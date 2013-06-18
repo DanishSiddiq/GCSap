@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Departments" representedClassName="Departments" syncable="YES">
+        <attribute name="dept_id" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="dept_name" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Employees" representedClassName="Employees" syncable="YES">
+        <attribute name="dept_head" attributeType="Boolean" syncable="YES"/>
+        <attribute name="dept_id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="emp_id" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="emp_name" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="HR_leaves" representedClassName="HR_leaves" syncable="YES">
+        <attribute name="applied_date" attributeType="Date" syncable="YES"/>
+        <attribute name="approved" attributeType="Boolean" syncable="YES"/>
+        <attribute name="approver" attributeType="String" syncable="YES"/>
+        <attribute name="from_date" attributeType="Date" syncable="YES"/>
+        <attribute name="leave_id" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="leave_type" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="submitted" attributeType="Boolean" syncable="YES"/>
+        <attribute name="to_date" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Purchase_Orders" representedClassName="Purchase_Orders" syncable="YES">
+        <attribute name="amount" attributeType="Double" syncable="YES"/>
+        <attribute name="currency" attributeType="String" syncable="YES"/>
+        <attribute name="order_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="po_date" attributeType="Date" syncable="YES"/>
+        <attribute name="po_id" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="vendor" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Departments" positionX="-4329" positionY="-4041" width="128" height="75"/>
+        <element name="Employees" positionX="-4653" positionY="-4086" width="128" height="105"/>
+        <element name="HR_leaves" positionX="-4482" positionY="-4041" width="128" height="180"/>
+        <element name="Purchase_Orders" positionX="-4691" positionY="-3816" width="128" height="135"/>
+    </elements>
+</model>
