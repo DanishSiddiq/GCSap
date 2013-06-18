@@ -40,10 +40,10 @@ int main(int argc, char *argv[])
                                                                options:kNilOptions
                                                                  error:&err];
         
-        NSLog(@"Departments %@", departments);
-        NSLog(@"Employees %@", employees);
-        NSLog(@"HR leaves %@", hr_leaves);
-        NSLog(@"Purchase Order %@", purchases);
+//        NSLog(@"Departments %@", departments);
+//        NSLog(@"Employees %@", employees);
+//        NSLog(@"HR leaves %@", hr_leaves);
+//        NSLog(@"Purchase Order %@", purchases);
         
 //        // saving departments
 //        [departments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
