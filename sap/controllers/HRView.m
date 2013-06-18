@@ -25,6 +25,7 @@
         // Initialization code
         [[NSBundle mainBundle] loadNibNamed:@"HRView" owner:self options:nil];
         [self initializeViews:frame];
+        [self initializeData];
         
     }
     return self;
@@ -36,9 +37,6 @@
     
     self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
     [self addSubview:self.hrView];
-    
-    _tblLeave.delegate = self;
-    _tblLeave.dataSource = self;
 }
 
 -(void) initializeData {
