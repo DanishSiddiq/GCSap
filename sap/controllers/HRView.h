@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HRView : UIView
+@interface HRView : UIView <UITableViewDataSource, UITableViewDelegate>
 
+
+- (IBAction)slideBtnPressed:(id)sender;
 
 @end
