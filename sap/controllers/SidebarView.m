@@ -30,23 +30,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"SidebarView" owner:self options:nil];
-        
         self.sidebarView.frame = frame;
+        UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBg.png"]];
+        self.sidebarView.backgroundColor = background;
+        
         
         [self addSubview:self.sidebarView];
                 
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 
 -(IBAction)hrButtonPressed:(id)sender{
