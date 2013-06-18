@@ -24,12 +24,26 @@
     if (self) {
         // Initialization code
         [[NSBundle mainBundle] loadNibNamed:@"HRView" owner:self options:nil];
-        
-        self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);        
-        [self addSubview:self.hrView];
+        [self initializeViews:frame];
         
     }
     return self;
+}
+
+
+- (void) initializeViews : (CGRect) frame {
+    
+    
+    self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
+    [self addSubview:self.hrView];
+    
+    _tblLeave.delegate = self;
+    _tblLeave.dataSource = self;
+}
+
+-(void) initializeData {
+    
+    _lstLeave = [[NSMutableArray alloc] init];
 }
 
 
@@ -57,8 +71,20 @@
     }
 }
 
+#pragma searchbar delegates
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    // changing text logic here
+}
 
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    // saerc logic will go here
+}
 
+-(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    [searchBar setText:@""];
+    [searchBar resignFirstResponder];
+}
 
 // delegates
 #pragma table delagtes
@@ -118,6 +144,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
+
+
 
 
 @end
