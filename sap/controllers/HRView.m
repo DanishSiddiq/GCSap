@@ -12,8 +12,6 @@
 
 @property (retain, nonatomic) IBOutlet UIView* hrView;
 
-- (IBAction)slideBtnPressed:(id)sender;
-
 @end
 
 @implementation HRView
@@ -33,28 +31,26 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
-
-
 - (IBAction)slideBtnPressed:(id)sender {
-    CGRect splashTop = self.hrView.frame;
-    splashTop.origin.x = -60;
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelay:0.0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    
-    self.hrView.frame = splashTop;
-    
-    [UIView commitAnimations];
+ 
+    if(self.frame.origin.x == 120){
+        
+        CGRect toFrame = self.frame;
+        toFrame.origin.x = 0.0;
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.frame = toFrame;
+        } completion:nil];
+    }
+    else{
+        
+        CGRect toFrame = self.frame;
+        toFrame.origin.x = 120;
+        
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.frame = toFrame;
+        } completion:nil];
+    }
 }
 @end
