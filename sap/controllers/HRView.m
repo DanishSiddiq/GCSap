@@ -139,7 +139,7 @@
         for(HR_leaves *leave in _lstLeave){
             
             if([[leave approved] isEqualToNumber:[NSNumber numberWithBool:_switchApproved.isOn]]
-               && [[leave leave_type] rangeOfString:_filterText].location != NSNotFound){
+               && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                 [_lstFilterLeave addObject:leave];
             }
         }
