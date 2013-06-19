@@ -10,22 +10,23 @@
 
 @interface HRView()
 
+@property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView* hrView;
-@property (retain, nonatomic) IBOutlet UITableView* tblLeave;
+@property (retain, nonatomic) IBOutlet UISwitch* switchApproved;
 @property (retain, nonatomic) NSMutableArray* lstLeave;
 
 @end
 
 @implementation HRView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [[NSBundle mainBundle] loadNibNamed:@"HRView" owner:self options:nil];
         [self initializeViews:frame];
-        [self initializeData];
+        [self initializeData:sapDelegate];
         
     }
     return self;
@@ -39,11 +40,25 @@
     [self addSubview:self.hrView];
 }
 
--(void) initializeData {
+-(void) initializeData  : (AppDelegate *) sapDelegate{
     
+    _sapDelegate = sapDelegate;
     _lstLeave = [[NSMutableArray alloc] init];
+    
+    // data base calling for fetching data
+    [self fetchDataFromServer];
 }
 
+- (void) fetchDataFromServer {
+    
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
+                                              inManagedObjectContext:_sapDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    
+}
 
 // selectors
 - (IBAction)slideBtnPressed:(id)sender {
@@ -67,6 +82,10 @@
             self.frame = toFrame;
         } completion:nil];
     }
+}
+
+// switch delegate
+- (IBAction)switchApprovedValueChanged:(id)sender {
 }
 
 #pragma searchbar delegates

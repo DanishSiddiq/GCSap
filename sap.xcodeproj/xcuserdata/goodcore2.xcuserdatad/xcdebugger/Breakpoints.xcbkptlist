@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261580.559773"
+         timestampString = "393322258.480609"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261580.559773"
+         timestampString = "393322258.480609"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
          landmarkName = "-searchBarSearchButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261580.559773"
+         timestampString = "393322258.480609"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261580.559773"
+         timestampString = "393322258.480609"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
          landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,12 +60,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261580.559773"
+         timestampString = "393322258.480609"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
-         landmarkName = "-initializeData"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-initializeData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,12 +73,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/controllers/HRView.m"
-         timestampString = "393261625.482591"
+         timestampString = "393322148.753183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-initializeData"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-initializeData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sap/controllers/HRView.m"
+         timestampString = "393322254.965253"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
+         landmarkName = "-fetchDataFromServer"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
