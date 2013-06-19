@@ -75,6 +75,21 @@
                                                          options:kNilOptions
                                                            error:&err];
     
+    NSString* dataPathPO_Invoices = [[NSBundle mainBundle] pathForResource:@"PO_Invoice" ofType:@"json"];
+    NSArray* po_invoivces = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPO_Invoices]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
+    NSString* dataPathPO_Delivery = [[NSBundle mainBundle] pathForResource:@"PO_Delivery" ofType:@"json"];
+    NSArray* po_delivery = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPO_Delivery]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
+    NSString* dataPathPOItems = [[NSBundle mainBundle] pathForResource:@"PO_Items" ofType:@"json"];
+    NSArray* po_items = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPOItems]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
     //        // saving departments
     [departments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Departments *departmentsObj = [NSEntityDescription
@@ -85,7 +100,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
         }
     }];
     
@@ -101,7 +116,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
         }
     }];
     
@@ -122,7 +137,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
         }
     }];
     
@@ -140,7 +155,63 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving purchase_orders
+    [po_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        PO_Items *poItemsObj = [NSEntityDescription
+                                        insertNewObjectForEntityForName:@"PO_Items"
+                                        inManagedObjectContext:_managedObjectContext];
+        poItemsObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
+        poItemsObj.po_items_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_items_id"] longLongValue]];
+        poItemsObj.delivery_date = [self convertStringToDate:[obj objectForKey:@"delivery_date"]];
+        poItemsObj.items = [obj objectForKey:@"vendor"];
+        poItemsObj.quantity = [NSNumber numberWithLongLong:[[obj objectForKey:@"quantity"] longLongValue]];
+        poItemsObj.units = [obj objectForKey:@"units"];
+        poItemsObj.l = [NSNumber numberWithLongLong:[[obj objectForKey:@"l"] longLongValue]];
+        poItemsObj.a = [NSNumber numberWithLongLong:[[obj objectForKey:@"a"] longLongValue]];
+        poItemsObj.short_text = [obj objectForKey:@"short_text"];
+        poItemsObj.material = [obj objectForKey:@"material"];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving purchase_orders
+    [po_delivery enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        PO_Delivery *poDeliveryObj = [NSEntityDescription
+                                        insertNewObjectForEntityForName:@"PO_Delivery"
+                                        inManagedObjectContext:_managedObjectContext];
+        poDeliveryObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
+        poDeliveryObj.delivery_date = [self convertStringToDate:[obj objectForKey:@"delivery_date"]];
+        poDeliveryObj.delivery_type = [obj objectForKey:@"delivery_type"];
+        poDeliveryObj.po_delivery_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_delivery_id"] longLongValue]];
+        poDeliveryObj.status = [NSNumber numberWithLongLong:[[obj objectForKey:@"status"] longLongValue]];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving purchase_orders
+    [po_invoivces enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        PO_Invoice *poInvoiceObj = [NSEntityDescription
+                                        insertNewObjectForEntityForName:@"PO_Invoice"
+                                        inManagedObjectContext:_managedObjectContext];
+        
+        poInvoiceObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
+        poInvoiceObj.invoice_date = [self convertStringToDate:[obj objectForKey:@"invoice_date"]];
+        poInvoiceObj.po_invoice_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_invoice_id"] longLongValue]];
+        poInvoiceObj.amount = [NSNumber numberWithLongLong:[[obj objectForKey:@"amount"] longLongValue]];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
         }
     }];
 
@@ -152,7 +223,7 @@
     [df setDateFormat:@"dd/MM/yyyy"];
     NSDate* date = [df dateFromString:strDate];
 
-    NSLog(@"%@", date);
+    //NSLog(@"%@", date);
     
     return date;
 }
