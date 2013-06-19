@@ -13,7 +13,9 @@
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView* hrView;
 @property (retain, nonatomic) IBOutlet UISwitch* switchApproved;
+@property (retain, nonatomic) IBOutlet UITableView *tblLeave;
 @property (retain, nonatomic) NSMutableArray* lstLeave;
+@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 @end
 
@@ -38,12 +40,16 @@
     
     self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
     [self addSubview:self.hrView];
+    
+    [_tblLeave setShowsVerticalScrollIndicator:NO];
 }
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{
     
     _sapDelegate = sapDelegate;
     _lstLeave = [[NSMutableArray alloc] init];
+    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
     
     // data base calling for fetching data
     [self fetchDataFromServer];
@@ -141,6 +147,7 @@
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"HRSearchCell"];
     UITableViewCell *cell;
     UILabel *lblFromDate, *lbltoDate, *lblDuration, *lblReason;
+    UIImageView *imgViewBackground, *imgViewCalender;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
     
@@ -148,13 +155,29 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:1];
         
-    }
-        
-    lblFromDate = (UILabel *)[cell.contentView viewWithTag:10];
-    lbltoDate = (UILabel *)[cell.contentView viewWithTag:20];
-    lblDuration = (UILabel *)[cell.contentView viewWithTag:30];
-    lblReason = (UILabel *)[cell.contentView viewWithTag:40];
+    }    
     
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
+    imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:20];
+    lblFromDate = (UILabel *)[cell.contentView viewWithTag:50];
+    lbltoDate = (UILabel *)[cell.contentView viewWithTag:60];
+    lblDuration = (UILabel *)[cell.contentView viewWithTag:70];
+    lblReason = (UILabel *)[cell.contentView viewWithTag:80];
+    
+    if(_selectedIndexPath.row == indexPath.row){
+        [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
+        [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
+        [lblFromDate setTextColor:[UIColor whiteColor]];
+        [lbltoDate setTextColor:[UIColor whiteColor]];
+        [lblReason setTextColor:[UIColor whiteColor]];
+    }
+    else{
+        [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
+        [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
+        [lblFromDate setTextColor:[UIColor blackColor]];
+        [lbltoDate setTextColor:[UIColor blackColor]];
+        [lblReason setTextColor:[UIColor blackColor]];
+    }
     
     HR_leaves *leaveObj = [_lstLeave objectAtIndex:indexPath.row];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
