@@ -11,6 +11,9 @@
 #import "Employees.h"
 #import "HR_leaves.h"
 #import "Purchase_Orders.h"
+#import "PO_Delivery.h"
+#import "PO_Invoice.h"
+#import "PO_Items.h"
 
 @class RootViewController;
 

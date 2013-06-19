@@ -31,6 +31,15 @@
 		3D3DC6B8176B474C00E5ACB7 /* MaintenanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3DC6B7176B474C00E5ACB7 /* MaintenanceView.m */; };
 		3D84F03C176F3C1B00449C09 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D84F03B176F3C1B00449C09 /* CoreData.framework */; };
 		3D84F03F176F3C6000449C09 /* sapDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D84F03D176F3C6000449C09 /* sapDatabase.xcdatamodeld */; };
+		3DC669421771989200B8CB79 /* PO_Delivery.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669411771989200B8CB79 /* PO_Delivery.json */; };
+		3DC669441771991200B8CB79 /* PO_Invoice.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669431771991200B8CB79 /* PO_Invoice.json */; };
+		3DC669461771999B00B8CB79 /* PO_Items.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669451771999B00B8CB79 /* PO_Items.json */; };
+		3DC6694917719CA700B8CB79 /* PO_Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6694817719CA700B8CB79 /* PO_Items.m */; };
+		3DC6694C17719CC400B8CB79 /* PO_Delivery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6694B17719CC400B8CB79 /* PO_Delivery.m */; };
+		3DC6694F17719CD900B8CB79 /* PO_Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6694E17719CD800B8CB79 /* PO_Invoice.m */; };
+		3DC669501771C70300B8CB79 /* PO_Items.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC669451771999B00B8CB79 /* PO_Items.json */; };
+		3DC669511771C70A00B8CB79 /* PO_Invoice.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC669431771991200B8CB79 /* PO_Invoice.json */; };
+		3DC669521771C70C00B8CB79 /* PO_Delivery.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC669411771989200B8CB79 /* PO_Delivery.json */; };
 		3DE993BD1770358200DC4B98 /* Departments.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BC1770358200DC4B98 /* Departments.m */; };
 		3DE993C0177035C600DC4B98 /* Employees.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BF177035C600DC4B98 /* Employees.m */; };
 		3DE993C3177035E000DC4B98 /* HR_leaves.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993C2177035E000DC4B98 /* HR_leaves.m */; };
@@ -95,7 +104,10 @@
 			files = (
 				3DE993E01770542E00DC4B98 /* Purchase_Order.json in CopyFiles */,
 				3DE993E11770543000DC4B98 /* HR_leaves.json in CopyFiles */,
+				3DC669501771C70300B8CB79 /* PO_Items.json in CopyFiles */,
 				3DE993E31770543500DC4B98 /* Departments.json in CopyFiles */,
+				3DC669521771C70C00B8CB79 /* PO_Delivery.json in CopyFiles */,
+				3DC669511771C70A00B8CB79 /* PO_Invoice.json in CopyFiles */,
 				3DE993E21770543300DC4B98 /* Employees.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +149,15 @@
 		3D3DC6B7176B474C00E5ACB7 /* MaintenanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaintenanceView.m; sourceTree = "<group>"; };
 		3D84F03B176F3C1B00449C09 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3D84F03E176F3C6000449C09 /* sapDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sapDatabase.xcdatamodel; sourceTree = "<group>"; };
+		3DC669411771989200B8CB79 /* PO_Delivery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PO_Delivery.json; sourceTree = "<group>"; };
+		3DC669431771991200B8CB79 /* PO_Invoice.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PO_Invoice.json; sourceTree = "<group>"; };
+		3DC669451771999B00B8CB79 /* PO_Items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PO_Items.json; sourceTree = "<group>"; };
+		3DC6694717719CA700B8CB79 /* PO_Items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PO_Items.h; sourceTree = "<group>"; };
+		3DC6694817719CA700B8CB79 /* PO_Items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PO_Items.m; sourceTree = "<group>"; };
+		3DC6694A17719CC400B8CB79 /* PO_Delivery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PO_Delivery.h; sourceTree = "<group>"; };
+		3DC6694B17719CC400B8CB79 /* PO_Delivery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PO_Delivery.m; sourceTree = "<group>"; };
+		3DC6694D17719CD800B8CB79 /* PO_Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PO_Invoice.h; sourceTree = "<group>"; };
+		3DC6694E17719CD800B8CB79 /* PO_Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PO_Invoice.m; sourceTree = "<group>"; };
 		3DE993BB1770358200DC4B98 /* Departments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departments.h; sourceTree = "<group>"; };
 		3DE993BC1770358200DC4B98 /* Departments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departments.m; sourceTree = "<group>"; };
 		3DE993BE177035C600DC4B98 /* Employees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employees.h; sourceTree = "<group>"; };
@@ -210,6 +231,9 @@
 		3D3DC669176AF49D00E5ACB7 = {
 			isa = PBXGroup;
 			children = (
+				3DC669451771999B00B8CB79 /* PO_Items.json */,
+				3DC669431771991200B8CB79 /* PO_Invoice.json */,
+				3DC669411771989200B8CB79 /* PO_Delivery.json */,
 				3DE993DE177053EF00DC4B98 /* Purchase_Order.json */,
 				3DE993DC177053DA00DC4B98 /* HR_leaves.json */,
 				3DE993DA177053CA00DC4B98 /* Employees.json */,
@@ -312,6 +336,12 @@
 				3DE993C2177035E000DC4B98 /* HR_leaves.m */,
 				3DE993C4177035F500DC4B98 /* Purchase_Orders.h */,
 				3DE993C5177035F500DC4B98 /* Purchase_Orders.m */,
+				3DC6694717719CA700B8CB79 /* PO_Items.h */,
+				3DC6694817719CA700B8CB79 /* PO_Items.m */,
+				3DC6694A17719CC400B8CB79 /* PO_Delivery.h */,
+				3DC6694B17719CC400B8CB79 /* PO_Delivery.m */,
+				3DC6694D17719CD800B8CB79 /* PO_Invoice.h */,
+				3DC6694E17719CD800B8CB79 /* PO_Invoice.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -480,6 +510,9 @@
 				3DE9943517709AC600DC4B98 /* v4-Full_04.png in Resources */,
 				3DE9943617709AC600DC4B98 /* v4-Full_05.png in Resources */,
 				3DE9943717709AC600DC4B98 /* withoutFliedCal.PNG in Resources */,
+				3DC669421771989200B8CB79 /* PO_Delivery.json in Resources */,
+				3DC669441771991200B8CB79 /* PO_Invoice.json in Resources */,
+				3DC669461771999B00B8CB79 /* PO_Items.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +536,9 @@
 				3DE993C0177035C600DC4B98 /* Employees.m in Sources */,
 				3DE993C3177035E000DC4B98 /* HR_leaves.m in Sources */,
 				3DE993C6177035F500DC4B98 /* Purchase_Orders.m in Sources */,
+				3DC6694917719CA700B8CB79 /* PO_Items.m in Sources */,
+				3DC6694C17719CC400B8CB79 /* PO_Delivery.m in Sources */,
+				3DC6694F17719CD900B8CB79 /* PO_Invoice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
