@@ -40,6 +40,7 @@
 		3DC669511771C70A00B8CB79 /* PO_Invoice.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC669431771991200B8CB79 /* PO_Invoice.json */; };
 		3DC669521771C70C00B8CB79 /* PO_Delivery.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC669411771989200B8CB79 /* PO_Delivery.json */; };
 		3DC669541771D91700B8CB79 /* NavBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669531771D91600B8CB79 /* NavBg.png */; };
+		3DC669561771F3E800B8CB79 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669551771F3E800B8CB79 /* SearchTableViewCell.xib */; };
 		3DE993BD1770358200DC4B98 /* Departments.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BC1770358200DC4B98 /* Departments.m */; };
 		3DE993C0177035C600DC4B98 /* Employees.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BF177035C600DC4B98 /* Employees.m */; };
 		3DE993C3177035E000DC4B98 /* HR_leaves.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993C2177035E000DC4B98 /* HR_leaves.m */; };
@@ -157,6 +158,7 @@
 		3DC6694D17719CD800B8CB79 /* PO_Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PO_Invoice.h; sourceTree = "<group>"; };
 		3DC6694E17719CD800B8CB79 /* PO_Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PO_Invoice.m; sourceTree = "<group>"; };
 		3DC669531771D91600B8CB79 /* NavBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBg.png; sourceTree = "<group>"; };
+		3DC669551771F3E800B8CB79 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		3DE993BB1770358200DC4B98 /* Departments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departments.h; sourceTree = "<group>"; };
 		3DE993BC1770358200DC4B98 /* Departments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departments.m; sourceTree = "<group>"; };
 		3DE993BE177035C600DC4B98 /* Employees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employees.h; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		3D3DC698176AF4CE00E5ACB7 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				3DC669551771F3E800B8CB79 /* SearchTableViewCell.xib */,
 				3D3DC69B176AF4F400E5ACB7 /* RootViewController.h */,
 				3D3DC69C176AF4F400E5ACB7 /* RootViewController.m */,
 				3D3DC69D176AF4F400E5ACB7 /* RootViewController.xib */,
@@ -509,6 +512,7 @@
 				3DC669441771991200B8CB79 /* PO_Invoice.json in Resources */,
 				3DC669461771999B00B8CB79 /* PO_Items.json in Resources */,
 				3DC669541771D91700B8CB79 /* NavBg.png in Resources */,
+				3DC669561771F3E800B8CB79 /* SearchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
