@@ -16,14 +16,16 @@
 
 @property (retain, nonatomic) IBOutlet UIView* sidebarView;
 
--(IBAction)hrButtonPressed:(id)sender;
--(IBAction)purchaseButtonPressed:(id)sender;
--(IBAction)financeButtonPressed:(id)sender;
--(IBAction)maintenanceButtonPressed:(id)sender;
+
 
 @end
 
 @implementation SidebarView
+
+@synthesize hrBtn;
+@synthesize financeBtn;
+@synthesize maintenancerBtn;
+@synthesize purchaseBtn;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -43,6 +45,7 @@
 
 
 -(IBAction)hrButtonPressed:(id)sender{
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [HRView class]){
@@ -51,9 +54,20 @@
             subview.hidden = YES;
         }
     }
+    
+    
+    [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+    [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    
+    UIImage* image = [UIImage imageNamed:@"HumanHover.png"];    
+    [sender setImage:image forState:UIControlStateNormal];
+    
 }
 
 -(IBAction)purchaseButtonPressed:(id)sender{
+    
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [PurchasesView class]){
@@ -63,9 +77,17 @@
         }
     }
     
+    [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+    [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    
+    UIImage *image = [UIImage imageNamed:@"purchasingHover.png"];
+    [sender setImage:image forState:UIControlStateNormal];
+    
 }
 
 -(IBAction)financeButtonPressed:(id)sender{
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [FinanceView class]){
@@ -75,9 +97,17 @@
         }
     }
     
+    UIImage *image = [UIImage imageNamed:@"FinanceHover.png"];
+    [sender setImage:image forState:UIControlStateNormal];
+    
+    [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+    [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    
 }
 
 -(IBAction)maintenanceButtonPressed:(id)sender{
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [MaintenanceView class]){
@@ -86,6 +116,13 @@
             subview.hidden = YES;
         }
     }
+    
+    UIImage *image = [UIImage imageNamed:@"MaintenanceHover.png"];
+    [sender setImage:image forState:UIControlStateNormal];
+    
+    [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+    [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+    [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
 }
 
 

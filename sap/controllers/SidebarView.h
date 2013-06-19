@@ -10,4 +10,14 @@
 
 @interface SidebarView : UIView
 
+@property (strong, nonatomic) IBOutlet UIButton* hrBtn;
+@property (strong, nonatomic) IBOutlet UIButton* purchaseBtn;
+@property (strong, nonatomic) IBOutlet UIButton* financeBtn;
+@property (strong, nonatomic) IBOutlet UIButton* maintenancerBtn;
+
+-(IBAction)hrButtonPressed:(id)sender;
+-(IBAction)purchaseButtonPressed:(id)sender;
+-(IBAction)financeButtonPressed:(id)sender;
+-(IBAction)maintenanceButtonPressed:(id)sender;
+
 @end

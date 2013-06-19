@@ -26,7 +26,7 @@
 
 @property bool _isSlided;
 
-- (IBAction)slideBtnPressed:(id)sender;
+
 
 @end
 
