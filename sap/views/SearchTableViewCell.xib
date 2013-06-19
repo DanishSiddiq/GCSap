@@ -227,10 +227,10 @@
 						<reference key="NSNextResponder" ref="70166935"/>
 						<int key="NSvFlags">256</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIImageView" id="7443585">
+							<object class="IBUIImageView" id="641313337">
 								<reference key="NSNextResponder" ref="649711472"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 10}, {320, 86}}</string>
+								<string key="NSFrame">{{0, 10}, {330, 86}}</string>
 								<reference key="NSSuperview" ref="649711472"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -416,7 +416,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 105}</string>
+						<string key="NSFrameSize">{330, 105}</string>
 						<reference key="NSSuperview" ref="70166935"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="326310526"/>
@@ -429,7 +429,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 106}</string>
+				<string key="NSFrameSize">{330, 106}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="649711472"/>
@@ -505,7 +505,7 @@
 							<reference ref="544369671"/>
 							<reference ref="127962301"/>
 							<reference ref="326310526"/>
-							<reference ref="7443585"/>
+							<reference ref="641313337"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">HRLeaveCell</string>
@@ -566,7 +566,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
-						<reference key="object" ref="7443585"/>
+						<reference key="object" ref="641313337"/>
 						<reference key="parent" ref="70166935"/>
 						<string key="objectName">Image View - backGround</string>
 					</object>

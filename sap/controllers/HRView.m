@@ -165,6 +165,9 @@
     lblReason = (UILabel *)[cell.contentView viewWithTag:80];
     
     if(_selectedIndexPath.row == indexPath.row){
+        
+        [cell setFrame:CGRectMake(0, 0, 330, 86)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 330, 86)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
         [lblFromDate setTextColor:[UIColor whiteColor]];
@@ -172,6 +175,8 @@
         [lblReason setTextColor:[UIColor whiteColor]];
     }
     else{
+        [cell setFrame:CGRectMake(0, 0, 325, 86)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 325, 86)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
         [lblFromDate setTextColor:[UIColor blackColor]];
