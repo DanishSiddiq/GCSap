@@ -59,8 +59,7 @@
     maintenanceView.hidden = YES;
     [self.view addSubview:maintenanceView];
     
-    PurchasesView* purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];    
-    //purchaseView.bounds = CGRectMake(120.0, -10.0, 1024, 768);
+    PurchasesView* purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     purchaseView.hidden = NO;
     [self.view addSubview:purchaseView];
 }

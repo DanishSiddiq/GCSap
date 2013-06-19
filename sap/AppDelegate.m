@@ -39,7 +39,7 @@
     else{
         
         for (Employees *info in fetchedObjects) {
-            NSLog(@"emp_name: %@", info.emp_name);
+            //NSLog(@"emp_name: %@", info.emp_name);
         }
     }
     

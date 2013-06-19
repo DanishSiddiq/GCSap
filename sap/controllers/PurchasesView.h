@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "PurchasesView.h"
+#import "PO_Delivery.h"
+#import "PO_Invoice.h"
+#import "PO_Items.h"
 
-@interface PurchasesView : UIView <NSFetchedResultsControllerDelegate>
+@interface PurchasesView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+// overriding the constructor
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 - (IBAction)slideBtnPressed:(id)sender;
 
 @end
