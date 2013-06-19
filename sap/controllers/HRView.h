@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "HR_leaves.h"
 
@@ -18,5 +19,8 @@
 
 - (IBAction)slideBtnPressed:(id)sender;
 - (IBAction)switchApprovedValueChanged:(id)sender;
+- (IBAction)btnPressedApproved:(id)sender;
+- (IBAction)btnPressedUnApproved:(id)sender;
+
 
 @end
