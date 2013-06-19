@@ -155,6 +155,20 @@
     lblDuration = (UILabel *)[cell.contentView viewWithTag:30];
     lblReason = (UILabel *)[cell.contentView viewWithTag:40];
     
+    
+    HR_leaves *leaveObj = [_lstLeave objectAtIndex:indexPath.row];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    NSTimeInterval distanceBetweenDates = [leaveObj.to_date timeIntervalSinceDate:leaveObj.from_date];
+    double secondsInDay = 60*60*24;
+    NSInteger dayBetweenDates = distanceBetweenDates / secondsInDay;
+        
+    lblFromDate.text = [format stringFromDate:leaveObj.from_date];
+    lbltoDate.text = [format stringFromDate:leaveObj.to_date];
+    lblReason.text = leaveObj.leave_type;
+    lblDuration.text = [NSString stringWithFormat:@"%d Days", dayBetweenDates];
+    
     return cell;
 }
 
