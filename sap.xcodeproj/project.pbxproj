@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A99D4041770856900C4DABE /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A99D4031770856900C4DABE /* SearchTableViewCell.xib */; };
 		3D3DC676176AF49D00E5ACB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC675176AF49D00E5ACB7 /* UIKit.framework */; };
 		3D3DC678176AF49D00E5ACB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC677176AF49D00E5ACB7 /* Foundation.framework */; };
 		3D3DC67A176AF49D00E5ACB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC679176AF49D00E5ACB7 /* CoreGraphics.framework */; };
@@ -115,7 +114,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A99D4031770856900C4DABE /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		3D3DC672176AF49D00E5ACB7 /* sap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3DC675176AF49D00E5ACB7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D3DC677176AF49D00E5ACB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -303,7 +301,6 @@
 				3D3DC6A7176B46A900E5ACB7 /* FinanceView.xib */,
 				3D3DC6A9176B46BF00E5ACB7 /* MaintenanceView.xib */,
 				3D3DC6AB176B46F600E5ACB7 /* PurchasesView.xib */,
-				3A99D4031770856900C4DABE /* SearchTableViewCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -468,7 +465,6 @@
 				3DE993DB177053CA00DC4B98 /* Employees.json in Resources */,
 				3DE993DD177053DA00DC4B98 /* HR_leaves.json in Resources */,
 				3DE993DF177053EF00DC4B98 /* Purchase_Order.json in Resources */,
-				3A99D4041770856900C4DABE /* SearchTableViewCell.xib in Resources */,
 				3DE9940F17709AC600DC4B98 /* approveBtn.png in Resources */,
 				3DE9941017709AC600DC4B98 /* Base.png in Resources */,
 				3DE9941117709AC600DC4B98 /* bg.png in Resources */,
