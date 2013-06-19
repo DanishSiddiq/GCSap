@@ -12,11 +12,13 @@
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView *hrView;
-@property (retain, nonatomic) IBOutlet UISwitch *switchApproved;
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet UITableView *tblLeave;
 @property (retain, nonatomic) NSMutableArray *lstLeave;
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
 @property (retain, nonatomic) NSMutableString *filterText;
+@property (nonatomic) BOOL isApprovedSelected;
+@property (nonatomic) BOOL isUnApprovedSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 
@@ -44,6 +46,8 @@
     self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
     [self addSubview:self.hrView];
     
+    
+    [self setKeyBoardForSearchBar];
     [_tblLeave setShowsVerticalScrollIndicator:NO];
 }
 
@@ -53,6 +57,8 @@
     _lstFilterLeave = [[NSMutableArray alloc] init];
     _lstLeave = [[NSMutableArray alloc] init];
     _filterText = [NSMutableString stringWithFormat:@""];
+    _isApprovedSelected = YES;
+    _isUnApprovedSelected = YES;
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     
@@ -97,13 +103,45 @@
 }
 
 // switch delegate
-- (IBAction)switchApprovedValueChanged:(id)sender {
+- (IBAction)btnPressedApproved:(id)sender {
+    
+    _isApprovedSelected = !_isApprovedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
+}
 
+- (IBAction)btnPressedUnApproved:(id)sender {
+    
+    _isUnApprovedSelected = !_isUnApprovedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
     [self filterLeaves];
     [self updateViews ];
 }
 
 #pragma searchbar delegates
+
+-(void) setKeyBoardForSearchBar{
+    
+    for (UIView *searchBarSubview in [_searchBar subviews]) {
+        
+        if ([searchBarSubview conformsToProtocol:@protocol(UITextInputTraits)]) {
+            
+            @try {
+                
+                [(UITextField *)searchBarSubview setReturnKeyType:UIReturnKeyDone];
+                [(UITextField *)searchBarSubview setKeyboardAppearance:UIKeyboardAppearanceAlert];
+            }
+            @catch (NSException * e) {
+                
+                // ignore exception
+            }
+        }
+    }
+}
+
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
     // changing text logic here
@@ -115,9 +153,7 @@
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
     // search logic will go here
-    [_filterText setString:searchBar.text];
-    [self filterLeaves];
-    [self updateViews];
+    [searchBar resignFirstResponder];
 }
 
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -138,17 +174,44 @@
         
         for(HR_leaves *leave in _lstLeave){
             
-            if([[leave approved] isEqualToNumber:[NSNumber numberWithBool:_switchApproved.isOn]]
+            
+            if(_isApprovedSelected && _isUnApprovedSelected
                && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                
                 [_lstFilterLeave addObject:leave];
+            }
+            else{
+                
+                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                    [_lstFilterLeave addObject:leave];
+                }
+                
+                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]
+                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                    
+                    [_lstFilterLeave addObject:leave];
+                }
             }
         }
     }
     else{
             
         for(HR_leaves *leave in _lstLeave){
-            if([[leave approved] isEqualToNumber:[NSNumber numberWithBool:_switchApproved.isOn]]){
+            
+            if(_isApprovedSelected && _isUnApprovedSelected){
+                
                 [_lstFilterLeave addObject:leave];
+            }
+            else{
+                
+                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                    [_lstFilterLeave addObject:leave];
+                }
+                
+                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                    [_lstFilterLeave addObject:leave];
+                }
             }
         }
     }

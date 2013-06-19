@@ -19,5 +19,8 @@
 
 - (IBAction)slideBtnPressed:(id)sender;
 - (IBAction)switchApprovedValueChanged:(id)sender;
+- (IBAction)btnPressedApproved:(id)sender;
+- (IBAction)btnPressedUnApproved:(id)sender;
+
 
 @end
