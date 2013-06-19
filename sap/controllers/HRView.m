@@ -11,11 +11,14 @@
 @interface HRView()
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
-@property (retain, nonatomic) IBOutlet UIView* hrView;
-@property (retain, nonatomic) IBOutlet UISwitch* switchApproved;
+@property (retain, nonatomic) IBOutlet UIView *hrView;
+@property (retain, nonatomic) IBOutlet UISwitch *switchApproved;
 @property (retain, nonatomic) IBOutlet UITableView *tblLeave;
-@property (retain, nonatomic) NSMutableArray* lstLeave;
+@property (retain, nonatomic) NSMutableArray *lstLeave;
+@property (retain, nonatomic) NSMutableArray *lstFilterLeave;
+@property (retain, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
+
 
 @end
 
@@ -47,7 +50,9 @@
 -(void) initializeData  : (AppDelegate *) sapDelegate{
     
     _sapDelegate = sapDelegate;
+    _lstFilterLeave = [[NSMutableArray alloc] init];
     _lstLeave = [[NSMutableArray alloc] init];
+    _filterText = [NSMutableString stringWithFormat:@""];
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     
@@ -63,6 +68,7 @@
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
     [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    [_lstFilterLeave addObjectsFromArray:_lstLeave];
     
 }
 
@@ -92,21 +98,66 @@
 
 // switch delegate
 - (IBAction)switchApprovedValueChanged:(id)sender {
+
+    [self filterLeaves];
+    [self updateViews ];
 }
 
 #pragma searchbar delegates
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
     // changing text logic here
+    [_filterText setString:searchText];
+    [self filterLeaves];
+    [self updateViews];
 }
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    // saerc logic will go here
+    
+    // search logic will go here
+    [_filterText setString:searchBar.text];
+    [self filterLeaves];
+    [self updateViews];
 }
 
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
     [searchBar setText:@""];
     [searchBar resignFirstResponder];
+    [_filterText setString:searchBar.text];
+    [self filterLeaves];
+    [self updateViews];
+}
+
+- (void) filterLeaves {
+    
+    [_lstFilterLeave removeAllObjects];
+    [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    
+    if([_filterText length] > 0){
+        
+        for(HR_leaves *leave in _lstLeave){
+            
+            if([[leave approved] isEqualToNumber:[NSNumber numberWithBool:_switchApproved.isOn]]
+               && [[leave leave_type] rangeOfString:_filterText].location != NSNotFound){
+                [_lstFilterLeave addObject:leave];
+            }
+        }
+    }
+    else{
+            
+        for(HR_leaves *leave in _lstLeave){
+            if([[leave approved] isEqualToNumber:[NSNumber numberWithBool:_switchApproved.isOn]]){
+                [_lstFilterLeave addObject:leave];
+            }
+        }
+    }
+}
+
+// you have to update the view also have to change the side vise fileds accordingly
+-(void) updateViews {
+    
+    [_tblLeave reloadData];
 }
 
 // delegates
@@ -117,7 +168,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  [_lstLeave count];
+    return  [_lstFilterLeave count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +213,9 @@
     lblFromDate = (UILabel *)[cell.contentView viewWithTag:50];
     lbltoDate = (UILabel *)[cell.contentView viewWithTag:60];
     lblDuration = (UILabel *)[cell.contentView viewWithTag:70];
-    lblReason = (UILabel *)[cell.contentView viewWithTag:80];
+    lblReason = (UILabel *)[cell.contentView viewWithTag:80];    
+    // to round label
+    [[lblDuration layer] setCornerRadius:3.0];
     
     if(_selectedIndexPath.row == indexPath.row){
         
@@ -184,7 +237,7 @@
         [lblReason setTextColor:[UIColor blackColor]];
     }
     
-    HR_leaves *leaveObj = [_lstLeave objectAtIndex:indexPath.row];
+    HR_leaves *leaveObj = [_lstFilterLeave objectAtIndex:indexPath.row];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     
