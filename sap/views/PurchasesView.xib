@@ -157,7 +157,7 @@
 									<object class="IBUISearchBar" id="465949923">
 										<reference key="NSNextResponder" ref="1047259783"/>
 										<int key="NSvFlags">290</int>
-										<string key="NSFrameSize">{300, 44}</string>
+										<string key="NSFrameSize">{330, 44}</string>
 										<reference key="NSSuperview" ref="1047259783"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="498190879"/>
@@ -171,10 +171,9 @@
 									<object class="IBUITableView" id="498190879">
 										<reference key="NSNextResponder" ref="1047259783"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{0, 44}, {300, 634}}</string>
+										<string key="NSFrame">{{0, 44}, {330, 634}}</string>
 										<reference key="NSSuperview" ref="1047259783"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="37828726"/>
 										<bool key="IBUIAutoresizesSubviews">NO</bool>
@@ -188,7 +187,7 @@
 										<float key="IBUISectionFooterHeight">22</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{10, 10}, {300, 678}}</string>
+								<string key="NSFrame">{{10, 10}, {330, 678}}</string>
 								<reference key="NSSuperview" ref="680518146"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="465949923"/>
