@@ -14,6 +14,8 @@
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) NSMutableArray* lstPurchases;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
+@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
+@property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
 
 @property bool _isSlided;
 
@@ -34,6 +36,9 @@
         
         self.purchaseView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:self.purchaseView];
+        
+        [_tblPurchases setShowsVerticalScrollIndicator:NO];
+        
         self._isSlided = NO;
         [self initializeData:sapDelegate];
         
@@ -45,6 +50,7 @@
     
     _sapDelegate = sapDelegate;
     _lstPurchases = [[NSMutableArray alloc] init];
+    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     // data base calling for fetching data
     [self fetchDataFromServer];
@@ -93,6 +99,12 @@
     
 }
 
+// you have to update the view also have to change the side vise fileds accordingly
+-(void) updateViews {
+    
+    [_tblPurchases reloadData];
+}
+
 #pragma table delegates
 #pragma purchase order delegates
 
@@ -125,6 +137,7 @@
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"PurchaseViewCell"];
     UITableViewCell *cell;
     UILabel *lblPOId, *lblPODate, *lblVendor, *lblCurrency, *lblAmount, *lblOrderType;
+    UIImageView *imgViewBackground;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
     
@@ -140,6 +153,31 @@
     lblPODate = (UILabel *)[cell.contentView viewWithTag:4];
     lblOrderType = (UILabel *)[cell.contentView viewWithTag:5];
     lblCurrency = (UILabel *)[cell.contentView viewWithTag:6];
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
+    
+    if(_selectedIndexPath.row == indexPath.row){
+        
+        [cell setFrame:CGRectMake(0, 0, 330, 120)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 330, 120)];
+        [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
+        [lblPOId setTextColor:[UIColor whiteColor]];
+        [lblVendor setTextColor:[UIColor whiteColor]];
+        [lblAmount setTextColor:[UIColor whiteColor]];
+        [lblPODate setTextColor:[UIColor whiteColor]];
+        [lblOrderType setTextColor:[UIColor whiteColor]];
+        [lblCurrency setTextColor:[UIColor whiteColor]];
+    }
+    else{
+        [cell setFrame:CGRectMake(0, 0, 325, 120)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 325, 120)];
+        [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
+        [lblPOId setTextColor:[UIColor blackColor]];
+        [lblVendor setTextColor:[UIColor blackColor]];
+        [lblAmount setTextColor:[UIColor blackColor]];
+        [lblPODate setTextColor:[UIColor blackColor]];
+        [lblOrderType setTextColor:[UIColor blackColor]];
+        [lblCurrency setTextColor:[UIColor blackColor]];
+    }
     
     
     Purchase_Orders *purchaseObj = [_lstPurchases objectAtIndex:indexPath.row];
@@ -159,7 +197,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    _selectedIndexPath = indexPath;
+    [_tblPurchases reloadData];
 }
 
 
