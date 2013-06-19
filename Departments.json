@@ -1,22 +1,22 @@
  [
   {
-  "dept_id": "1",
+  "dept_id": 1,
   "dept_name": "HR"
   },
   {
-  "dept_id": "2",
+  "dept_id": 2,
   "dept_name": "Sales"
   },
   {
-  "dept_id": "3",
+  "dept_id": 3,
   "dept_name": "Finance"
   },
   {
-  "dept_id": "4",
+  "dept_id": 4,
   "dept_name": "Accounts"
   },
   {
-  "dept_id": "5",
+  "dept_id": 5,
   "dept_name": "Warehouse"
   }
   ]

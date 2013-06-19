@@ -17,7 +17,6 @@
 @property (retain, nonatomic) IBOutlet UIView* sidebarView;
 
 
-
 @end
 
 @implementation SidebarView

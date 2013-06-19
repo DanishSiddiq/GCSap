@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Departments.h"
+#import "Employees.h"
+#import "HR_leaves.h"
+#import "Purchase_Orders.h"
 
 @class RootViewController;
 

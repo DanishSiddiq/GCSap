@@ -10,6 +10,7 @@
 
 #import "RootViewController.h"
 
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -18,22 +19,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //NSManagedObjectContext *context = [self managedObjectContext];
+    _managedObjectContext = [self managedObjectContext];
     
-//    NSError *error;
-//    if (![context save:&error]) {
-//        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-//    }
-//    
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//    NSEntityDescription *entity = [NSEntityDescription
-//                                   entityForName:@"Purchase_Orders" inManagedObjectContext:context];
-//    [fetchRequest setEntity:entity];
-//    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-//    for (NSManagedObject *info in fetchedObjects) {
-//        NSLog(@"Amount: %@", [info valueForKey:@"amount"]);
-//        NSLog(@"Vendor: %@", [info valueForKey:@"vendor"]);
-//    }
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Employees"
+                                              inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if([fetchedObjects count] <= 0){
+        
+        [self populateWithPrerequisiteData];
+    }
+    else{
+        
+        for (Employees *info in fetchedObjects) {
+            NSLog(@"emp_name: %@", info.emp_name);
+        }
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -41,6 +49,112 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+
+- (void) populateWithPrerequisiteData {
+    
+    NSError* err = nil;
+    NSString* dataPathDepartments = [[NSBundle mainBundle] pathForResource:@"Departments" ofType:@"json"];
+    NSArray* departments = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathDepartments]
+                                                           options:kNilOptions
+                                                             error:&err];
+    
+    NSString* dataPathEmployees = [[NSBundle mainBundle] pathForResource:@"Employees" ofType:@"json"];
+    NSArray* employees = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathEmployees]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
+    NSString* dataPathhrLeaves = [[NSBundle mainBundle] pathForResource:@"HR_leaves" ofType:@"json"];
+    NSArray* hr_leaves = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathhrLeaves]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
+    NSString* dataPathPurhases = [[NSBundle mainBundle] pathForResource:@"Purchase_Order" ofType:@"json"];
+    NSArray* purchases = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPurhases]
+                                                         options:kNilOptions
+                                                           error:&err];
+    
+    //        // saving departments
+    [departments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Departments *departmentsObj = [NSEntityDescription
+                                       insertNewObjectForEntityForName:@"Departments"
+                                       inManagedObjectContext:_managedObjectContext];
+        departmentsObj.dept_id = [obj objectForKey:@"dept_id"];
+        departmentsObj.dept_name = [obj objectForKey:@"dept_name"];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving employees
+    [employees enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Employees *empObj = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"Employees"
+                             inManagedObjectContext:_managedObjectContext];
+        empObj.emp_id = [obj objectForKey:@"emp_id"];
+        empObj.emp_name = [obj objectForKey:@"emp_name"];
+        empObj.dept_id = [obj objectForKey:@"dept_id"];
+        empObj.dept_head = [NSNumber numberWithLongLong:[[obj objectForKey:@"dept_head"] longLongValue]];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    //        // saving hr_leaves
+    [hr_leaves enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        HR_leaves *hrObj = [NSEntityDescription
+                            insertNewObjectForEntityForName:@"HR_leaves"
+                            inManagedObjectContext:_managedObjectContext];
+        hrObj.leave_id = [obj objectForKey:@"leave_id"];
+        hrObj.leave_type = [obj objectForKey:@"leave_type"];
+        hrObj.applied_date = [self convertStringToDate: [obj objectForKey:@"applied_date"]];
+        hrObj.from_date = [self convertStringToDate:[obj objectForKey:@"from_date"]];
+        hrObj.to_date = [self convertStringToDate:[obj objectForKey:@"to_date"]];
+        hrObj.submitted =  [NSNumber numberWithLongLong:[[obj objectForKey:@"submitted"] longLongValue]];
+        hrObj.approver = [obj objectForKey:@"approver"];
+        hrObj.approved = [NSNumber numberWithLongLong:[[obj objectForKey:@"approved"] longLongValue]];
+        hrObj.notes = [obj objectForKey:@"notes"];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving purchase_orders
+    [purchases enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Purchase_Orders *purchaseObj = [NSEntityDescription
+                                        insertNewObjectForEntityForName:@"Purchase_Orders"
+                                        inManagedObjectContext:_managedObjectContext];
+        purchaseObj.po_id = [obj objectForKey:@"po_id"];
+        purchaseObj.po_date = [self convertStringToDate:[obj objectForKey:@"po_date"]];
+        purchaseObj.vendor = [obj objectForKey:@"vendor"];
+        purchaseObj.amount = [obj objectForKey:@"amount"];
+        purchaseObj.currency = [obj objectForKey:@"currency"];
+        purchaseObj.order_type = [obj objectForKey:@"order_type"];
+        
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }];
+
+}
+
+- (NSDate *) convertStringToDate : (NSString *) strDate {
+    
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd/MM/yyyy"];
+    NSDate* date = [df dateFromString:strDate];
+
+    NSLog(@"%@", date);
+    
+    return date;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -122,18 +236,8 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"sapDatabase.sqlite"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]]) {
-        NSURL *preloadURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sap" ofType:@"sqlite"]];
-        NSError* err = nil;
-        
-        if (![[NSFileManager defaultManager] copyItemAtURL:preloadURL toURL:storeURL error:&err]) {
-            NSLog(@"Oops, could copy preloaded data");
-        }
-    }
-    
     NSError *error = nil;
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"sapDatabase.sqlite"];
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
