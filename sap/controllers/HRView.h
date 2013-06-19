@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "HR_leaves.h"
 
 @interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 
+// constructor
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
+
 - (IBAction)slideBtnPressed:(id)sender;
+- (IBAction)switchApprovedValueChanged:(id)sender;
 
 @end

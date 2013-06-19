@@ -15,6 +15,8 @@
 
 @interface RootViewController ()
 
+@property (nonatomic, strong) AppDelegate *sapDelegate;
+
 @end
 
 @implementation RootViewController
@@ -37,13 +39,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _sapDelegate = [[UIApplication sharedApplication] delegate];    
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+
     SidebarView* sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0)];
     [self.view addSubview:sidebarview];
     
-    HRView* hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
+    HRView* hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     hrView.hidden = YES;
     [self.view addSubview:hrView];
     
