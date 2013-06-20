@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AA00E051772F417005E9340 /* HRLeaveRequest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA00E041772F417005E9340 /* HRLeaveRequest.xib */; };
+		3AA00E081772F440005E9340 /* HRLeaveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA00E071772F440005E9340 /* HRLeaveRequest.m */; };
 		3D3DC676176AF49D00E5ACB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC675176AF49D00E5ACB7 /* UIKit.framework */; };
 		3D3DC678176AF49D00E5ACB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC677176AF49D00E5ACB7 /* Foundation.framework */; };
 		3D3DC67A176AF49D00E5ACB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DC679176AF49D00E5ACB7 /* CoreGraphics.framework */; };
@@ -115,6 +117,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3AA00E041772F417005E9340 /* HRLeaveRequest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HRLeaveRequest.xib; sourceTree = "<group>"; };
+		3AA00E061772F440005E9340 /* HRLeaveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLeaveRequest.h; sourceTree = "<group>"; };
+		3AA00E071772F440005E9340 /* HRLeaveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLeaveRequest.m; sourceTree = "<group>"; };
 		3D3DC672176AF49D00E5ACB7 /* sap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3DC675176AF49D00E5ACB7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D3DC677176AF49D00E5ACB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -304,6 +309,7 @@
 				3D3DC6A7176B46A900E5ACB7 /* FinanceView.xib */,
 				3D3DC6A9176B46BF00E5ACB7 /* MaintenanceView.xib */,
 				3D3DC6AB176B46F600E5ACB7 /* PurchasesView.xib */,
+				3AA00E041772F417005E9340 /* HRLeaveRequest.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -321,6 +327,8 @@
 				3D3DC6B4176B473500E5ACB7 /* PurchasesView.m */,
 				3D3DC6B6176B474C00E5ACB7 /* MaintenanceView.h */,
 				3D3DC6B7176B474C00E5ACB7 /* MaintenanceView.m */,
+				3AA00E061772F440005E9340 /* HRLeaveRequest.h */,
+				3AA00E071772F440005E9340 /* HRLeaveRequest.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -513,6 +521,7 @@
 				3DC669461771999B00B8CB79 /* PO_Items.json in Resources */,
 				3DC669541771D91700B8CB79 /* NavBg.png in Resources */,
 				3DC669561771F3E800B8CB79 /* SearchTableViewCell.xib in Resources */,
+				3AA00E051772F417005E9340 /* HRLeaveRequest.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +548,7 @@
 				3DC6694917719CA700B8CB79 /* PO_Items.m in Sources */,
 				3DC6694C17719CC400B8CB79 /* PO_Delivery.m in Sources */,
 				3DC6694F17719CD900B8CB79 /* PO_Invoice.m in Sources */,
+				3AA00E081772F440005E9340 /* HRLeaveRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
