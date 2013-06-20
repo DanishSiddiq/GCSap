@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSString * emp_name;
 @property (nonatomic, retain) NSNumber * dept_id;
 @property (nonatomic, retain) NSNumber * dept_head;
+@property (nonatomic, retain) NSString * emp_number;
 
 @end

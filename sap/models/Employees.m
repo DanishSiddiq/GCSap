@@ -15,5 +15,6 @@
 @dynamic emp_name;
 @dynamic dept_id;
 @dynamic dept_head;
+@dynamic emp_number;
 
 @end
