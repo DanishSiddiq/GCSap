@@ -155,6 +155,8 @@
     lblCurrency = (UILabel *)[cell.contentView viewWithTag:6];
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if(_selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 292, 120)];
