@@ -237,10 +237,10 @@
     
     if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:YES]]){
         if([leaveObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
-            [imgViewStatus setImage:[UIImage imageNamed:@"orangeCircle"]];
+            [imgViewStatus setImage:[UIImage imageNamed:@"greenCircle"]];
         }
         else{
-            [imgViewStatus setImage:[UIImage imageNamed:@"greenCircle"]];
+            [imgViewStatus setImage:[UIImage imageNamed:@"redCircle"]];
         }
     }
     else{

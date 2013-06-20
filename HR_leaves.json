@@ -11,7 +11,7 @@
   "emp_name": "Miller",
   "approved": "1",
   "submitted": "1",
-  "isProcessed" : 0,
+  "isProcessed" : "1",
   "notes": "Having fever and cold"
   },
   {
@@ -26,7 +26,7 @@
   "emp_name": "Miller",
   "approved": "0",
   "submitted": "0",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Going for a planned vacation"
   },
   {
@@ -39,9 +39,9 @@
   "approver": "Colin Ray",
   "emp_number"  : "EMP-OO2",
   "emp_name": "Patrick",
-  "approved": "1",
+  "approved": "0",
   "submitted": "1",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Going for a planned vacation"
   },
   {
@@ -54,10 +54,9 @@
   "approver": "Colin Ray",
   "emp_number"  : "EMP-OO3",
   "emp_name": "Johnson Rick",
-  "approved": "1",
   "approved": "0",
-  "submitted": "0",
-  "isProcessed" : 0,
+  "submitted": "1",
+  "isProcessed" : "0",
   "notes": "Going to pay a visit to a close relative"
   },
   {
@@ -72,7 +71,7 @@
   "emp_name": "William",
   "approved": "0",
   "submitted": "0",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Have a appointement with my dentist"
   },
   {
@@ -87,7 +86,7 @@
   "emp_name": "Chris",
   "approved": "0",
   "submitted": "0",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Taking annual leaves"
   },
   {
@@ -102,7 +101,7 @@
   "emp_name": "William",
   "approved": "1",
   "submitted": "1",
-  "isProcessed" : 0,
+  "isProcessed" : "1",
   "notes": "Paid leaves"
   },
   {
@@ -115,9 +114,9 @@
   "approver": "Johnson Rick",
   "emp_number"  : "EMP-005",
   "emp_name": "Chris",
-  "approved": "1",
+  "approved": "0",
   "submitted": "1",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Having bad cold and fever"
   },
   {
@@ -132,7 +131,7 @@
   "emp_name": "Robert",
   "approved": "1",
   "submitted": "1",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Planned vacations"
   },
   {
@@ -147,7 +146,7 @@
   "emp_name": "Sean",
   "approved": "0",
   "submitted": "0",
-  "isProcessed" : 0,
+  "isProcessed" : "0",
   "notes": "Planned vacations"
   }
   ]
