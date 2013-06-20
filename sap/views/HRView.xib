@@ -40,7 +40,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="1033211040">
+					<object class="IBUIImageView" id="265979723">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{1024, 768}</string>
@@ -164,7 +164,7 @@
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIImageView" id="695503040">
+							<object class="IBUIImageView" id="933197326">
 								<reference key="NSNextResponder" ref="877936066"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 10}, {964, 660}}</string>
@@ -319,10 +319,10 @@
 									<object class="IBUITableView" id="1039301119">
 										<reference key="NSNextResponder" ref="248225360"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{0, 84}, {270, 517}}</string>
+										<string key="NSFrame">{{0, 84}, {275, 517}}</string>
 										<reference key="NSSuperview" ref="248225360"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="695503040"/>
+										<reference key="NSNextKeyView" ref="933197326"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="162011815"/>
 										<bool key="IBUIAutoresizesSubviews">NO</bool>
@@ -336,12 +336,12 @@
 										<float key="IBUISectionFooterHeight">22</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{28, 25}, {270, 612}}</string>
+								<string key="NSFrame">{{28, 25}, {275, 612}}</string>
 								<reference key="NSSuperview" ref="877936066"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="427767877"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor" id="291929151">
+								<object class="NSColor" key="IBUIBackgroundColor" id="884878860">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
 								</object>
@@ -761,14 +761,14 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="248225360"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIBackgroundColor" ref="291929151"/>
+						<reference key="IBUIBackgroundColor" ref="884878860"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1033211040"/>
+				<reference key="NSNextKeyView" ref="265979723"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC40MDI2NDY0MDEgMC40OTAyODUxNDM4IDAuNjE5NTE5MjkyMQA</bytes>
@@ -875,7 +875,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="230626371"/>
 							<reference ref="877936066"/>
-							<reference ref="1033211040"/>
+							<reference ref="265979723"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -895,7 +895,7 @@
 						<reference key="object" ref="877936066"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="248225360"/>
-							<reference ref="695503040"/>
+							<reference ref="933197326"/>
 							<reference ref="930843956"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
@@ -1090,12 +1090,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">71</int>
-						<reference key="object" ref="695503040"/>
+						<reference key="object" ref="933197326"/>
 						<reference key="parent" ref="877936066"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">72</int>
-						<reference key="object" ref="1033211040"/>
+						<reference key="object" ref="265979723"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Image View - BG</string>
 					</object>
