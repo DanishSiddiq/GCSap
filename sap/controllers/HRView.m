@@ -262,6 +262,7 @@
     UITableViewCell *cell;
     UILabel *lblFromDate, *lbltoDate, *lblDuration, *lblReason;
     UIImageView *imgViewBackground, *imgViewCalender;
+    UIView *vwSeperator;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
     
@@ -273,17 +274,20 @@
     
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
     imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:20];
+    vwSeperator = (UIView *)[cell.contentView viewWithTag:30];
     lblFromDate = (UILabel *)[cell.contentView viewWithTag:50];
     lbltoDate = (UILabel *)[cell.contentView viewWithTag:60];
     lblDuration = (UILabel *)[cell.contentView viewWithTag:70];
-    lblReason = (UILabel *)[cell.contentView viewWithTag:80];    
+    lblReason = (UILabel *)[cell.contentView viewWithTag:80];
+    
     // to round label
     [[lblDuration layer] setCornerRadius:3.0];
     
     if(_selectedIndexPath.row == indexPath.row){
         
-        [cell setFrame:CGRectMake(0, 0, 330, 86)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 330, 86)];
+        [cell setFrame:CGRectMake(0, 0, 275, 106)];
+        [imgViewBackground setFrame:CGRectMake(0, 10, 275, 86)];
+        [vwSeperator setFrame:CGRectMake(5, 50, 250, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
         [lblFromDate setTextColor:[UIColor whiteColor]];
@@ -291,8 +295,9 @@
         [lblReason setTextColor:[UIColor whiteColor]];
     }
     else{
-        [cell setFrame:CGRectMake(0, 0, 325, 86)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 325, 86)];
+        [cell setFrame:CGRectMake(0, 0, 270, 106)];
+        [imgViewBackground setFrame:CGRectMake(0, 10, 270, 86)];
+        [vwSeperator setFrame:CGRectMake(5, 50, 245, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
         [lblFromDate setTextColor:[UIColor blackColor]];
