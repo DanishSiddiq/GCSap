@@ -13,9 +13,12 @@
 @property (retain, nonatomic) IBOutlet UIView* purchaseView;
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) NSMutableArray* lstPurchases;
+@property (retain, nonatomic) NSMutableArray *lstFilterPurchases;
+@property (retain, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 @property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (retain, nonatomic) IBOutlet UIView* purchaseViewDetailUpper;
 
@@ -53,6 +56,8 @@
     _sapDelegate = sapDelegate;
     _lstPurchases = [[NSMutableArray alloc] init];
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    _lstFilterPurchases = [[NSMutableArray alloc] init];
+    _filterText = [NSMutableString stringWithFormat:@""];
     
     // data base calling for fetching data
     [self fetchDataFromServer];
@@ -66,7 +71,7 @@
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
     [_lstPurchases addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-    
+    [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
 }
 
 - (IBAction)slideBtnPressed:(id)sender {
@@ -101,6 +106,74 @@
     
 }
 
+
+#pragma searchbar delegates
+
+-(void) setKeyBoardForSearchBar{
+    
+    for (UIView *searchBarSubview in [_searchBar subviews]) {
+        
+        if ([searchBarSubview conformsToProtocol:@protocol(UITextInputTraits)]) {
+            
+            @try {
+                
+                [(UITextField *)searchBarSubview setReturnKeyType:UIReturnKeyDone];
+                [(UITextField *)searchBarSubview setKeyboardAppearance:UIKeyboardAppearanceAlert];
+            }
+            @catch (NSException * e) {
+                
+                // ignore exception
+            }
+        }
+    }
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    // changing text logic here
+    [_filterText setString:searchText];
+    [self filterLeaves];
+    [self updateViews];
+}
+
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    
+    // search logic will go here
+    [searchBar resignFirstResponder];
+}
+
+-(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    [searchBar setText:@""];
+    [searchBar resignFirstResponder];
+    [_filterText setString:searchBar.text];
+    [self filterLeaves];
+    [self updateViews];
+}
+
+- (void) filterLeaves {
+    
+    [_lstFilterPurchases removeAllObjects];
+    [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    
+    if([_filterText length] > 0){
+        
+        for(Purchase_Orders *purchase in _lstPurchases){
+            
+            if([[[purchase order_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                
+                [_lstFilterPurchases addObject:purchase];
+            }
+            else if([[[NSString stringWithFormat:@"%@", [ purchase po_id]] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                [_lstFilterPurchases addObject:purchase];
+            }
+            else if([[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                [_lstFilterPurchases addObject:purchase];
+            }
+        }
+    }
+}
+
 // you have to update the view also have to change the side vise fileds accordingly
 -(void) updateViews {
     
@@ -111,7 +184,7 @@
 #pragma purchase order delegates
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_lstPurchases count];
+    return [_lstFilterPurchases count];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -184,7 +257,7 @@
     }
     
     
-    Purchase_Orders *purchaseObj = [_lstPurchases objectAtIndex:indexPath.row];
+    Purchase_Orders *purchaseObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     
