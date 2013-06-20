@@ -17,6 +17,8 @@
 @dynamic from_date;
 @dynamic to_date;
 @dynamic approver;
+@dynamic emp_number;
+@dynamic emp_name;
 @dynamic approved;
 @dynamic submitted;
 @dynamic notes;

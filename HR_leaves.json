@@ -7,6 +7,8 @@
   "to_date": "23/01/2013",
   "duration": 2,
   "approver": "Colin Ray",
+  "emp_number"  : "EMP-OO1",
+  "emp_name": "Miller",
   "approved": "1",
   "submitted": "1",
   "notes": "Having fever and cold"
@@ -18,7 +20,9 @@
   "from_date": "17/06/2013",
   "to_date": "21/06/2013",
   "duration": 5,
-  "approver": "Johnson Rick",
+  "approver": "Colin Ray",
+  "emp_number"  : "EMP-OO1",
+  "emp_name": "Miller",
   "approved": "0",
   "submitted": "0",
   "notes": "Going for a planned vacation"
@@ -30,7 +34,9 @@
   "from_date": "17/06/2013",
   "to_date": "21/06/2013",
   "duration": 5,
-  "approver": "Miller",
+  "approver": "Colin Ray",
+  "emp_number"  : "EMP-OO2",
+  "emp_name": "Patrick",
   "approved": "1",
   "submitted": "1",
   "notes": "Going for a planned vacation"
@@ -42,7 +48,10 @@
   "from_date": "13/06/2013",
   "to_date": "14/06/2013",
   "duration": 2,
-  "approver": "Patrick",
+  "approver": "Colin Ray",
+  "emp_number"  : "EMP-OO3",
+  "emp_name": "Johnson Rick",
+  "approved": "1",
   "approved": "0",
   "submitted": "0",
   "notes": "Going to pay a visit to a close relative"
@@ -54,7 +63,9 @@
   "from_date": "05/06/2013",
   "to_date": "05/06/2013",
   "duration": 1,
-  "approver": "Berry",
+  "approver": "Johnson Rick",
+  "emp_number"  : "EMP-OO4",
+  "emp_name": "William",
   "approved": "0",
   "submitted": "0",
   "notes": "Have a appointement with my dentist"
@@ -67,6 +78,8 @@
   "to_date": "15/06/2013",
   "duration": 5,
   "approver": "Johnson Rick",
+  "emp_number"  : "EMP-OO5",
+  "emp_name": "Chris",
   "approved": "0",
   "submitted": "0",
   "notes": "Taking annual leaves"
@@ -79,6 +92,8 @@
   "to_date": "21/03/2013",
   "duration": 9,
   "approver": "Johnson Rick",
+  "emp_number"  : "EMP-004",
+  "emp_name": "William",
   "approved": "1",
   "submitted": "1",
   "notes": "Paid leaves"
@@ -91,6 +106,8 @@
   "to_date": "25/03/2013",
   "duration": 5,
   "approver": "Johnson Rick",
+  "emp_number"  : "EMP-005",
+  "emp_name": "Chris",
   "approved": "1",
   "submitted": "1",
   "notes": "Having bad cold and fever"
@@ -102,7 +119,9 @@
   "from_date": "05/06/2013",
   "to_date": "12/06/2013",
   "duration": 7,
-  "approver": "Colin Ray",
+  "approver": "Johnson Rick",
+  "emp_number"  : "EMP-006",
+  "emp_name": "Robert",
   "approved": "1",
   "submitted": "1",
   "notes": "Planned vacations"
@@ -114,7 +133,9 @@
   "from_date": "07/06/2013",
   "to_date": "14/06/2013",
   "duration": 7,
-  "approver": "Patrick",
+  "approver": "Johnson Rick",
+  "emp_number"  : "EMP-007",
+  "emp_name": "Sean",
   "approved": "0",
   "submitted": "0",
   "notes": "Planned vacations"
