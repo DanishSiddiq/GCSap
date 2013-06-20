@@ -99,7 +99,7 @@
   "approver": "Johnson Rick",
   "emp_number"  : "EMP-004",
   "emp_name": "William",
-  "approved": "1",
+  "approved": "0",
   "submitted": "1",
   "isProcessed" : "1",
   "notes": "Paid leaves"
