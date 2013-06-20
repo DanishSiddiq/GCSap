@@ -27,7 +27,7 @@
     }
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Employees"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PO_Items"
                                               inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -89,6 +89,8 @@
     NSArray* po_items = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPOItems]
                                                          options:kNilOptions
                                                            error:&err];
+    
+    NSLog(@"Items: %@", po_items);
     
     //        // saving departments
     [departments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -159,7 +161,7 @@
         }
     }];
     
-    // saving purchase_orders
+    // saving purchase_orders items
     [po_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PO_Items *poItemsObj = [NSEntityDescription
                                         insertNewObjectForEntityForName:@"PO_Items"
@@ -181,7 +183,7 @@
         }
     }];
     
-    // saving purchase_orders
+    // saving purchase_orders delivery
     [po_delivery enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PO_Delivery *poDeliveryObj = [NSEntityDescription
                                         insertNewObjectForEntityForName:@"PO_Delivery"
@@ -198,7 +200,7 @@
         }
     }];
     
-    // saving purchase_orders
+    // saving purchase_orders invoice
     [po_invoivces enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PO_Invoice *poInvoiceObj = [NSEntityDescription
                                         insertNewObjectForEntityForName:@"PO_Invoice"
