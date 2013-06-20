@@ -37,7 +37,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="4490899">
+					<object class="IBUIImageView" id="856563376">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{1024, 768}</string>
@@ -59,7 +59,7 @@
 							<object class="IBUIButton" id="666729771">
 								<reference key="NSNextResponder" ref="230626371"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 10}, {50, 31}}</string>
+								<string key="NSFrame">{{20, 1}, {48, 48}}</string>
 								<reference key="NSSuperview" ref="230626371"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="588363176"/>
@@ -68,8 +68,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">---</string>
 								<object class="NSColor" key="IBUIHighlightedTitleColor" id="162011815">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
@@ -81,6 +79,10 @@
 								<object class="NSColor" key="IBUINormalTitleShadowColor" id="970099284">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">sliderBtn.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
@@ -123,7 +125,7 @@
 							<object class="IBUILabel" id="1007614278">
 								<reference key="NSNextResponder" ref="230626371"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{323, 10}, {296, 30}}</string>
+								<string key="NSFrame">{{347, 10}, {296, 30}}</string>
 								<reference key="NSSuperview" ref="230626371"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -161,7 +163,7 @@
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="4490899"/>
+				<reference key="NSNextKeyView" ref="856563376"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC40MDI2NDY0MDEgMC40OTAyODUxNDM4IDAuNjE5NTE5MjkyMQA</bytes>
@@ -209,7 +211,7 @@
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="230626371"/>
-							<reference ref="4490899"/>
+							<reference ref="856563376"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -252,7 +254,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">72</int>
-						<reference key="object" ref="4490899"/>
+						<reference key="object" ref="856563376"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Image View - BG</string>
 					</object>
@@ -281,49 +283,28 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">HRView</string>
 					<string key="superclassName">UIView</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="btnPressedApproved:">id</string>
-						<string key="btnPressedUnApproved:">id</string>
-						<string key="slideBtnPressed:">id</string>
-						<string key="switchApprovedValueChanged:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="btnPressedApproved:">
-							<string key="name">btnPressedApproved:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnPressedUnApproved:">
-							<string key="name">btnPressedUnApproved:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideBtnPressed:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">slideBtnPressed:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">slideBtnPressed:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">slideBtnPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="switchApprovedValueChanged:">
-							<string key="name">switchApprovedValueChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="hrView">UIView</string>
-						<string key="searchBar">UISearchBar</string>
-						<string key="tblLeave">UITableView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="hrView">
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">hrView</string>
+						<string key="NS.object.0">UIView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">hrView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">hrView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="searchBar">
-							<string key="name">searchBar</string>
-							<string key="candidateClassName">UISearchBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tblLeave">
-							<string key="name">tblLeave</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HRView.h</string>
@@ -335,10 +316,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">bg.png</string>
-			<string key="NS.object.0">{2048, 1536}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="bg.png">{2048, 1536}</string>
+			<string key="sliderBtn.png">{83, 95}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>
