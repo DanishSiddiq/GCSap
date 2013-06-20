@@ -102,7 +102,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving Department: %@", [error localizedDescription]);
         }
     }];
     
@@ -113,12 +113,13 @@
                              inManagedObjectContext:_managedObjectContext];
         empObj.emp_id = [obj objectForKey:@"emp_id"];
         empObj.emp_name = [obj objectForKey:@"emp_name"];
+        empObj.emp_number = [obj objectForKey:@"emp_number"];
         empObj.dept_id = [obj objectForKey:@"dept_id"];
         empObj.dept_head = [NSNumber numberWithLongLong:[[obj objectForKey:@"dept_head"] longLongValue]];
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving Employee: %@", [error localizedDescription]);
         }
     }];
     
@@ -134,12 +135,14 @@
         hrObj.to_date = [self convertStringToDate:[obj objectForKey:@"to_date"]];
         hrObj.submitted =  [NSNumber numberWithLongLong:[[obj objectForKey:@"submitted"] longLongValue]];
         hrObj.approver = [obj objectForKey:@"approver"];
+        hrObj.emp_number = [obj objectForKey:@"emp_number"];
+        hrObj.emp_name = [obj objectForKey:@"emp_name"];
         hrObj.approved = [NSNumber numberWithLongLong:[[obj objectForKey:@"approved"] longLongValue]];
         hrObj.notes = [obj objectForKey:@"notes"];
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving HR leave: %@", [error localizedDescription]);
         }
     }];
     
@@ -157,7 +160,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving Purchase: %@", [error localizedDescription]);
         }
     }];
     
@@ -179,7 +182,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Item: %@", [error localizedDescription]);
         }
     }];
     
@@ -196,7 +199,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);
         }
     }];
     
@@ -213,7 +216,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error, couldn't save: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Invoice: %@", [error localizedDescription]);
         }
     }];
 

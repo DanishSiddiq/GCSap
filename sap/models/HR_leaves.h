@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSDate * from_date;
 @property (nonatomic, retain) NSDate * to_date;
 @property (nonatomic, retain) NSString * approver;
+@property (nonatomic, retain) NSString * emp_number;
+@property (nonatomic, retain) NSString * emp_name;
 @property (nonatomic, retain) NSNumber * approved;
 @property (nonatomic, retain) NSNumber * submitted;
 @property (nonatomic, retain) NSString * notes;
