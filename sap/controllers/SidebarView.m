@@ -32,7 +32,7 @@
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"SidebarView" owner:self options:nil];
         self.sidebarView.frame = frame;
-        UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBg.png"]];
+        UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBg-1.png"]];
         self.sidebarView.backgroundColor = background;
         
         

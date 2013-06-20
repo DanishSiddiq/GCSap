@@ -120,11 +120,11 @@
   "short_text": "APC BK 232"
   },
   {
-  "po_Items_id": "11",
-  "po_id": "6",
+  "po_Items_id": 11,
+  "po_id": 6,
   "items": "Data 121",
-  "a": "22",
-  "l": "11",
+  "a": 22,
+  "l": 11,
   "material": "sdaasd",
   "quantity": "23",
   "units": "C",

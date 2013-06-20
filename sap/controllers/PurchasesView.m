@@ -17,6 +17,8 @@
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 @property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
 
+@property (retain, nonatomic) IBOutlet UIView* purchaseViewDetailUpper;
+
 @property bool _isSlided;
 
 @end
@@ -201,6 +203,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
+    
+    //NSLog(@"Index: %@", _selectedIndexPath);
 }
 
 
