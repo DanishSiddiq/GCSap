@@ -138,6 +138,7 @@
         hrObj.emp_number = [obj objectForKey:@"emp_number"];
         hrObj.emp_name = [obj objectForKey:@"emp_name"];
         hrObj.approved = [NSNumber numberWithLongLong:[[obj objectForKey:@"approved"] longLongValue]];
+        hrObj.isProcessed = [NSNumber numberWithLongLong:[[obj objectForKey:@"isProcessed"] longLongValue]];
         hrObj.notes = [obj objectForKey:@"notes"];
         
         NSError *error;

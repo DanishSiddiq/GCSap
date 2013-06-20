@@ -21,6 +21,7 @@
 @dynamic emp_name;
 @dynamic approved;
 @dynamic submitted;
+@dynamic isProcessed;
 @dynamic notes;
 
 @end
