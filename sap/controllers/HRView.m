@@ -12,6 +12,11 @@
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView *hrView;
+@property (retain, nonatomic) IBOutlet UILabel *lblTitle;
+@property (retain, nonatomic) IBOutlet UIButton *btnLeaveRequest;
+@property (retain, nonatomic) IBOutlet UIButton *btnLeaveApproval;
+@property (retain, nonatomic) HRLeaveApprovalView* hrleaveApproval;
+@property (retain, nonatomic) HRLeaveRequestView* hrleaveRequest;
 
 @end
 
@@ -36,14 +41,16 @@
     
     self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
     [self addSubview:self.hrView];
-        
-    HRLeaveRequestView* hrleaveRequest = [[HRLeaveRequestView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
-    [self addSubview:hrleaveRequest];
-    [hrleaveRequest setHidden:YES];
     
-    HRLeaveApprovalView* hrleaveApproval = [[HRLeaveApprovalView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
-    [self addSubview:hrleaveApproval];
-    //[hrleaveApproval setHidden:YES];
+    _hrleaveApproval = [[HRLeaveApprovalView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
+    [self addSubview:_hrleaveApproval];
+    
+    _hrleaveRequest = [[HRLeaveRequestView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
+    [self addSubview:_hrleaveRequest];
+    [_hrleaveRequest setHidden:YES];
+    
+    // leave request will be shown for toggling
+    [_btnLeaveApproval setHidden:YES];
 }
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{
@@ -52,7 +59,7 @@
 }
 
 // selectors
-- (IBAction)slideBtnPressed:(id)sender {
+- (IBAction)btnPressedSlide:(id)sender {
  
     if(self.frame.origin.x == 120){
         
@@ -73,6 +80,43 @@
             self.frame = toFrame;
         } completion:nil];
     }
+}
+
+- (IBAction)btnPressedLeaveRequest:(id)sender {
+    
+    [_lblTitle setText:@"LEAVE REQUEST (EMPLOYEE SECTION)"];
+    
+    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [_hrleaveRequest setHidden:NO];
+                        [_hrleaveApproval setHidden:YES];
+                        
+                        [_btnLeaveRequest setHidden:YES];
+                        [_btnLeaveApproval setHidden:NO];
+                        
+                    } completion:^(BOOL finished) {
+                        if(finished){
+                        }
+                    }];
+    
+}
+
+- (IBAction)btnPressedLeaveApproval:(id)sender {
+    
+    [_lblTitle setText:@"LEAVE APPROVAL (MANAGERIAL SECTION)"];
+    
+    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [_hrleaveRequest setHidden:YES];
+                        [_hrleaveApproval setHidden:NO];
+                        
+                        [_btnLeaveRequest setHidden:NO];
+                        [_btnLeaveApproval setHidden:YES];
+                        
+                    } completion:^(BOOL finished) {
+                        if(finished){
+                        }
+                    }];
 }
 
 @end

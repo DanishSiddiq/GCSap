@@ -19,6 +19,8 @@
 // constructor
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
-- (IBAction)slideBtnPressed:(id)sender;
+- (IBAction)btnPressedSlide:(id)sender;
+- (IBAction)btnPressedLeaveRequest:(id)sender;
+- (IBAction)btnPressedLeaveApproval:(id)sender;
 
 @end
