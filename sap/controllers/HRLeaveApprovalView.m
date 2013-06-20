@@ -1,38 +1,44 @@
 //
-//  HRLeaveRequest.m
+//  HRLeaveApprovalView.m
 //  sap
 //
 //  Created by goodcore2 on 6/20/13.
 //  Copyright (c) 2013 goodcore1. All rights reserved.
 //
 
-#import "HRLeaveRequest.h"
+#import "HRLeaveApprovalView.h"
 
+@interface HRLeaveApprovalView ()
 
-@interface HRLeaveRequest ()
-
-@property (retain, nonatomic) IBOutlet UIView *hrLeaveRequest;
+@property (retain, nonatomic) IBOutlet UIView *hrLeaveApproval;
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
-@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet UITableView *tblLeave;
 @property (retain, nonatomic) NSMutableArray *lstLeave;
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
-@property (retain, nonatomic) NSMutableString *filterText;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isUnApprovedSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 @end
 
-@implementation HRLeaveRequest
+@implementation HRLeaveApprovalView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
 
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-        [[NSBundle mainBundle] loadNibNamed:@"HRLeaveRequest" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"HRLeaveApprovalView" owner:self options:nil];
         [self initializeViews:frame];
         [self initializeData:sapDelegate];
     }
@@ -42,10 +48,9 @@
 
 - (void) initializeViews : (CGRect) frame {
     
-    self.hrLeaveRequest.frame = frame;
-    [self addSubview:self.hrLeaveRequest];    
+    self.hrLeaveApproval.frame = frame;
+    [self addSubview:self.hrLeaveApproval];
     
-    [self setKeyBoardForSearchBar];
     [_tblLeave setShowsVerticalScrollIndicator:NO];
 }
 
@@ -55,7 +60,6 @@
     _sapDelegate = sapDelegate;
     _lstFilterLeave = [[NSMutableArray alloc] init];
     _lstLeave = [[NSMutableArray alloc] init];
-    _filterText = [NSMutableString stringWithFormat:@""];
     _isApprovedSelected = YES;
     _isUnApprovedSelected = YES;
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -96,97 +100,24 @@
     [self updateViews ];
 }
 
-#pragma searchbar delegates
-
--(void) setKeyBoardForSearchBar{
-    
-    for (UIView *searchBarSubview in [_searchBar subviews]) {
-        
-        if ([searchBarSubview conformsToProtocol:@protocol(UITextInputTraits)]) {
-            
-            @try {
-                
-                [(UITextField *)searchBarSubview setReturnKeyType:UIReturnKeyDone];
-                [(UITextField *)searchBarSubview setKeyboardAppearance:UIKeyboardAppearanceAlert];
-            }
-            @catch (NSException * e) {
-                
-                // ignore exception
-            }
-        }
-    }
-}
-
-- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    
-    // changing text logic here
-    [_filterText setString:searchText];
-    [self filterLeaves];
-    [self updateViews];
-}
-
--(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    
-    // search logic will go here
-    [searchBar resignFirstResponder];
-}
-
--(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    
-    [searchBar setText:@""];
-    [searchBar resignFirstResponder];
-    [_filterText setString:searchBar.text];
-    [self filterLeaves];
-    [self updateViews];
-}
-
 - (void) filterLeaves {
     
     [_lstFilterLeave removeAllObjects];
-    [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-    
-    if([_filterText length] > 0){
         
-        for(HR_leaves *leave in _lstLeave){
+    for(HR_leaves *leave in _lstLeave){
+        
+        if(_isApprovedSelected && _isUnApprovedSelected){
             
-            
-            if(_isApprovedSelected && _isUnApprovedSelected
-               && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
-                
-                [_lstFilterLeave addObject:leave];
-            }
-            else{
-                
-                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]
-                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
-                    [_lstFilterLeave addObject:leave];
-                }
-                
-                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]
-                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
-                    
-                    [_lstFilterLeave addObject:leave];
-                }
-            }
+            [_lstFilterLeave addObject:leave];
         }
-    }
-    else{
-        
-        for(HR_leaves *leave in _lstLeave){
+        else{
             
-            if(_isApprovedSelected && _isUnApprovedSelected){
-                
+            if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                 [_lstFilterLeave addObject:leave];
             }
-            else{
-                
-                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                    [_lstFilterLeave addObject:leave];
-                }
-                
-                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                    [_lstFilterLeave addObject:leave];
-                }
+            
+            if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                [_lstFilterLeave addObject:leave];
             }
         }
     }
@@ -301,7 +232,6 @@
     [_tblLeave reloadData];
     
 }
-
 
 
 @end

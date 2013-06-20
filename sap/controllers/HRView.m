@@ -37,8 +37,12 @@
     self.hrView.frame = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
     [self addSubview:self.hrView];
         
-    HRLeaveRequest* hrleaveRequest = [[HRLeaveRequest alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
+    HRLeaveRequestView* hrleaveRequest = [[HRLeaveRequestView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
     [self addSubview:hrleaveRequest];
+    [hrleaveRequest setHidden:YES];
+    
+    HRLeaveApprovalView* hrleaveApproval = [[HRLeaveApprovalView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 1024.0f, 718) sapDelegate:_sapDelegate];
+    [self addSubview:hrleaveApproval];
 }
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{

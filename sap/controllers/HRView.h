@@ -10,7 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "HR_leaves.h"
-#import "HRLeaveRequest.h"
+#import "HRLeaveRequestView.h"
+#import "HRLeaveApprovalView.h"
 
 @interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
