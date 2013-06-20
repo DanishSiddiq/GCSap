@@ -141,7 +141,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 106.0f;
+    return 142.0f;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -166,34 +166,40 @@
     
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"HRSearchCell"];
     UITableViewCell *cell;
-    UILabel *lblFromDate, *lbltoDate, *lblDuration, *lblReason;
+    UILabel *lblName, *lblFromDate, *lbltoDate, *lblDuration, *lblReason;
     UIImageView *imgViewBackground, *imgViewCalender;
-    UIView *vwSeperator;
+    UIView *vwSeperatorUpper, *vwSeperatorLower;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
     
     if (cell == nil)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:1];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:2];
         
     }
     
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
-    imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:20];
-    vwSeperator = (UIView *)[cell.contentView viewWithTag:30];
+    imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:40];
+    
+    vwSeperatorUpper = (UIView *)[cell.contentView viewWithTag:30];
+    vwSeperatorLower = (UIView *)[cell.contentView viewWithTag:80];
+    
+    
+    lblName = (UILabel *)[cell.contentView viewWithTag:20];
     lblFromDate = (UILabel *)[cell.contentView viewWithTag:50];
-    lbltoDate = (UILabel *)[cell.contentView viewWithTag:60];
-    lblDuration = (UILabel *)[cell.contentView viewWithTag:70];
-    lblReason = (UILabel *)[cell.contentView viewWithTag:80];
+    lbltoDate = (UILabel *)[cell.contentView viewWithTag:70];
+    lblDuration = (UILabel *)[cell.contentView viewWithTag:90];
+    lblReason = (UILabel *)[cell.contentView viewWithTag:100];
     
     // to round label
     [[lblDuration layer] setCornerRadius:3.0];
     
     if(_selectedIndexPath.row == indexPath.row){
         
-        [cell setFrame:CGRectMake(0, 0, 275, 106)];
-        [imgViewBackground setFrame:CGRectMake(0, 10, 275, 86)];
-        [vwSeperator setFrame:CGRectMake(5, 50, 250, 1)];
+        [cell setFrame:CGRectMake(0, 0, 275, 142)];
+        [imgViewBackground setFrame:CGRectMake(0, 10, 275, 122)];
+        [vwSeperatorUpper setFrame:CGRectMake(5, 48, 250, 1)];
+        [vwSeperatorLower setFrame:CGRectMake(5, 86, 250, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
         [lblFromDate setTextColor:[UIColor whiteColor]];
@@ -201,9 +207,10 @@
         [lblReason setTextColor:[UIColor whiteColor]];
     }
     else{
-        [cell setFrame:CGRectMake(0, 0, 270, 106)];
-        [imgViewBackground setFrame:CGRectMake(0, 10, 270, 86)];
-        [vwSeperator setFrame:CGRectMake(5, 50, 245, 1)];
+        [cell setFrame:CGRectMake(0, 0, 270, 142)];
+        [imgViewBackground setFrame:CGRectMake(0, 10, 270, 122)];
+        [vwSeperatorLower setFrame:CGRectMake(5, 48, 245, 1)];
+        [vwSeperatorLower setFrame:CGRectMake(5, 86, 245, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
         [lblFromDate setTextColor:[UIColor blackColor]];
@@ -219,6 +226,7 @@
     double secondsInDay = 60*60*24;
     NSInteger dayBetweenDates = distanceBetweenDates / secondsInDay;
     
+    lblName.text = leaveObj.emp_name;
     lblFromDate.text = [format stringFromDate:leaveObj.from_date];
     lbltoDate.text = [format stringFromDate:leaveObj.to_date];
     lblReason.text = leaveObj.leave_type;
