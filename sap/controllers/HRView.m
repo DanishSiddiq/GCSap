@@ -86,7 +86,7 @@
     
     [_lblTitle setText:@"LEAVE REQUEST (EMPLOYEE SECTION)"];
     
-    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve
+    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlUp
                     animations:^{
                         [_hrleaveRequest setHidden:NO];
                         [_hrleaveApproval setHidden:YES];
@@ -105,7 +105,7 @@
     
     [_lblTitle setText:@"LEAVE APPROVAL (MANAGERIAL SECTION)"];
     
-    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve
+    [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlDown
                     animations:^{
                         [_hrleaveRequest setHidden:YES];
                         [_hrleaveApproval setHidden:NO];
