@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63b</string>
+		<string key="IBDocument.SystemVersion">11G56</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
@@ -153,7 +153,7 @@
 							<object class="IBUIView" id="21980364">
 								<reference key="NSNextResponder" ref="335192844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{13, 27}, {301, 1}}</string>
+								<string key="NSFrame">{{13, 27}, {257, 1}}</string>
 								<reference key="NSSuperview" ref="335192844"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -317,7 +317,7 @@
 							<object class="IBUIView" id="287876416">
 								<reference key="NSNextResponder" ref="335192844"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{14, 82}, {301, 1}}</string>
+								<string key="NSFrame">{{14, 82}, {257, 1}}</string>
 								<reference key="NSSuperview" ref="335192844"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -368,7 +368,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{330, 119}</string>
+						<string key="NSFrameSize">{292, 119}</string>
 						<reference key="NSSuperview" ref="179444305"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="898746140"/>
@@ -384,7 +384,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{330, 120}</string>
+				<string key="NSFrameSize">{292, 120}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="335192844"/>
