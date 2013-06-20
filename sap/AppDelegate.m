@@ -89,10 +89,10 @@
     NSArray* po_items = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPOItems]
                                                          options:kNilOptions
                                                            error:&err];
+    //NSLog(@"Items: %@", employees);
+    //NSLog(@"Items: %@", po_items);
     
-    NSLog(@"Items: %@", po_items);
-    
-    //        // saving departments
+    // saving departments
     [departments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Departments *departmentsObj = [NSEntityDescription
                                        insertNewObjectForEntityForName:@"Departments"
@@ -102,7 +102,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving Department: %@", [error localizedDescription]);
+            //NSLog(@"Error saving Department: %@", [error localizedDescription]);
         }
     }];
     
@@ -119,11 +119,11 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving Employee: %@", [error localizedDescription]);
+            //NSLog(@"Error saving Employee: %@", [error localizedDescription]);
         }
     }];
     
-    //        // saving hr_leaves
+    // saving hr_leaves
     [hr_leaves enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         HR_leaves *hrObj = [NSEntityDescription
                             insertNewObjectForEntityForName:@"HR_leaves"
@@ -142,7 +142,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving HR leave: %@", [error localizedDescription]);
+            //NSLog(@"Error saving HR leave: %@", [error localizedDescription]);
         }
     }];
     
@@ -160,19 +160,38 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving Purchase: %@", [error localizedDescription]);
+            //NSLog(@"Error saving Purchase: %@", [error localizedDescription]);
         }
     }];
+    
+    // saving purchase_orders invoice
+    [po_invoivces enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        PO_Invoice *poInvoiceObj = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"PO_Invoice"
+                                    inManagedObjectContext:_managedObjectContext];
+        
+        poInvoiceObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
+        poInvoiceObj.invoice_date = [self convertStringToDate:[obj objectForKey:@"invoice_date"]];
+        poInvoiceObj.po_invoice_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_invoice_id"] longLongValue]];
+        poInvoiceObj.amount = [NSNumber numberWithLongLong:[[obj objectForKey:@"amount"] longLongValue]];
+        
+        NSLog(@"OBJ: %@", poInvoiceObj);
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            //NSLog(@"Error saving PO Invoice: %@", [error localizedDescription]);
+        }
+    }];
+
     
     // saving purchase_orders items
     [po_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PO_Items *poItemsObj = [NSEntityDescription
                                         insertNewObjectForEntityForName:@"PO_Items"
                                         inManagedObjectContext:_managedObjectContext];
+        poItemsObj.po_items_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_Items_id"] longLongValue]];
         poItemsObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
-        poItemsObj.po_items_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_items_id"] longLongValue]];
         poItemsObj.delivery_date = [self convertStringToDate:[obj objectForKey:@"delivery_date"]];
-        poItemsObj.items = [obj objectForKey:@"vendor"];
+        poItemsObj.items = [obj objectForKey:@"items"];
         poItemsObj.quantity = [NSNumber numberWithLongLong:[[obj objectForKey:@"quantity"] longLongValue]];
         poItemsObj.units = [obj objectForKey:@"units"];
         poItemsObj.l = [NSNumber numberWithLongLong:[[obj objectForKey:@"l"] longLongValue]];
@@ -180,9 +199,10 @@
         poItemsObj.short_text = [obj objectForKey:@"short_text"];
         poItemsObj.material = [obj objectForKey:@"material"];
         
+        NSLog(@"OBJ: %@", poItemsObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving PO Item: %@", [error localizedDescription]);
+            //NSLog(@"Error saving PO Item: %@", [error localizedDescription]);
         }
     }];
     
@@ -197,29 +217,13 @@
         poDeliveryObj.po_delivery_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_delivery_id"] longLongValue]];
         poDeliveryObj.status = [NSNumber numberWithLongLong:[[obj objectForKey:@"status"] longLongValue]];
         
+        NSLog(@"OBJ: %@", poDeliveryObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);
+            //NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);
         }
     }];
     
-    // saving purchase_orders invoice
-    [po_invoivces enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        PO_Invoice *poInvoiceObj = [NSEntityDescription
-                                        insertNewObjectForEntityForName:@"PO_Invoice"
-                                        inManagedObjectContext:_managedObjectContext];
-        
-        poInvoiceObj.po_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_id"] longLongValue]];
-        poInvoiceObj.invoice_date = [self convertStringToDate:[obj objectForKey:@"invoice_date"]];
-        poInvoiceObj.po_invoice_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_invoice_id"] longLongValue]];
-        poInvoiceObj.amount = [NSNumber numberWithLongLong:[[obj objectForKey:@"amount"] longLongValue]];
-        
-        NSError *error;
-        if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error saving PO Invoice: %@", [error localizedDescription]);
-        }
-    }];
-
 }
 
 - (NSDate *) convertStringToDate : (NSString *) strDate {
