@@ -803,6 +803,14 @@
 					<int key="connectionID">121</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="465949923"/>
+					</object>
+					<int key="connectionID">122</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">slideBtnPressed:</string>
 						<reference key="source" ref="146670505"/>
@@ -810,6 +818,14 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="465949923"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">123</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1138,7 +1154,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">121</int>
+			<int key="maxID">123</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1159,6 +1175,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="purchaseView">UIView</string>
 						<string key="purchaseViewDetailUpper">UIView</string>
+						<string key="searchBar">UISearchBar</string>
 						<string key="tblPurchases">UITableView</string>
 						<string key="titleView">UIView</string>
 					</dictionary>
@@ -1170,6 +1187,10 @@
 						<object class="IBToOneOutletInfo" key="purchaseViewDetailUpper">
 							<string key="name">purchaseViewDetailUpper</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tblPurchases">
 							<string key="name">tblPurchases</string>
