@@ -51,6 +51,7 @@
 
 - (void) initializeViews : (CGRect) frame {
     
+    frame.origin.y = 0;
     self.hrLeaveRequest.frame = frame;
     [self addSubview:self.hrLeaveRequest];    
     
