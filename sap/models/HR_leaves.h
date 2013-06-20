@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * emp_name;
 @property (nonatomic, retain) NSNumber * approved;
 @property (nonatomic, retain) NSNumber * submitted;
+@property (nonatomic, retain) NSNumber * isProcessed;
 @property (nonatomic, retain) NSString * notes;
 
 @end
