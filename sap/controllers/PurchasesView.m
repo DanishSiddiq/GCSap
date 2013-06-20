@@ -157,8 +157,8 @@
     
     if(_selectedIndexPath.row == indexPath.row){
         
-        [cell setFrame:CGRectMake(0, 0, 330, 120)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 330, 120)];
+        [cell setFrame:CGRectMake(0, 0, 292, 120)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 120)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [lblPOId setTextColor:[UIColor whiteColor]];
         [lblVendor setTextColor:[UIColor whiteColor]];
@@ -168,8 +168,8 @@
         [lblCurrency setTextColor:[UIColor whiteColor]];
     }
     else{
-        [cell setFrame:CGRectMake(0, 0, 325, 120)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 325, 120)];
+        [cell setFrame:CGRectMake(0, 0, 292, 120)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 120)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [lblPOId setTextColor:[UIColor blackColor]];
         [lblVendor setTextColor:[UIColor blackColor]];
