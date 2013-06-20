@@ -27,7 +27,7 @@
     }
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PO_Items"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Employees"
                                               inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
