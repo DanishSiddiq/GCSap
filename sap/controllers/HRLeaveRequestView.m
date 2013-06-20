@@ -246,7 +246,7 @@
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"HRSearchCell"];
     UITableViewCell *cell;
     UILabel *lblFromDate, *lbltoDate, *lblDuration, *lblReason;
-    UIImageView *imgViewBackground, *imgViewCalender;
+    UIImageView *imgViewBackground, *imgViewCalender, *imgViewStatus;
     UIView *vwSeperator;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
@@ -259,7 +259,10 @@
     
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
     imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:20];
+    imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:110];
+    
     vwSeperator = (UIView *)[cell.contentView viewWithTag:30];
+    
     lblFromDate = (UILabel *)[cell.contentView viewWithTag:50];
     lbltoDate = (UILabel *)[cell.contentView viewWithTag:60];
     lblDuration = (UILabel *)[cell.contentView viewWithTag:70];
@@ -302,6 +305,26 @@
     lbltoDate.text = [format stringFromDate:leaveObj.to_date];
     lblReason.text = leaveObj.leave_type;
     lblDuration.text = [NSString stringWithFormat:@"%d Days", dayBetweenDates];
+    
+    if([leaveObj.submitted isEqualToNumber:[NSNumber numberWithBool:YES]]){
+
+        if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:YES]]){
+            
+            if([leaveObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                [imgViewStatus setImage:[UIImage imageNamed:@"greenCircle"]];
+            }
+            else{
+                [imgViewStatus setImage:[UIImage imageNamed:@"redCircle"]];
+            }
+        }
+        else{
+            [imgViewStatus setImage:[UIImage imageNamed:@"orangeCircle"]];
+        }
+    }
+    else{
+        
+        [imgViewStatus setImage:[UIImage imageNamed:@"blueCircle"]];
+    }
     
     return cell;
 }

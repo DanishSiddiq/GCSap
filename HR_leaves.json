@@ -129,7 +129,7 @@
   "approver": "Johnson Rick",
   "emp_number"  : "EMP-006",
   "emp_name": "Robert",
-  "approved": "1",
+  "approved": "0",
   "submitted": "1",
   "isProcessed" : "0",
   "notes": "Planned vacations"
