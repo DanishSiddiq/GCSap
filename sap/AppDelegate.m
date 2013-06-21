@@ -27,7 +27,7 @@
     }
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Employees"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
                                               inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -129,6 +129,7 @@
                             insertNewObjectForEntityForName:@"HR_leaves"
                             inManagedObjectContext:_managedObjectContext];
         hrObj.leave_id = [obj objectForKey:@"leave_id"];
+        hrObj.dept_id = [obj objectForKey:@"dept_id"];
         hrObj.leave_type = [obj objectForKey:@"leave_type"];
         hrObj.applied_date = [self convertStringToDate: [obj objectForKey:@"applied_date"]];
         hrObj.from_date = [self convertStringToDate:[obj objectForKey:@"from_date"]];
@@ -143,7 +144,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving HR leave: %@", [error localizedDescription]);
+            NSLog(@"Error saving HR leave: %@", [error localizedDescription]);
         }
     }];
     

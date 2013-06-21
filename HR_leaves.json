@@ -1,6 +1,7 @@
  [
   {
   "leave_id": 1,
+  "dept_id": 2,
   "leave_type": "Sick leaves",
   "applied_date": "24/01/2013",
   "from_date": "22/01/2013",
@@ -16,6 +17,7 @@
   },
   {
   "leave_id": 2,
+  "dept_id": 1,
   "leave_type": "Annual leaves",
   "applied_date": "13/06/2013",
   "from_date": "17/06/2013",
@@ -31,6 +33,7 @@
   },
   {
   "leave_id": 3,
+  "dept_id": 3,
   "leave_type": "Annual leaves",
   "applied_date": "13/06/2013",
   "from_date": "17/06/2013",
@@ -46,6 +49,7 @@
   },
   {
   "leave_id": 4,
+  "dept_id": 1,
   "leave_type": "Paid leaves",
   "applied_date": "12/06/2013",
   "from_date": "13/06/2013",
@@ -61,6 +65,7 @@
   },
   {
   "leave_id": 5,
+  "dept_id": 1,
   "leave_type": "Sick leaves",
   "applied_date": "03/06/2013",
   "from_date": "05/06/2013",
@@ -76,6 +81,7 @@
   },
   {
   "leave_id": 6,
+  "dept_id": 1,
   "leave_type": "Annual leaves",
   "applied_date": "05/06/2013",
   "from_date": "10/06/2013",
@@ -91,6 +97,7 @@
   },
   {
   "leave_id": 7,
+  "dept_id":1,
   "leave_type": "Paid leaves",
   "applied_date": "08/03/2013",
   "from_date": "12/03/2013",
@@ -106,6 +113,7 @@
   },
   {
   "leave_id": 8,
+  "dept_id":1,
   "leave_type": "Sick leaves",
   "applied_date": "19/03/2013",
   "from_date": "20/03/2013",
@@ -121,6 +129,7 @@
   },
   {
   "leave_id": 9,
+  "dept_id":1,
   "leave_type": "Annual leaves",
   "applied_date": "03/06/2013",
   "from_date": "05/06/2013",
@@ -136,6 +145,7 @@
   },
   {
   "leave_id": 10,
+  "dept_id": 1,
   "leave_type": "Annual leaves",
   "applied_date": "06/06/2013",
   "from_date": "07/06/2013",

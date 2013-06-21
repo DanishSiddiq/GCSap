@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Departments" representedClassName="Departments" syncable="YES">
         <attribute name="dept_id" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="dept_name" attributeType="String" syncable="YES"/>
@@ -15,6 +15,7 @@
         <attribute name="applied_date" attributeType="Date" syncable="YES"/>
         <attribute name="approved" attributeType="Boolean" syncable="YES"/>
         <attribute name="approver" attributeType="String" syncable="YES"/>
+        <attribute name="dept_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="emp_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emp_number" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="from_date" attributeType="Date" syncable="YES"/>
@@ -63,7 +64,7 @@
     <elements>
         <element name="Departments" positionX="-4329" positionY="-4041" width="128" height="75"/>
         <element name="Employees" positionX="-4653" positionY="-4086" width="128" height="120"/>
-        <element name="HR_leaves" positionX="-4482" positionY="-4041" width="128" height="225"/>
+        <element name="HR_leaves" positionX="-4482" positionY="-4041" width="128" height="240"/>
         <element name="PO_Delivery" positionX="-4833" positionY="-3978" width="128" height="120"/>
         <element name="PO_Invoice" positionX="-5022" positionY="-3825" width="128" height="105"/>
         <element name="PO_Items" positionX="-5024" positionY="-4077" width="128" height="195"/>

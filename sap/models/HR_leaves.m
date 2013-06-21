@@ -23,5 +23,6 @@
 @dynamic submitted;
 @dynamic isProcessed;
 @dynamic notes;
+@dynamic dept_id;
 
 @end

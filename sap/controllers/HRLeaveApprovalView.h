@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Departments.h"
 
 @interface HRLeaveApprovalView : UIView <UITableViewDelegate, UITableViewDataSource>
 
