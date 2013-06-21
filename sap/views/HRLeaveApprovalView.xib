@@ -409,7 +409,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="1010142577">
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="399514508">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">calFlied.png</string>
 								</object>
@@ -564,7 +564,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<reference key="IBUINormalBackgroundImage" ref="1010142577"/>
+								<reference key="IBUINormalBackgroundImage" ref="399514508"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -777,7 +777,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<reference key="IBUINormalBackgroundImage" ref="1010142577"/>
+								<reference key="IBUINormalBackgroundImage" ref="399514508"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -920,12 +920,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedUnApproved:</string>
+						<string key="label">btnPressedFilterUnApproved:</string>
 						<reference key="source" ref="364780608"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">42</int>
+					<int key="connectionID">69</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -945,21 +945,39 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedApproved:</string>
+						<string key="label">btnPressedFilterApproved:</string>
 						<reference key="source" ref="359275995"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">68</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedProcessed:</string>
+						<string key="label">btnPressedFilterProcessed:</string>
 						<reference key="source" ref="976371322"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">46</int>
+					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnPressedApprove:</string>
+						<reference key="source" ref="930346297"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">74</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnPressedDecline:</string>
+						<reference key="source" ref="107088092"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">73</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1241,7 +1259,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">67</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1249,21 +1267,36 @@
 					<string key="className">HRLeaveApprovalView</string>
 					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="btnPressedApprove:">id</string>
 						<string key="btnPressedApproved:">id</string>
-						<string key="btnPressedProcessed:">id</string>
-						<string key="btnPressedUnApproved:">id</string>
+						<string key="btnPressedDecline:">id</string>
+						<string key="btnPressedFilterApproved:">id</string>
+						<string key="btnPressedFilterProcessed:">id</string>
+						<string key="btnPressedFilterUnApproved:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="btnPressedApprove:">
+							<string key="name">btnPressedApprove:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="btnPressedApproved:">
 							<string key="name">btnPressedApproved:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedProcessed:">
-							<string key="name">btnPressedProcessed:</string>
+						<object class="IBActionInfo" key="btnPressedDecline:">
+							<string key="name">btnPressedDecline:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedUnApproved:">
-							<string key="name">btnPressedUnApproved:</string>
+						<object class="IBActionInfo" key="btnPressedFilterApproved:">
+							<string key="name">btnPressedFilterApproved:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnPressedFilterProcessed:">
+							<string key="name">btnPressedFilterProcessed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnPressedFilterUnApproved:">
+							<string key="name">btnPressedFilterUnApproved:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

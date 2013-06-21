@@ -35,6 +35,13 @@
 @property (retain, nonatomic) IBOutlet UIButton *btnApprove;
 @property (retain, nonatomic) IBOutlet UIButton *btnDecline;
 
+//selectors
+- (IBAction)btnPressedFilterApproved:(id)sender;
+- (IBAction)btnPressedFilterUnApproved:(id)sender;
+- (IBAction)btnPressedFilterProcessed:(id)sender;
+- (IBAction)btnPressedApprove:(id)sender;
+- (IBAction)btnPressedDecline:(id)sender;
+
 @end
 
 @implementation HRLeaveApprovalView
@@ -146,9 +153,8 @@
     return [_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
 
-
 // selectors
-- (IBAction)btnPressedApproved:(id)sender {
+- (IBAction)btnPressedFilterApproved:(id)sender {
     
     _isApprovedSelected = !_isApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
@@ -157,7 +163,7 @@
     [self updateViews ];
 }
 
-- (IBAction)btnPressedUnApproved:(id)sender {
+- (IBAction)btnPressedFilterUnApproved:(id)sender {
     
     _isUnApprovedSelected = !_isUnApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
@@ -166,7 +172,7 @@
     [self updateViews ];
 }
 
-- (IBAction)btnPressedProcessed:(id)sender{
+- (IBAction)btnPressedFilterProcessed:(id)sender{
     
     _isProcessedSelected = !_isProcessedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isProcessedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
@@ -175,6 +181,46 @@
     [self updateViews ];
 }
 
+- (IBAction)btnPressedApprove:(id)sender{
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        HR_leaves *leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+        [leave setIsProcessed:[NSNumber numberWithBool:YES]];
+        [leave setApproved:[NSNumber numberWithBool:YES]];
+        [_sapDelegate.managedObjectContext save:&error];
+        
+        if(!error){
+            
+            [self updateViews];
+        }
+        else{
+            
+        }
+    }
+    
+}
+
+- (IBAction)btnPressedDecline:(id)sender{
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        HR_leaves *leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+        [leave setIsProcessed:[NSNumber numberWithBool:YES]];
+        [leave setApproved:[NSNumber numberWithBool:NO]];
+        [_sapDelegate.managedObjectContext save:&error];
+        
+        if(!error){
+            
+            [self updateViews];
+        }
+        else{
+            
+        }
+    }
+}
 
 - (void) filterLeaves {
     
