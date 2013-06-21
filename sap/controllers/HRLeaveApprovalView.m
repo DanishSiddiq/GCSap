@@ -76,16 +76,35 @@
     [_vwDetailleaveApproval.layer setBorderWidth:1.0f];
     [_vwDetailleaveApproval.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
     
-    // disable all buttons
+    // disable all buttons    
     [_btnEmployeeID setUserInteractionEnabled:NO];
+    [_btnEmployeeID setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     [_btnEmployeeName setUserInteractionEnabled:NO];
+    [_btnEmployeeName setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+ 
     [_btnDepartment setUserInteractionEnabled:NO];
+    [_btnDepartment setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+
     [_btnDuration setUserInteractionEnabled:NO];
+    [_btnDuration setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     [_btnAppliedDate setUserInteractionEnabled:NO];
+    [_btnAppliedDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     [_btnRequestDate setUserInteractionEnabled:NO];
+    [_btnRequestDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     [_btnToDate setUserInteractionEnabled:NO];
+    [_btnToDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     [_btnLeaveType setUserInteractionEnabled:NO];
+    [_btnLeaveType setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+
     [_tvNotes setUserInteractionEnabled:NO];
+    [_tvNotes.layer setCornerRadius:4.0f];
+    [_tvNotes.layer setBorderWidth:1.0f];
+    [_tvNotes.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
     
 }
 
@@ -150,9 +169,7 @@
 
 - (void) filterLeaves {
     
-    [_lstFilterLeave removeAllObjects];
-    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        
+    [_lstFilterLeave removeAllObjects];        
     for(HR_leaves *leave in _lstLeave){
         
         if(_isApprovedSelected && _isUnApprovedSelected && _isProcessedSelected){
@@ -204,6 +221,13 @@
             }
         }
     }
+    
+    if(_lstFilterLeave.count > 0){
+        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    else{
+        _selectedIndexPath = nil;
+    }
 }
 
 // you have to update the view also have to change the side vise fileds accordingly
@@ -237,7 +261,7 @@
         [_btnLeaveType setTitle:leaveObj.leave_type forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes setText:leaveObj.notes];
         
-        if(leaveObj.isProcessed){
+        if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:YES]]){
             
             [_btnApprove setHidden:YES];
             [_btnDecline setHidden:YES];

@@ -397,7 +397,7 @@
 								<string key="NSFrame">{{445, 146}, {170, 35}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="879311692"/>
+								<reference key="NSNextKeyView" ref="722394727"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -409,6 +409,10 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="873099429">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">calFlied.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -517,6 +521,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<reference key="IBUINormalBackgroundImage" ref="141997627"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -559,13 +564,14 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<reference key="IBUINormalBackgroundImage" ref="873099429"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
 							<object class="IBUITextView" id="882417066">
 								<reference key="NSNextResponder" ref="235991671"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{109, 240}, {501, 79}}</string>
+								<string key="NSFrame">{{125, 240}, {485, 79}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="930346297"/>
@@ -632,6 +638,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<reference key="IBUINormalBackgroundImage" ref="141997627"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -709,6 +716,7 @@
 								<string key="NSFrame">{{319, 351}, {130, 32}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -733,6 +741,7 @@
 								<string key="NSFrame">{{12, 198}, {99, 24}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="11203953"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -753,6 +762,7 @@
 								<string key="NSFrame">{{125, 192}, {170, 35}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="879311692"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -764,6 +774,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<reference key="IBUINormalBackgroundImage" ref="873099429"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -1342,6 +1353,7 @@
 			<string key="Base.png">{1985, 1314}</string>
 			<string key="approveBtn.png">{260, 65}</string>
 			<string key="blueBar.png">{1329, 75}</string>
+			<string key="calFlied.png">{367, 61}</string>
 			<string key="check2.png">{27, 27}</string>
 			<string key="declineBtn.png">{228, 65}</string>
 			<string key="plainFlied.png">{367, 61}</string>
