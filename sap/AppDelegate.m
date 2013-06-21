@@ -220,7 +220,7 @@
         poDeliveryObj.po_delivery_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"po_delivery_id"] longLongValue]];
         poDeliveryObj.status = [NSNumber numberWithLongLong:[[obj objectForKey:@"status"] longLongValue]];
         
-        NSLog(@"OBJ: %@", poDeliveryObj);
+        //NSLog(@"OBJ: %@", poDeliveryObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
             //NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);

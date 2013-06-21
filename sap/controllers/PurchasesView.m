@@ -172,6 +172,28 @@
             }
         }
     }
+    
+    else{
+        
+        for(Purchase_Orders *purchase in _lstPurchases){
+            [_lstFilterPurchases addObject:purchase];
+            
+//            if(_isApprovedSelected && _isUnApprovedSelected){
+//                
+//                [_lstFilterLeave addObject:leave];
+//            }
+//            else{
+//                
+//                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+//                    [_lstFilterLeave addObject:leave];
+//                }
+//                
+//                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+//                    [_lstFilterLeave addObject:leave];
+//                }
+//            }
+        }
+    }
 }
 
 // you have to update the view also have to change the side vise fileds accordingly
@@ -212,7 +234,7 @@
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"PurchaseViewCell"];
     UITableViewCell *cell;
     UILabel *lblPOId, *lblPODate, *lblVendor, *lblCurrency, *lblAmount, *lblOrderType;
-    UIImageView *imgViewBackground;
+    UIImageView *imgViewBackground, *imgViewStatus;
     
     cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
     
@@ -228,14 +250,15 @@
     lblPODate = (UILabel *)[cell.contentView viewWithTag:4];
     lblOrderType = (UILabel *)[cell.contentView viewWithTag:5];
     lblCurrency = (UILabel *)[cell.contentView viewWithTag:6];
-    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:10];
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:7];
+    imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if(_selectedIndexPath.row == indexPath.row){
         
-        [cell setFrame:CGRectMake(0, 0, 292, 120)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 120)];
+        [cell setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [lblPOId setTextColor:[UIColor whiteColor]];
         [lblVendor setTextColor:[UIColor whiteColor]];
@@ -245,8 +268,8 @@
         [lblCurrency setTextColor:[UIColor whiteColor]];
     }
     else{
-        [cell setFrame:CGRectMake(0, 0, 292, 120)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 120)];
+        [cell setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [lblPOId setTextColor:[UIColor blackColor]];
         [lblVendor setTextColor:[UIColor blackColor]];
@@ -267,6 +290,19 @@
     lblOrderType.text = purchaseObj.order_type;
     lblAmount.text = [NSString stringWithFormat:@"%@", purchaseObj.amount];
     lblCurrency.text = purchaseObj.currency;
+    
+    if([purchaseObj.approved isEqualToNumber:[NSNumber numberWithBool:NO]] &&
+       [purchaseObj.declined isEqualToNumber:[NSNumber numberWithBool:NO]]){
+        
+        [imgViewStatus setImage:[UIImage imageNamed:@"blueCircle"]];
+        
+    }else if([purchaseObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
+        
+        [imgViewStatus setImage:[UIImage imageNamed:@"greenCircle"]];
+        
+    }else{
+        [imgViewStatus setImage:[UIImage imageNamed:@"redCircle"]];
+    }
     
     return cell;
 
