@@ -60,19 +60,21 @@
     _filterText = [NSMutableString stringWithFormat:@""];
     
     // data base calling for fetching data
-    [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
+    _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
+    [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
 }
 
-- (void) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
+- (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
     
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
+    NSMutableArray * arrayObjects = [[NSMutableArray alloc] init];
     [fetchRequest setPredicate:predicate];
     [fetchRequest setEntity:entity];
-    [_lstPurchases addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-    [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
+    [arrayObjects addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    return arrayObjects;
 }
 
 - (IBAction)slideBtnPressed:(id)sender {
@@ -319,7 +321,12 @@
 }
 
 -(void) getPurchaseOrderDetails: (NSNumber*) poID{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:
+                                 @"(po_id = %@)", poID];
+    NSMutableArray * poInvoices = [[NSMutableArray alloc] init];
+    poInvoices = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Invoice"];
     
+    NSLog(@"Invoices, %@", poInvoices);
 }
 
 
