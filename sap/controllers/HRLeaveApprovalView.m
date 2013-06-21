@@ -193,7 +193,8 @@
         
         if(!error){
             
-            [self updateViews];
+            [self filterLeaves];
+            [self updateViews ];
         }
         else{
             
@@ -214,7 +215,8 @@
         
         if(!error){
             
-            [self updateViews];
+            [self filterLeaves];
+            [self updateViews ];
         }
         else{
             
