@@ -68,6 +68,25 @@
     [self addSubview:self.hrLeaveApproval];
     
     [_tblLeave setShowsVerticalScrollIndicator:NO];
+    [_tblLeave setShowsHorizontalScrollIndicator:NO];
+    
+    
+    // detail view
+    [_vwDetailleaveApproval.layer setCornerRadius:4.0f];
+    [_vwDetailleaveApproval.layer setBorderWidth:1.0f];
+    [_vwDetailleaveApproval.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
+    
+    // disable all buttons
+    [_btnEmployeeID setUserInteractionEnabled:NO];
+    [_btnEmployeeName setUserInteractionEnabled:NO];
+    [_btnDepartment setUserInteractionEnabled:NO];
+    [_btnDuration setUserInteractionEnabled:NO];
+    [_btnAppliedDate setUserInteractionEnabled:NO];
+    [_btnRequestDate setUserInteractionEnabled:NO];
+    [_btnToDate setUserInteractionEnabled:NO];
+    [_btnLeaveType setUserInteractionEnabled:NO];
+    [_tvNotes setUserInteractionEnabled:NO];
+    
 }
 
 
@@ -79,11 +98,13 @@
     _isApprovedSelected = YES;
     _isUnApprovedSelected = YES;
     _isProcessedSelected = YES;
-    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    _selectedIndexPath = nil;
     
     
     // data base calling for fetching data
     [self fetchDataFromServer];
+    [self filterLeaves];
+    [self updateViews];
 }
 
 - (void) fetchDataFromServer {
@@ -95,8 +116,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
-    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];    
-    [self filterLeaves];
+    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
 }
 
 // selectors
@@ -131,6 +151,7 @@
 - (void) filterLeaves {
     
     [_lstFilterLeave removeAllObjects];
+    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         
     for(HR_leaves *leave in _lstLeave){
         
@@ -186,9 +207,52 @@
 }
 
 // you have to update the view also have to change the side vise fileds accordingly
--(void) updateViews {
+- (void) updateViews {
     
     [_tblLeave reloadData];
+    [self updateLeaveApprovalDetail];
+    
+}
+
+- (void) updateLeaveApprovalDetail{
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        HR_leaves *leaveObj = [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+        
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateStyle:NSDateFormatterMediumStyle];
+        
+        NSTimeInterval distanceBetweenDates = [leaveObj.to_date timeIntervalSinceDate:leaveObj.from_date];
+        double secondsInDay = 60*60*24;
+        NSInteger dayBetweenDates = distanceBetweenDates / secondsInDay;
+        
+        [_btnEmployeeID setTitle:leaveObj.emp_number forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnEmployeeName setTitle:leaveObj.emp_name forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDepartment setTitle:@"wow" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDuration setTitle:[NSString stringWithFormat:@"%d Day(s)", dayBetweenDates] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnAppliedDate setTitle:[format stringFromDate:leaveObj.applied_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnRequestDate setTitle:[format stringFromDate:leaveObj.from_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnToDate setTitle:[format stringFromDate:leaveObj.to_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnLeaveType setTitle:leaveObj.leave_type forState:UIControlStateNormal & UIControlStateSelected];
+        [_tvNotes setText:leaveObj.notes];
+        
+        if(leaveObj.isProcessed){
+            
+            [_btnApprove setHidden:YES];
+            [_btnDecline setHidden:YES];
+        }
+        else{
+            
+            [_btnApprove setHidden:NO];
+            [_btnDecline setHidden:NO];
+        }
+    }
+    else{
+        
+        [_btnApprove setHidden:YES];
+        [_btnDecline setHidden:YES];
+    }
 }
 
 // delegates
@@ -257,7 +321,7 @@
     // to round label
     [[lblDuration layer] setCornerRadius:3.0];
     
-    if(_selectedIndexPath.row == indexPath.row){
+    if(_selectedIndexPath && _selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 275, 142)];
         [imgViewBackground setFrame:CGRectMake(0, 10, 275, 122)];
@@ -312,8 +376,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     _selectedIndexPath = indexPath;
-    [_tblLeave reloadData];
+    [self updateViews];
     
 }
 
