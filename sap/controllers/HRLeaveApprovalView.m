@@ -129,7 +129,8 @@
 - (void) fetchHRLeavesFromCoreData {
     
     [_lstLeave removeAllObjects];
-    [_lstLeave addObjectsFromArray:[self fetchDataFromCoreDataWithPredicate:nil AndEntityName:@"HR_leaves"]];
+        NSPredicate * predicate = [NSPredicate predicateWithFormat: @"(submitted = %@)", [NSNumber numberWithBool:YES]];
+    [_lstLeave addObjectsFromArray:[self fetchDataFromCoreDataWithPredicate:predicate AndEntityName:@"HR_leaves"]];
 }
 
 - (NSArray *) fetchDataFromCoreDataWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
