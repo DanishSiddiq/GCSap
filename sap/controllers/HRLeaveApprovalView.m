@@ -21,6 +21,20 @@
 @property (nonatomic) BOOL isProcessedSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
+// detail view
+@property (retain, nonatomic) IBOutlet UIView *vwDetailleaveApproval;
+@property (retain, nonatomic) IBOutlet UIButton *btnEmployeeID;
+@property (retain, nonatomic) IBOutlet UIButton *btnEmployeeName;
+@property (retain, nonatomic) IBOutlet UIButton *btnDepartment;
+@property (retain, nonatomic) IBOutlet UIButton *btnDuration;
+@property (retain, nonatomic) IBOutlet UIButton *btnAppliedDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnRequestDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnToDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnLeaveType;
+@property (retain, nonatomic) IBOutlet UITextView *tvNotes;
+@property (retain, nonatomic) IBOutlet UIButton *btnApprove;
+@property (retain, nonatomic) IBOutlet UIButton *btnDecline;
+
 @end
 
 @implementation HRLeaveApprovalView
@@ -40,8 +54,8 @@
     if (self) {
         
         [[NSBundle mainBundle] loadNibNamed:@"HRLeaveApprovalView" owner:self options:nil];
-        [self initializeViews:frame];
         [self initializeData:sapDelegate];
+        [self initializeViews:frame];
     }
     return self;
 }
