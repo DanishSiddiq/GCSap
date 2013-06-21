@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G56" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Departments" representedClassName="Departments" syncable="YES">
         <attribute name="dept_id" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="dept_name" attributeType="String" syncable="YES"/>
@@ -52,7 +52,9 @@
     </entity>
     <entity name="Purchase_Orders" representedClassName="Purchase_Orders" syncable="YES">
         <attribute name="amount" attributeType="Double" syncable="YES"/>
+        <attribute name="approved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="currency" attributeType="String" syncable="YES"/>
+        <attribute name="declined" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="order_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="po_date" attributeType="Date" syncable="YES"/>
         <attribute name="po_id" attributeType="Integer 32" syncable="YES"/>
@@ -65,6 +67,6 @@
         <element name="PO_Delivery" positionX="-4833" positionY="-3978" width="128" height="120"/>
         <element name="PO_Invoice" positionX="-5022" positionY="-3825" width="128" height="105"/>
         <element name="PO_Items" positionX="-5024" positionY="-4077" width="128" height="195"/>
-        <element name="Purchase_Orders" positionX="-4691" positionY="-3816" width="128" height="135"/>
+        <element name="Purchase_Orders" positionX="-4691" positionY="-3816" width="128" height="165"/>
     </elements>
 </model>

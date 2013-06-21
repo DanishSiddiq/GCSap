@@ -18,5 +18,7 @@
 @property (nonatomic, retain) NSDate * po_date;
 @property (nonatomic, retain) NSString * order_type;
 @property (nonatomic, retain) NSString * currency;
+@property (nonatomic, retain) NSNumber * approved;
+@property (nonatomic, retain) NSNumber * declined;
 
 @end

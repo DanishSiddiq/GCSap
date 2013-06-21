@@ -158,6 +158,8 @@
         purchaseObj.amount = [obj objectForKey:@"amount"];
         purchaseObj.currency = [obj objectForKey:@"currency"];
         purchaseObj.order_type = [obj objectForKey:@"order_type"];
+        purchaseObj.approved = [NSNumber numberWithLongLong:[[obj objectForKey:@"approved"] longLongValue]];
+        purchaseObj.declined = [NSNumber numberWithLongLong:[[obj objectForKey:@"declined"] longLongValue]];
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {

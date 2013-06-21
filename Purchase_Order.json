@@ -5,7 +5,9 @@
   "amount": 25400,
   "po_date": "12/04/2013",
   "order_type": "Lanier Professional Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
   },
   {
   "po_id": 450020,
@@ -13,7 +15,9 @@
   "amount": 35400,
   "po_date": "13/04/2013",
   "order_type": "ABC Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
   },
   {
   "po_id": 450023,
@@ -21,7 +25,9 @@
   "amount": 12890,
   "po_date": "10/05/2013",
   "order_type": "Software",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "1"
   },
   {
   "po_id": 450024,
@@ -29,7 +35,9 @@
   "amount": 12890,
   "po_date": "10/05/2013",
   "order_type": "TLF Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
   },
   {
   "po_id": 450029,
@@ -37,7 +45,9 @@
   "amount": 11234,
   "po_date": "15/05/2013",
   "order_type": "ABC Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "1",
+  "declined": "0"
   },
   {
   "po_id": 450030,
@@ -45,7 +55,9 @@
   "amount": 66789,
   "po_date": "18/05/2013",
   "order_type": "Lanier Professional Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "1"
   },
   {
   "po_id": 450032,
@@ -53,6 +65,48 @@
   "amount": 50000,
   "po_date": "18/04/2013",
   "order_type": "XYZ Services",
-  "currency": "USD"
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
+  },
+  {
+  "po_id": 450033,
+  "vendor": "TLF Services",
+  "amount": 12890,
+  "po_date": "05/05/2013",
+  "order_type": "TLF Services",
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
+  },
+  {
+  "po_id": 450034,
+  "vendor": "XYZ Services",
+  "amount": 55000,
+  "po_date": "09/05/2013",
+  "order_type": "TLF Services",
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
+  },
+  {
+  "po_id": 450037,
+  "vendor": "Lanier Professional Services",
+  "amount": 12000,
+  "po_date": "11/05/2013",
+  "order_type": "TLF Services",
+  "currency": "USD",
+  "approved": "0",
+  "declined": "1"
+  },
+  {
+  "po_id": 450039,
+  "vendor": "ABC Services",
+  "amount": 20000,
+  "po_date": "12/05/2013",
+  "order_type": "TLF Services",
+  "currency": "USD",
+  "approved": "0",
+  "declined": "0"
   }
   ]

@@ -17,5 +17,7 @@
 @dynamic po_date;
 @dynamic order_type;
 @dynamic currency;
+@dynamic approved;
+@dynamic declined;
 
 @end
