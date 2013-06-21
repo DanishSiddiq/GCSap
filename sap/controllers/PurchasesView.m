@@ -60,15 +60,16 @@
     _filterText = [NSMutableString stringWithFormat:@""];
     
     // data base calling for fetching data
-    [self fetchDataFromServer];
+    [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
 }
 
-- (void) fetchDataFromServer {
+- (void) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
     
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Purchase_Orders"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
+    [fetchRequest setPredicate:predicate];
     [fetchRequest setEntity:entity];
     [_lstPurchases addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
     [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
@@ -312,8 +313,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
+    Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
+    NSLog(@"Purchase Details:%@", poObj);
+    [self getPurchaseOrderDetails:poObj.po_id];
+}
+
+-(void) getPurchaseOrderDetails: (NSNumber*) poID{
     
-    //NSLog(@"Index: %@", _selectedIndexPath);
 }
 
 
