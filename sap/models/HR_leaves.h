@@ -24,5 +24,6 @@
 @property (nonatomic, retain) NSNumber * submitted;
 @property (nonatomic, retain) NSNumber * isProcessed;
 @property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * dept_id;
 
 @end

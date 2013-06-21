@@ -121,22 +121,30 @@
     
     
     // data base calling for fetching data
-    [self fetchDataFromServer];
+    [self fetchHRLeavesFromCoreData];
     [self filterLeaves];
     [self updateViews];
 }
 
-- (void) fetchDataFromServer {
+- (void) fetchHRLeavesFromCoreData {
     
     [_lstLeave removeAllObjects];
+    [_lstLeave addObjectsFromArray:[self fetchDataFromCoreDataWithPredicate:nil AndEntityName:@"HR_leaves"]];
+}
+
+- (NSArray *) fetchDataFromCoreDataWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
     
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
+    
     [fetchRequest setEntity:entity];
-    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    [fetchRequest setPredicate:predicate];
+    
+    return [_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
+
 
 // selectors
 - (IBAction)btnPressedApproved:(id)sender {
@@ -251,9 +259,13 @@
         double secondsInDay = 60*60*24;
         NSInteger dayBetweenDates = distanceBetweenDates / secondsInDay;
         
+        // fetch record for department name
+        NSPredicate * predicate = [NSPredicate predicateWithFormat: @"(dept_id = %@)", leaveObj.dept_id];
+        NSArray *lstDepartment = [self fetchDataFromCoreDataWithPredicate:predicate AndEntityName:@"Departments"];
+        
         [_btnEmployeeID setTitle:leaveObj.emp_number forState:UIControlStateNormal & UIControlStateSelected];
         [_btnEmployeeName setTitle:leaveObj.emp_name forState:UIControlStateNormal & UIControlStateSelected];
-        [_btnDepartment setTitle:@"wow" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDepartment setTitle:[(Departments *)[lstDepartment objectAtIndex:0] dept_name] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnDuration setTitle:[NSString stringWithFormat:@"%d Day(s)", dayBetweenDates] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnAppliedDate setTitle:[format stringFromDate:leaveObj.applied_date] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnRequestDate setTitle:[format stringFromDate:leaveObj.from_date] forState:UIControlStateNormal & UIControlStateSelected];
@@ -273,6 +285,16 @@
         }
     }
     else{
+     
+        [_btnEmployeeID     setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnEmployeeName   setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDepartment     setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDuration       setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnAppliedDate    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnRequestDate    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnToDate         setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnLeaveType      setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_tvNotes           setText:@""];
         
         [_btnApprove setHidden:YES];
         [_btnDecline setHidden:YES];

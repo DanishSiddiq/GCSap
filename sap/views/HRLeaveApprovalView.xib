@@ -409,7 +409,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="873099429">
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="1010142577">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">calFlied.png</string>
 								</object>
@@ -564,7 +564,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<reference key="IBUINormalBackgroundImage" ref="873099429"/>
+								<reference key="IBUINormalBackgroundImage" ref="1010142577"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -682,6 +682,10 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">dd.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -716,7 +720,6 @@
 								<string key="NSFrame">{{319, 351}, {130, 32}}</string>
 								<reference key="NSSuperview" ref="235991671"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -774,7 +777,7 @@
 									<bytes key="NSRGB">MC4yNDMxMzcyNzAyIDAuNjE1Njg2Mjk3NCAwLjY5ODAzOTIzMzcAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
-								<reference key="IBUINormalBackgroundImage" ref="873099429"/>
+								<reference key="IBUINormalBackgroundImage" ref="1010142577"/>
 								<reference key="IBUIFontDescription" ref="288021570"/>
 								<reference key="IBUIFont" ref="352781777"/>
 							</object>
@@ -1355,6 +1358,7 @@
 			<string key="blueBar.png">{1329, 75}</string>
 			<string key="calFlied.png">{367, 61}</string>
 			<string key="check2.png">{27, 27}</string>
+			<string key="dd.png">{367, 61}</string>
 			<string key="declineBtn.png">{228, 65}</string>
 			<string key="plainFlied.png">{367, 61}</string>
 		</dictionary>
