@@ -99,7 +99,7 @@
     [_btnToDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     
     [_btnLeaveType setUserInteractionEnabled:NO];
-    [_btnLeaveType setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    [_btnLeaveType setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 0.0)];
 
     [_tvNotes setUserInteractionEnabled:NO];
     [_tvNotes.layer setCornerRadius:4.0f];
