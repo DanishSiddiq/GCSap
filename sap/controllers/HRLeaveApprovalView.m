@@ -18,6 +18,7 @@
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isUnApprovedSelected;
+@property (nonatomic) BOOL isProcessedSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 @end
@@ -63,6 +64,7 @@
     _lstLeave = [[NSMutableArray alloc] init];
     _isApprovedSelected = YES;
     _isUnApprovedSelected = YES;
+    _isProcessedSelected = YES;
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     
@@ -72,14 +74,15 @@
 
 - (void) fetchDataFromServer {
     
+    [_lstLeave removeAllObjects];
+    
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
-    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-    [_lstFilterLeave addObjectsFromArray:_lstLeave];
-    
+    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];    
+    [self filterLeaves];
 }
 
 // selectors
@@ -101,24 +104,68 @@
     [self updateViews ];
 }
 
+- (IBAction)btnPressedProcessed:(id)sender{
+    
+    _isProcessedSelected = !_isProcessedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isProcessedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
+}
+
+
 - (void) filterLeaves {
     
     [_lstFilterLeave removeAllObjects];
         
     for(HR_leaves *leave in _lstLeave){
         
-        if(_isApprovedSelected && _isUnApprovedSelected){
+        if(_isApprovedSelected && _isUnApprovedSelected && _isProcessedSelected){
             
-            [_lstFilterLeave addObject:leave];
+            if([[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                [_lstFilterLeave addObject:leave];
+            }
         }
         else{
             
+            // approved selected
             if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                [_lstFilterLeave addObject:leave];
+                
+                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+
+                    [_lstFilterLeave addObject:leave];
+                }
+                else if(!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                    
+                    [_lstFilterLeave addObject:leave];
+                }
             }
             
+            // un-approved selected
             if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                [_lstFilterLeave addObject:leave];
+                
+                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+
+                    [_lstFilterLeave addObject:leave];
+                }
+                else if(!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+
+                    [_lstFilterLeave addObject:leave];
+                }
+                
+            }
+            
+            // if both approved and un-approved not selected
+            if(!_isApprovedSelected && !_isUnApprovedSelected){
+                
+                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                    
+                    [_lstFilterLeave addObject:leave];
+                }
+                else if (!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                    
+                    [_lstFilterLeave addObject:leave];
+                }
             }
         }
     }

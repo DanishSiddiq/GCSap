@@ -19,5 +19,6 @@
 //selectors
 - (IBAction)btnPressedApproved:(id)sender;
 - (IBAction)btnPressedUnApproved:(id)sender;
+- (IBAction)btnPressedProcessed:(id)sender;
 
 @end
