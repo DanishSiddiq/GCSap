@@ -316,17 +316,24 @@
     _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
     Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
-    NSLog(@"Purchase Details:%@", poObj);
+    //NSLog(@"Purchase Details:%@", poObj);
     [self getPurchaseOrderDetails:poObj.po_id];
 }
 
 -(void) getPurchaseOrderDetails: (NSNumber*) poID{
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:
-                                 @"(po_id = %@)", poID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(po_id = %@)", poID];
     NSMutableArray * poInvoices = [[NSMutableArray alloc] init];
+    NSMutableArray * poDelivery = [[NSMutableArray alloc] init];
+    NSMutableArray * poItems = [[NSMutableArray alloc] init];
     poInvoices = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Invoice"];
+    poItems = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Items"];
+    poDelivery = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Delivery"];
     
-    NSLog(@"Invoices, %@", poInvoices);
+    //PO_Invoice *poInvoiceObj = [poInvoices objectAtIndex:0];
+    
+    //NSLog(@"Invoice count, %d", [poInvoices count]);
+    
+    
 }
 
 
