@@ -11,6 +11,7 @@
 #import "FinanceView.h"
 #import "MaintenanceView.h"
 #import "PurchasesView.h"
+#import "WorkOrderView.h"
 
 @interface SidebarView ()
 
@@ -25,6 +26,7 @@
 @synthesize financeBtn;
 @synthesize maintenancerBtn;
 @synthesize purchaseBtn;
+@synthesize workOrderBtn;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -57,7 +59,7 @@
     
     [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
     [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
-    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
     
     UIImage* image = [UIImage imageNamed:@"HumanHover.png"];    
     [sender setImage:image forState:UIControlStateNormal];
@@ -78,7 +80,7 @@
     
     [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
     [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
-    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
     
     UIImage *image = [UIImage imageNamed:@"purchasingHover.png"];
     [sender setImage:image forState:UIControlStateNormal];
@@ -101,7 +103,7 @@
     
     [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
     [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
-    [self.maintenancerBtn setImage:[UIImage imageNamed:@"Maintenance.png"] forState:UIControlStateNormal];
+    [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
     
 }
 
@@ -117,6 +119,25 @@
     }
     
     UIImage *image = [UIImage imageNamed:@"MaintenanceHover.png"];
+    [sender setImage:image forState:UIControlStateNormal];
+    
+    [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+    [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+    [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+}
+
+-(IBAction)workOrderButtonPressed:(id)sender{
+    
+    for (UIView *subview in self.superview.subviews)
+    {
+        if([subview class] == [WorkOrderView class]){
+            subview.hidden = NO;
+        }else if([subview class] != [SidebarView class]){
+            subview.hidden = YES;
+        }
+    }
+    
+    UIImage *image = [UIImage imageNamed:@"WorkOrderHover.png"];
     [sender setImage:image forState:UIControlStateNormal];
     
     [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];

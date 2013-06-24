@@ -52,15 +52,15 @@
     hrView.hidden = YES;
     [self.view addSubview:hrView];
     
-    FinanceView* financeView = [[FinanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
+    FinanceView* financeView = [[FinanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     financeView.hidden = YES;
     [self.view addSubview:financeView];
     
-    MaintenanceView* maintenanceView = [[MaintenanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
-    maintenanceView.hidden = YES;
-    [self.view addSubview:maintenanceView];
+//    MaintenanceView* maintenanceView = [[MaintenanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
+//    maintenanceView.hidden = YES;
+//    [self.view addSubview:maintenanceView];
     
-    WorkOrderView* workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
+    WorkOrderView* workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     workOrderView.hidden = YES;
     [self.view addSubview:workOrderView];
     

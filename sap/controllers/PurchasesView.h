@@ -24,7 +24,7 @@
 - (IBAction)slideBtnPressed:(id)sender;
 //selectors
 - (IBAction)btnPressedApproved:(id)sender;
-- (IBAction)btnPressedUnApproved:(id)sender;
+- (IBAction)btnPressedDeclined:(id)sender;
 - (IBAction)btnPressedPending:(id)sender;
 - (IBAction)btnPoApprovedPressed:(id)sender;
 - (IBAction)btnPoDeclinedPressed:(id)sender;

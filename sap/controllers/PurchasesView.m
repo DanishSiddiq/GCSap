@@ -20,7 +20,7 @@
 @property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isApprovedSelected;
-@property (nonatomic) BOOL isUnApprovedSelected;
+@property (nonatomic) BOOL isDeclined;
 @property (nonatomic) BOOL isPending;
 
 @property (retain, nonatomic) Purchase_Orders *currentPO;
@@ -90,13 +90,13 @@
     _lstFilterPurchases = [[NSMutableArray alloc] init];
     _filterText = [NSMutableString stringWithFormat:@""];
     
-    _isApprovedSelected = _isUnApprovedSelected = _isPending = YES;
+    _isApprovedSelected = _isDeclined = _isPending = YES;
     
     // data base calling for fetching data
     _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
     [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [_tblPurchases reloadData];
     
     Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
@@ -154,18 +154,18 @@
     _isApprovedSelected = !_isApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
 }
 
-- (IBAction)btnPressedUnApproved:(id)sender {
+- (IBAction)btnPressedDeclined:(id)sender {
     
-    _isUnApprovedSelected = !_isUnApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    _isDeclined = !_isDeclined;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclined ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -176,7 +176,7 @@
     _isPending = !_isPending;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     
@@ -201,7 +201,7 @@
 	
 	[_tblPurchases reloadData];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -226,7 +226,7 @@
 	
 	[_tblPurchases reloadData];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -259,7 +259,7 @@
     
     // changing text logic here
     [_filterText setString:searchText];
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews];
     
     [self setPODetailIndexAfterFilter];
@@ -276,13 +276,13 @@
     [searchBar setText:@""];
     [searchBar resignFirstResponder];
     [_filterText setString:searchBar.text];
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews];
     
     [self setPODetailIndexAfterFilter];
 }
 
-- (void) filterLeaves {
+- (void) filterPurchases {
     
     [_lstFilterPurchases removeAllObjects];
     [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
@@ -292,12 +292,12 @@
         for(Purchase_Orders *purchase in _lstPurchases){
             
             // case when both checkboxes are selected
-            if(_isApprovedSelected && _isUnApprovedSelected && [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+            if(_isApprovedSelected && _isDeclined && [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                 
                 [_lstFilterPurchases addObject:purchase];
             }
             // case when any one checkbox is selected
-            else if(_isUnApprovedSelected || _isApprovedSelected){
+            else if(_isDeclined || _isApprovedSelected){
                 if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]]
                     &&  [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                     
@@ -305,7 +305,7 @@
                 
                 }
                 
-                if(_isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                if(_isDeclined && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]
                    &&  [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                     
                     [_lstFilterPurchases addObject:purchase];
@@ -327,18 +327,18 @@
         for(Purchase_Orders *purchase in _lstPurchases){
             
             // case when both checkboxes are selected
-            if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]] && _isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+            if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]] && _isDeclined && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                 
                 [_lstFilterPurchases addObject:purchase];
             }
              // case when any one checkbox is selected
-            else if(_isUnApprovedSelected || _isApprovedSelected){
+            else if(_isDeclined || _isApprovedSelected){
                 
                 if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                     [_lstFilterPurchases addObject:purchase];
                 }
                 
-                if(_isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                if(_isDeclined && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                     [_lstFilterPurchases addObject:purchase];
                 }
             }

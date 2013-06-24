@@ -1894,12 +1894,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedUnApproved:</string>
+						<string key="label">btnPressedDeclined:</string>
 						<reference key="source" ref="380161553"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">212</int>
+					<int key="connectionID">224</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -2561,7 +2561,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">223</int>
+			<int key="maxID">224</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2572,8 +2572,8 @@
 						<string key="btnPoApprovedPressed:">id</string>
 						<string key="btnPoDeclinedPressed:">id</string>
 						<string key="btnPressedApproved:">id</string>
+						<string key="btnPressedDeclined:">id</string>
 						<string key="btnPressedPending:">id</string>
-						<string key="btnPressedUnApproved:">id</string>
 						<string key="poDetailsBtnPressed:">id</string>
 						<string key="slideBtnPressed:">id</string>
 					</dictionary>
@@ -2590,12 +2590,12 @@
 							<string key="name">btnPressedApproved:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedPending:">
-							<string key="name">btnPressedPending:</string>
+						<object class="IBActionInfo" key="btnPressedDeclined:">
+							<string key="name">btnPressedDeclined:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedUnApproved:">
-							<string key="name">btnPressedUnApproved:</string>
+						<object class="IBActionInfo" key="btnPressedPending:">
+							<string key="name">btnPressedPending:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="poDetailsBtnPressed:">

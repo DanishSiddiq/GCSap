@@ -14,10 +14,12 @@
 @property (strong, nonatomic) IBOutlet UIButton* purchaseBtn;
 @property (strong, nonatomic) IBOutlet UIButton* financeBtn;
 @property (strong, nonatomic) IBOutlet UIButton* maintenancerBtn;
+@property (strong, nonatomic) IBOutlet UIButton* workOrderBtn;
 
 -(IBAction)hrButtonPressed:(id)sender;
 -(IBAction)purchaseButtonPressed:(id)sender;
 -(IBAction)financeButtonPressed:(id)sender;
 -(IBAction)maintenanceButtonPressed:(id)sender;
+-(IBAction)workOrderButtonPressed:(id)sender;
 
 @end
