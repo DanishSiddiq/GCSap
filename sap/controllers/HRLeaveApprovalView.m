@@ -28,7 +28,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *btnDepartment;
 @property (retain, nonatomic) IBOutlet UIButton *btnDuration;
 @property (retain, nonatomic) IBOutlet UIButton *btnAppliedDate;
-@property (retain, nonatomic) IBOutlet UIButton *btnRequestDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnFromDate;
 @property (retain, nonatomic) IBOutlet UIButton *btnToDate;
 @property (retain, nonatomic) IBOutlet UIButton *btnLeaveType;
 @property (retain, nonatomic) IBOutlet UITextView *tvNotes;
@@ -99,8 +99,8 @@
     [_btnAppliedDate setUserInteractionEnabled:NO];
     [_btnAppliedDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     
-    [_btnRequestDate setUserInteractionEnabled:NO];
-    [_btnRequestDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    [_btnFromDate setUserInteractionEnabled:NO];
+    [_btnFromDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     
     [_btnToDate setUserInteractionEnabled:NO];
     [_btnToDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
@@ -286,7 +286,7 @@
         [_btnDepartment setTitle:[(Departments *)[lstDepartment objectAtIndex:0] dept_name] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnDuration setTitle:[NSString stringWithFormat:@"%d Day(s)", dayBetweenDates] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnAppliedDate setTitle:[format stringFromDate:leaveObj.applied_date] forState:UIControlStateNormal & UIControlStateSelected];
-        [_btnRequestDate setTitle:[format stringFromDate:leaveObj.from_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnFromDate setTitle:[format stringFromDate:leaveObj.from_date] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnToDate setTitle:[format stringFromDate:leaveObj.to_date] forState:UIControlStateNormal & UIControlStateSelected];
         [_btnLeaveType setTitle:leaveObj.leave_type forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes setText:leaveObj.notes];
@@ -309,7 +309,7 @@
         [_btnDepartment     setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_btnDuration       setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_btnAppliedDate    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
-        [_btnRequestDate    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnFromDate       setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_btnToDate         setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_btnLeaveType      setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes           setText:@""];

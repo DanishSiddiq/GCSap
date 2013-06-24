@@ -20,7 +20,8 @@
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
 @property (retain, nonatomic) NSMutableString *filterText;
 @property (nonatomic) BOOL isApprovedSelected;
-@property (nonatomic) BOOL isUnApprovedSelected;
+@property (nonatomic) BOOL isDeclinedSelected;
+@property (nonatomic) BOOL isPendingSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 
@@ -34,11 +35,15 @@
 @property (retain, nonatomic) IBOutlet UIButton *btnApprover;
 @property (retain, nonatomic) IBOutlet UITextView *tvNotes;
 
+@property (retain, nonatomic) IBOutlet UIButton *btnSubmit;
+@property (retain, nonatomic) IBOutlet UIButton *btnCancel;
+
 //selectors
 - (IBAction)btnPressedFilterApproved:(id)sender;
-- (IBAction)btnPressedFilterUnApproved:(id)sender;
-- (IBAction)btnPressedApproved:(id)sender;
-- (IBAction)btnPressedUnApproved:(id)sender;
+- (IBAction)btnPressedFilterDeclined:(id)sender;
+- (IBAction)btnPressedFilterPending:(id)sender;
+- (IBAction)btnPressedSubmitted:(id)sender;
+- (IBAction)btnPressedCancel:(id)sender;
 
 @end
 
@@ -118,24 +123,34 @@
     _lstLeave = [[NSMutableArray alloc] init];
     _filterText = [NSMutableString stringWithFormat:@""];
     _isApprovedSelected = YES;
-    _isUnApprovedSelected = YES;
-    _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
+    _isDeclinedSelected = YES;
+    _isPendingSelected  = YES;
+    _selectedIndexPath  = nil;
     
     // data base calling for fetching data
-    [self fetchDataFromServer];
+    [self fetchHRLeavesFromCoreData];
+    [self filterLeaves];
+    [self updateViews];
 }
 
-- (void) fetchDataFromServer {
+
+- (void) fetchHRLeavesFromCoreData {
+    
+    [_lstLeave removeAllObjects];
+    [_lstLeave addObjectsFromArray:[self fetchDataFromCoreDataWithPredicate:nil AndEntityName:@"HR_leaves"]];
+}
+
+- (NSArray *) fetchDataFromCoreDataWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
     
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"HR_leaves"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:_sapDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [_lstLeave addObjectsFromArray:[_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-    [_lstFilterLeave addObjectsFromArray:_lstLeave];
     
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    return [_sapDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
 
 // selectors
@@ -148,19 +163,28 @@
     [self updateViews ];
 }
 
-- (IBAction)btnPressedFilterUnApproved:(id)sender{
+- (IBAction)btnPressedFilterDeclined:(id)sender{
     
-    _isUnApprovedSelected = !_isUnApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    _isDeclinedSelected = !_isDeclinedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclinedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
 }
 
-- (IBAction)btnPressedApproved:(id)sender {
+- (IBAction)btnPressedFilterPending:(id)sender{
+    
+    _isPendingSelected = !_isPendingSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPendingSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
 }
 
-- (IBAction)btnPressedUnApproved:(id)sender {
+- (IBAction)btnPressedSubmitted:(id)sender {
+}
+
+- (IBAction)btnPressedCancel:(id)sender {
 }
 
 #pragma searchbar delegates
@@ -216,21 +240,22 @@
         
         for(HR_leaves *leave in _lstLeave){
             
-            
-            if(_isApprovedSelected && _isUnApprovedSelected
-               && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+            if([[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                 
-                [_lstFilterLeave addObject:leave];
-            }
-            else{
-                
-                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]
-                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                if(_isApprovedSelected
+                   && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                   && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                    
                     [_lstFilterLeave addObject:leave];
                 }
-                
-                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]
-                   && [[[leave leave_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                else if(_isDeclinedSelected
+                        && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                        && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                    
+                    [_lstFilterLeave addObject:leave];
+                }
+                else if(_isPendingSelected
+                        && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                     
                     [_lstFilterLeave addObject:leave];
                 }
@@ -240,30 +265,91 @@
     else{
         
         for(HR_leaves *leave in _lstLeave){
-            
-            if(_isApprovedSelected && _isUnApprovedSelected){
+                
+            if(_isApprovedSelected
+               && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+               && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                 
                 [_lstFilterLeave addObject:leave];
             }
-            else{
+            else if(_isDeclinedSelected
+                    && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                    && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                 
-                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                    [_lstFilterLeave addObject:leave];
-                }
+                [_lstFilterLeave addObject:leave];
+            }
+            else if(_isPendingSelected
+                    && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                 
-                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                    [_lstFilterLeave addObject:leave];
-                }
+                [_lstFilterLeave addObject:leave];
             }
         }
     }
+    
+    if(_lstFilterLeave.count > 0){
+        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    else{
+        _selectedIndexPath = nil;
+    }
+    
 }
 
 // you have to update the view also have to change the side vise fileds accordingly
 -(void) updateViews {
     
     [_tblLeave reloadData];
+    [self updateLeaveApprovalRequest];
 }
+
+- (void) updateLeaveApprovalRequest{
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        HR_leaves *leaveObj = [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+        
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateStyle:NSDateFormatterMediumStyle];
+        
+        NSTimeInterval distanceBetweenDates = [leaveObj.to_date timeIntervalSinceDate:leaveObj.from_date];
+        double secondsInDay = 60*60*24;
+        NSInteger dayBetweenDates = distanceBetweenDates / secondsInDay;
+
+        
+        [_btnLeaveType setTitle:leaveObj.leave_type forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnAppliedDate setTitle:[format stringFromDate:leaveObj.applied_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDuration setTitle:[NSString stringWithFormat:@"%d Day(s)", dayBetweenDates] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnFromDate setTitle:[format stringFromDate:leaveObj.from_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnToDate setTitle:[format stringFromDate:leaveObj.to_date] forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnApprover setTitle:leaveObj.approver forState:UIControlStateNormal & UIControlStateSelected];
+        [_tvNotes setText:leaveObj.notes];
+        
+        if([leaveObj.submitted isEqualToNumber:[NSNumber numberWithBool:NO]]){
+            
+            [_btnSubmit setEnabled:YES];
+            [_btnCancel setEnabled:YES];
+        }
+        else{
+            
+            [_btnSubmit setEnabled:NO];
+            [_btnCancel setEnabled:NO];
+        }
+    }
+    else{
+        
+        [_btnLeaveType     setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnAppliedDate   setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnDuration     setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnFromDate       setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnToDate    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_btnApprover    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
+        [_tvNotes           setText:@""];
+        
+        [_btnSubmit setEnabled:NO];
+        [_btnCancel setEnabled:NO];
+    }
+}
+
 
 // delegates
 #pragma table delagtes
@@ -328,7 +414,7 @@
     // to round label
     [[lblDuration layer] setCornerRadius:3.0];
     
-    if(_selectedIndexPath.row == indexPath.row){
+    if(_selectedIndexPath && _selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 275, 106)];
         [imgViewBackground setFrame:CGRectMake(0, 10, 275, 86)];
@@ -388,7 +474,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndexPath = indexPath;
-    [_tblLeave reloadData];
+    [self updateViews ];
     
 }
 
