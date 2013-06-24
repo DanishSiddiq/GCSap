@@ -14,7 +14,7 @@
  },
  {
  "order_id": 5552,
- "order_type": "Service Order (With Contract)",
+ "order_type": "Working Order (With Contract)",
  "start_date": "12/04/2013",
  "end_date": "18/04/2013",
  "priority": "Normal",
@@ -27,7 +27,7 @@
  },
  {
  "order_id": 5553,
- "order_type": "Service Order (With Contract)",
+ "order_type": "ABC Order (With Contract)",
  "start_date": "24/04/2013",
  "end_date": "28/04/2013",
  "priority": "Low",

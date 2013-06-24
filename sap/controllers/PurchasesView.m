@@ -96,7 +96,7 @@
     _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
     [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [_tblPurchases reloadData];
     
     Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
@@ -154,7 +154,7 @@
     _isApprovedSelected = !_isApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -165,7 +165,7 @@
     _isUnApprovedSelected = !_isUnApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -176,7 +176,7 @@
     _isPending = !_isPending;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"check2" : @"check"] forState:UIControlStateNormal];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     
@@ -201,7 +201,7 @@
 	
 	[_tblPurchases reloadData];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -226,7 +226,7 @@
 	
 	[_tblPurchases reloadData];
     
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews ];
     
     [self setPODetailIndexAfterFilter];
@@ -259,7 +259,7 @@
     
     // changing text logic here
     [_filterText setString:searchText];
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews];
     
     [self setPODetailIndexAfterFilter];
@@ -276,13 +276,13 @@
     [searchBar setText:@""];
     [searchBar resignFirstResponder];
     [_filterText setString:searchBar.text];
-    [self filterLeaves];
+    [self filterPurchases];
     [self updateViews];
     
     [self setPODetailIndexAfterFilter];
 }
 
-- (void) filterLeaves {
+- (void) filterPurchases {
     
     [_lstFilterPurchases removeAllObjects];
     [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];

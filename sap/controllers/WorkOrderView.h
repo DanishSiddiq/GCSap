@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface WorkOrderView : UIView
+@interface WorkOrderView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+
+
+@property (strong, nonatomic) IBOutlet UIButton *btnApproved;
+@property (strong, nonatomic) IBOutlet UIButton *btnDeclined;
+
+// overriding the constructor
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
+- (IBAction)slideBtnPressed:(id)sender;
 
 @end
