@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WorkOrder : UIView
+@interface WorkOrderView : UIView
 
 @end

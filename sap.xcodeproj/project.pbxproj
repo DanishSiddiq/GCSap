@@ -26,8 +26,8 @@
 		3D0297B8177336D500810066 /* avatar-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0297B7177336D500810066 /* avatar-3.png */; };
 		3D0297BA1773370900810066 /* approveLeaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0297B91773370900810066 /* approveLeaveIcon.png */; };
 		3D0297BC1773371F00810066 /* mangerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0297BB1773371F00810066 /* mangerIcon.png */; };
-		3D0CBF00177811470049C367 /* WorkOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D0CBEFF177811470049C367 /* WorkOrderView.xib */; };
-		3D0CBF03177811AC0049C367 /* WorkOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0CBF02177811AC0049C367 /* WorkOrder.m */; };
+		3D0CBF03177811AC0049C367 /* WorkOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0CBF02177811AC0049C367 /* WorkOrderView.m */; };
+		3D0CBF05177813C80049C367 /* WorkOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D0CBF04177813C80049C367 /* WorkOrderView.xib */; };
 		3D23C8E8177779A800A4F03A /* businessPartners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D23C8DD177779A800A4F03A /* businessPartners.png */; };
 		3D23C8E9177779A800A4F03A /* businessPartnersHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D23C8DE177779A800A4F03A /* businessPartnersHover.png */; };
 		3D23C8EA177779A800A4F03A /* Components.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D23C8DF177779A800A4F03A /* Components.png */; };
@@ -169,9 +169,9 @@
 		3D0297B7177336D500810066 /* avatar-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-3.png"; sourceTree = "<group>"; };
 		3D0297B91773370900810066 /* approveLeaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = approveLeaveIcon.png; sourceTree = "<group>"; };
 		3D0297BB1773371F00810066 /* mangerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangerIcon.png; sourceTree = "<group>"; };
-		3D0CBEFF177811470049C367 /* WorkOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderView.xib; sourceTree = "<group>"; };
-		3D0CBF01177811AC0049C367 /* WorkOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrder.h; sourceTree = "<group>"; };
-		3D0CBF02177811AC0049C367 /* WorkOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrder.m; sourceTree = "<group>"; };
+		3D0CBF01177811AC0049C367 /* WorkOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderView.h; sourceTree = "<group>"; };
+		3D0CBF02177811AC0049C367 /* WorkOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderView.m; sourceTree = "<group>"; };
+		3D0CBF04177813C80049C367 /* WorkOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderView.xib; sourceTree = "<group>"; };
 		3D23C8DD177779A800A4F03A /* businessPartners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = businessPartners.png; sourceTree = "<group>"; };
 		3D23C8DE177779A800A4F03A /* businessPartnersHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = businessPartnersHover.png; sourceTree = "<group>"; };
 		3D23C8DF177779A800A4F03A /* Components.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Components.png; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 				3D3DC6AB176B46F600E5ACB7 /* PurchasesView.xib */,
 				3AA00E041772F417005E9340 /* HRLeaveRequestView.xib */,
 				3AA00E091772FCF0005E9340 /* HRLeaveApprovalView.xib */,
-				3D0CBEFF177811470049C367 /* WorkOrderView.xib */,
+				3D0CBF04177813C80049C367 /* WorkOrderView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -397,8 +397,8 @@
 				3AA00E071772F440005E9340 /* HRLeaveRequestView.m */,
 				3AA00E0E1773031A005E9340 /* HRLeaveApprovalView.h */,
 				3AA00E0F1773031A005E9340 /* HRLeaveApprovalView.m */,
-				3D0CBF01177811AC0049C367 /* WorkOrder.h */,
-				3D0CBF02177811AC0049C367 /* WorkOrder.m */,
+				3D0CBF01177811AC0049C367 /* WorkOrderView.h */,
+				3D0CBF02177811AC0049C367 /* WorkOrderView.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -642,7 +642,7 @@
 				3D23C8F1177779A800A4F03A /* overviewHover.png in Resources */,
 				3D23C8F2177779A800A4F03A /* TabBg.png in Resources */,
 				3D23C8F4177781E000A4F03A /* Work_Order.json in Resources */,
-				3D0CBF00177811470049C367 /* WorkOrderView.xib in Resources */,
+				3D0CBF05177813C80049C367 /* WorkOrderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,7 +672,7 @@
 				3AA00E081772F440005E9340 /* HRLeaveRequestView.m in Sources */,
 				3AA00E101773031A005E9340 /* HRLeaveApprovalView.m in Sources */,
 				3D23C8F8177785AE00A4F03A /* Work_Order.m in Sources */,
-				3D0CBF03177811AC0049C367 /* WorkOrder.m in Sources */,
+				3D0CBF03177811AC0049C367 /* WorkOrderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

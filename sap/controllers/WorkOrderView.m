@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 goodcore1. All rights reserved.
 //
 
-#import "WorkOrder.h"
+#import "WorkOrderView.h"
 
-@interface WorkOrder()
+@interface WorkOrderView()
 
 @property (retain, nonatomic) IBOutlet UIView *mainView;
 
 @end
 
 
-@implementation WorkOrder
+@implementation WorkOrderView
 
 - (id)initWithFrame:(CGRect)frame
 {

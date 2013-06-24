@@ -12,6 +12,7 @@
 #import "FinanceView.h"
 #import "MaintenanceView.h"
 #import "PurchasesView.h"
+#import "WorkOrderView.h"
 
 @interface RootViewController ()
 
@@ -58,6 +59,10 @@
     MaintenanceView* maintenanceView = [[MaintenanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
     maintenanceView.hidden = YES;
     [self.view addSubview:maintenanceView];
+    
+    WorkOrderView* workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
+    workOrderView.hidden = YES;
+    [self.view addSubview:workOrderView];
     
     PurchasesView* purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     purchaseView.hidden = NO;
