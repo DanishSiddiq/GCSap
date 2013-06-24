@@ -182,9 +182,56 @@
 }
 
 - (IBAction)btnPressedSubmitted:(id)sender {
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        HR_leaves *leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+        [leave setSubmitted:[NSNumber numberWithBool:YES]];
+        [leave setApplied_date:[NSDate date]];
+        [_sapDelegate.managedObjectContext save:&error];
+        
+        if(!error){
+            
+            [self filterLeaves];
+            [self updateViews ];
+        }
+        else{
+            
+        }
+    }
 }
 
 - (IBAction)btnPressedCancel:(id)sender {
+    
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        HR_leaves *leave;
+        
+        BOOL isError = NO;
+        @try {
+            
+            leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+            [_sapDelegate.managedObjectContext deleteObject:leave];
+        }
+        @catch (NSException *exception) {
+            isError = YES;
+            
+            NSLog(@"Exception: %@", exception);
+        }
+        @finally {
+            
+            if(!isError){
+             
+                [_lstLeave removeObject:leave];
+                [self filterLeaves];
+                [self updateViews ];
+            }
+            else{
+                // show error report
+            }
+        }
+    }
 }
 
 #pragma searchbar delegates
