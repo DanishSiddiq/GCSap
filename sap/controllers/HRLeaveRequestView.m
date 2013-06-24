@@ -25,7 +25,7 @@
 
 
 // fields
-@property (retain, nonatomic) IBOutlet UIView *vwDetailRequestApproval;
+@property (retain, nonatomic) IBOutlet UIView *vwDetailLeaveRequest;
 @property (retain, nonatomic) IBOutlet UIButton *btnLeaveType;
 @property (retain, nonatomic) IBOutlet UIButton *btnAppliedDate;
 @property (retain, nonatomic) IBOutlet UIButton *btnDuration;
@@ -72,8 +72,42 @@
     self.hrLeaveRequest.frame = frame;
     [self addSubview:self.hrLeaveRequest];    
     
+    // saerch keyboard config
     [self setKeyBoardForSearchBar];
+    
+    // tbl config
     [_tblLeave setShowsVerticalScrollIndicator:NO];
+    [_tblLeave setShowsHorizontalScrollIndicator:NO];
+    
+    
+    // detail view
+    [_vwDetailLeaveRequest.layer setCornerRadius:4.0f];
+    [_vwDetailLeaveRequest.layer setBorderWidth:1.0f];
+    [_vwDetailLeaveRequest.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
+    
+    // disable all buttons
+    [_btnLeaveType setUserInteractionEnabled:NO];
+    [_btnLeaveType setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 0.0)];
+    
+    [_btnAppliedDate setUserInteractionEnabled:NO];
+    [_btnAppliedDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    [_btnDuration setUserInteractionEnabled:NO];
+    [_btnDuration setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    [_btnFromDate setUserInteractionEnabled:NO];
+    [_btnFromDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    [_btnToDate setUserInteractionEnabled:NO];
+    [_btnToDate setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    [_btnApprover setUserInteractionEnabled:NO];
+    [_btnApprover setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 8.0, 0.0, 0.0)];
+    
+    [_tvNotes setUserInteractionEnabled:NO];
+    [_tvNotes.layer setCornerRadius:4.0f];
+    [_tvNotes.layer setBorderWidth:1.0f];
+    [_tvNotes.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
 }
 
 

@@ -133,7 +133,7 @@
 							<object class="IBUIButton" id="364780608">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{146, 15}, {21, 23}}</string>
+								<string key="NSFrame">{{97, 15}, {21, 23}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="143496133"/>
@@ -156,7 +156,7 @@
 							<object class="IBUILabel" id="143496133">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{170, 17}, {110, 20}}</string>
+								<string key="NSFrame">{{119, 18}, {110, 20}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="976371322"/>
@@ -166,7 +166,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Un-Approved</string>
+								<string key="IBUIText">Declined</string>
 								<reference key="IBUITextColor" ref="392710571"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -177,7 +177,7 @@
 							<object class="IBUIView" id="727175061">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 82}, {260, 1}}</string>
+								<string key="NSFrame">{{4, 43}, {260, 1}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1055828913"/>
@@ -188,7 +188,7 @@
 							<object class="IBUITableView" id="1055828913">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 90}, {275, 511}}</string>
+								<string key="NSFrame">{{0, 52}, {275, 549}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="235991671"/>
@@ -207,7 +207,7 @@
 							<object class="IBUIButton" id="976371322">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 52}, {21, 23}}</string>
+								<string key="NSFrame">{{181, 15}, {21, 23}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="446380582"/>
@@ -230,7 +230,7 @@
 							<object class="IBUILabel" id="446380582">
 								<reference key="NSNextResponder" ref="143707895"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{28, 54}, {75, 20}}</string>
+								<string key="NSFrame">{{205, 18}, {75, 20}}</string>
 								<reference key="NSSuperview" ref="143707895"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="727175061"/>
@@ -896,14 +896,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">vwDetailleaveApproval</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="235991671"/>
-					</object>
-					<int key="connectionID">64</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">btnDecline</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="107088092"/>
@@ -919,13 +911,21 @@
 					<int key="connectionID">66</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">vwDetailLeaveApproval</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="143707895"/>
+					</object>
+					<int key="connectionID">75</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedFilterUnApproved:</string>
+						<string key="label">btnPressedFilterDeclined:</string>
 						<reference key="source" ref="364780608"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">69</int>
+					<int key="connectionID">77</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -954,12 +954,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnPressedFilterProcessed:</string>
+						<string key="label">btnPressedFilterPending:</string>
 						<reference key="source" ref="976371322"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">70</int>
+					<int key="connectionID">78</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1042,12 +1042,12 @@
 						<int key="objectID">6</int>
 						<reference key="object" ref="143707895"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="143496133"/>
 							<reference ref="813086741"/>
 							<reference ref="1055828913"/>
 							<reference ref="359275995"/>
 							<reference ref="727175061"/>
 							<reference ref="364780608"/>
+							<reference ref="143496133"/>
 							<reference ref="976371322"/>
 							<reference ref="446380582"/>
 						</array>
@@ -1259,7 +1259,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">74</int>
+			<int key="maxID">78</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1270,8 +1270,8 @@
 						<string key="btnPressedApprove:">id</string>
 						<string key="btnPressedDecline:">id</string>
 						<string key="btnPressedFilterApproved:">id</string>
-						<string key="btnPressedFilterProcessed:">id</string>
-						<string key="btnPressedFilterUnApproved:">id</string>
+						<string key="btnPressedFilterDeclined:">id</string>
+						<string key="btnPressedFilterPending:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="btnPressedApprove:">
@@ -1286,12 +1286,12 @@
 							<string key="name">btnPressedFilterApproved:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedFilterProcessed:">
-							<string key="name">btnPressedFilterProcessed:</string>
+						<object class="IBActionInfo" key="btnPressedFilterDeclined:">
+							<string key="name">btnPressedFilterDeclined:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnPressedFilterUnApproved:">
-							<string key="name">btnPressedFilterUnApproved:</string>
+						<object class="IBActionInfo" key="btnPressedFilterPending:">
+							<string key="name">btnPressedFilterPending:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1309,7 +1309,7 @@
 						<string key="hrLeaveApproval">UIView</string>
 						<string key="tblLeave">UITableView</string>
 						<string key="tvNotes">UITextView</string>
-						<string key="vwDetailleaveApproval">UIView</string>
+						<string key="vwDetailLeaveApproval">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="btnAppliedDate">
@@ -1364,8 +1364,8 @@
 							<string key="name">tvNotes</string>
 							<string key="candidateClassName">UITextView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="vwDetailleaveApproval">
-							<string key="name">vwDetailleaveApproval</string>
+						<object class="IBToOneOutletInfo" key="vwDetailLeaveApproval">
+							<string key="name">vwDetailLeaveApproval</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
 					</dictionary>

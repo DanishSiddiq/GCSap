@@ -17,12 +17,12 @@
 @property (retain, nonatomic) NSMutableArray *lstLeave;
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
 @property (nonatomic) BOOL isApprovedSelected;
-@property (nonatomic) BOOL isUnApprovedSelected;
+@property (nonatomic) BOOL isDeclinedSelected;
 @property (nonatomic) BOOL isPendingSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 // detail view
-@property (retain, nonatomic) IBOutlet UIView *vwDetailleaveApproval;
+@property (retain, nonatomic) IBOutlet UIView *vwDetailLeaveApproval;
 @property (retain, nonatomic) IBOutlet UIButton *btnEmployeeID;
 @property (retain, nonatomic) IBOutlet UIButton *btnEmployeeName;
 @property (retain, nonatomic) IBOutlet UIButton *btnDepartment;
@@ -37,8 +37,8 @@
 
 //selectors
 - (IBAction)btnPressedFilterApproved:(id)sender;
-- (IBAction)btnPressedFilterUnApproved:(id)sender;
-- (IBAction)btnPressedFilterProcessed:(id)sender;
+- (IBAction)btnPressedFilterDeclined:(id)sender;
+- (IBAction)btnPressedFilterPending:(id)sender;
 - (IBAction)btnPressedApprove:(id)sender;
 - (IBAction)btnPressedDecline:(id)sender;
 
@@ -79,9 +79,9 @@
     
     
     // detail view
-    [_vwDetailleaveApproval.layer setCornerRadius:4.0f];
-    [_vwDetailleaveApproval.layer setBorderWidth:1.0f];
-    [_vwDetailleaveApproval.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
+    [_vwDetailLeaveApproval.layer setCornerRadius:4.0f];
+    [_vwDetailLeaveApproval.layer setBorderWidth:1.0f];
+    [_vwDetailLeaveApproval.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
     
     // disable all buttons    
     [_btnEmployeeID setUserInteractionEnabled:NO];
@@ -122,7 +122,7 @@
     _lstFilterLeave = [[NSMutableArray alloc] init];
     _lstLeave = [[NSMutableArray alloc] init];
     _isApprovedSelected = YES;
-    _isUnApprovedSelected = YES;
+    _isDeclinedSelected = YES;
     _isPendingSelected = YES;
     _selectedIndexPath = nil;
     
@@ -163,16 +163,16 @@
     [self updateViews ];
 }
 
-- (IBAction)btnPressedFilterUnApproved:(id)sender {
+- (IBAction)btnPressedFilterDeclined:(id)sender {
     
-    _isUnApprovedSelected = !_isUnApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    _isDeclinedSelected = !_isDeclinedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclinedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
 }
 
-- (IBAction)btnPressedFilterProcessed:(id)sender{
+- (IBAction)btnPressedFilterPending:(id)sender{
     
     _isPendingSelected = !_isPendingSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isPendingSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
@@ -229,53 +229,22 @@
     [_lstFilterLeave removeAllObjects];        
     for(HR_leaves *leave in _lstLeave){
         
-        if(_isApprovedSelected && _isUnApprovedSelected && _isPendingSelected){
+        if(_isApprovedSelected
+           && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+           && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
             
-            if([[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                [_lstFilterLeave addObject:leave];
-            }
+            [_lstFilterLeave addObject:leave];
         }
-        else{
+        else if(_isDeclinedSelected
+                && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
-            // approved selected
-            if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                
-                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-
-                    [_lstFilterLeave addObject:leave];
-                }
-                else if(!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                    
-                    [_lstFilterLeave addObject:leave];
-                }
-            }
+            [_lstFilterLeave addObject:leave];
+        }
+        else if(_isPendingSelected
+                && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
-            // un-approved selected
-            if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                
-                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-
-                    [_lstFilterLeave addObject:leave];
-                }
-                else if(!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-
-                    [_lstFilterLeave addObject:leave];
-                }
-                
-            }
-            
-            // if both approved and un-approved not selected
-            if(!_isApprovedSelected && !_isUnApprovedSelected){
-                
-                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-                    
-                    [_lstFilterLeave addObject:leave];
-                }
-                else if (!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-                    
-                    [_lstFilterLeave addObject:leave];
-                }
-            }
+            [_lstFilterLeave addObject:leave];
         }
     }
     
@@ -322,15 +291,15 @@
         [_btnLeaveType setTitle:leaveObj.leave_type forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes setText:leaveObj.notes];
         
-        if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:YES]]){
+        if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
-            [_btnApprove setHidden:YES];
-            [_btnDecline setHidden:YES];
+            [_btnApprove setEnabled:YES];
+            [_btnDecline setEnabled:YES];
         }
         else{
             
-            [_btnApprove setHidden:NO];
-            [_btnDecline setHidden:NO];
+            [_btnApprove setEnabled:NO];
+            [_btnDecline setEnabled:NO];
         }
     }
     else{
@@ -345,8 +314,8 @@
         [_btnLeaveType      setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes           setText:@""];
         
-        [_btnApprove setHidden:YES];
-        [_btnDecline setHidden:YES];
+        [_btnApprove setEnabled:NO];
+        [_btnDecline setEnabled:NO];
     }
 }
 
