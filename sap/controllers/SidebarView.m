@@ -178,6 +178,7 @@
 
 -(IBAction) btnPressedResetData :(id)sender{
     
+    [_sapDelegate pergeAllObjects];
 }
 
 

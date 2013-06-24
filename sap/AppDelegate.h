@@ -31,4 +31,8 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+
+// to delete all core data
+- (void) pergeAllObjects;
+
 @end
