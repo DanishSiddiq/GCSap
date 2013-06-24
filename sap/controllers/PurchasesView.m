@@ -19,8 +19,31 @@
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 @property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic) BOOL isApprovedSelected;
+@property (nonatomic) BOOL isUnApprovedSelected;
+@property (nonatomic) BOOL isPending;
+
+@property (retain, nonatomic) Purchase_Orders *currentPO;
+
+// PO Detail Objects
+@property (retain, nonatomic) IBOutlet UITableView *tblPoItems;
+@property (retain, nonatomic) NSMutableArray* lstPoItems;
+@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoItems;
+
+@property (retain, nonatomic) IBOutlet UITableView *tblPoInvoices;
+@property (retain, nonatomic) NSMutableArray* lstPoInvoices;
+@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoInvoices;
+
+@property (retain, nonatomic) IBOutlet UITableView *tblPoDelivery;
+@property (retain, nonatomic) NSMutableArray* lstPoDelivery;
+@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoDelivery;
 
 @property (retain, nonatomic) IBOutlet UIView* purchaseViewDetailUpper;
+@property (retain, nonatomic) IBOutlet UIButton * poItemsButton;
+@property (retain, nonatomic) IBOutlet UIButton * poInvoiceButton;
+@property (retain, nonatomic) IBOutlet UIButton * poDeliveryButton;
+
+- (IBAction)poDetailsBtnPressed:(id)sender;
 
 @property bool _isSlided;
 
@@ -43,8 +66,13 @@
         [self addSubview:self.purchaseView];
         
         [_tblPurchases setShowsVerticalScrollIndicator:NO];
+        [_tblPoItems setShowsVerticalScrollIndicator:NO];
+        [_tblPoInvoices setShowsVerticalScrollIndicator:NO];
+        [_tblPoDelivery setShowsVerticalScrollIndicator:NO];
         
-        self._isSlided = NO;
+        _tblPoDelivery.hidden = _tblPoInvoices.hidden = YES;
+        
+        self._isSlided = self.poItemsButton.userInteractionEnabled = NO;
         [self initializeData:sapDelegate];
         
     }
@@ -55,13 +83,24 @@
     
     _sapDelegate = sapDelegate;
     _lstPurchases = [[NSMutableArray alloc] init];
+    _lstPoItems = [[NSMutableArray alloc] init];
+    _lstPoInvoices = [[NSMutableArray alloc] init];
+    _lstPoDelivery = [[NSMutableArray alloc] init];
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     _lstFilterPurchases = [[NSMutableArray alloc] init];
     _filterText = [NSMutableString stringWithFormat:@""];
     
+    _isApprovedSelected = _isUnApprovedSelected = _isPending = YES;
+    
     // data base calling for fetching data
     _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
     [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
+    
+    [self filterLeaves];
+    [_tblPurchases reloadData];
+    
+    Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+    [self getPurchaseOrderDetails: poFirst.po_id];
 }
 
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
@@ -109,6 +148,91 @@
     
 }
 
+// selectors
+- (IBAction)btnPressedApproved:(id)sender {
+    
+    _isApprovedSelected = !_isApprovedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
+    
+    [self setPODetailIndexAfterFilter];
+}
+
+- (IBAction)btnPressedUnApproved:(id)sender {
+    
+    _isUnApprovedSelected = !_isUnApprovedSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
+    
+    [self setPODetailIndexAfterFilter];
+}
+
+- (IBAction)btnPressedPending:(id)sender {
+    
+    _isPending = !_isPending;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"check2" : @"check"] forState:UIControlStateNormal];
+    
+    [self filterLeaves];
+    [self updateViews ];
+    
+    
+    [self setPODetailIndexAfterFilter];
+}
+
+- (IBAction)btnPoApprovedPressed:(id)sender {
+    
+    [self.currentPO setApproved: [NSNumber numberWithBool:YES]];
+    
+    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
+    
+    NSError *error = nil;
+	[_sapDelegate.managedObjectContext save:&error];
+	
+	if (error) {
+		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
+		return;
+	}
+	
+    self.currentPO = nil;
+	
+	[_tblPurchases reloadData];
+    
+    [self filterLeaves];
+    [self updateViews ];
+    
+    [self setPODetailIndexAfterFilter];
+    
+}
+
+- (IBAction)btnPoDeclinedPressed:(id)sender {
+    
+    [self.currentPO setDeclined: [NSNumber numberWithBool:YES]];
+    
+    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
+    
+    NSError *error = nil;
+	[_sapDelegate.managedObjectContext save:&error];
+	
+	if (error) {
+		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
+		return;
+	}
+	
+    self.currentPO = nil;
+	
+	[_tblPurchases reloadData];
+    
+    [self filterLeaves];
+    [self updateViews ];
+    
+    [self setPODetailIndexAfterFilter];
+}
+
+
 
 #pragma searchbar delegates
 
@@ -137,6 +261,8 @@
     [_filterText setString:searchText];
     [self filterLeaves];
     [self updateViews];
+    
+    [self setPODetailIndexAfterFilter];
 }
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
@@ -152,6 +278,8 @@
     [_filterText setString:searchBar.text];
     [self filterLeaves];
     [self updateViews];
+    
+    [self setPODetailIndexAfterFilter];
 }
 
 - (void) filterLeaves {
@@ -163,14 +291,32 @@
         
         for(Purchase_Orders *purchase in _lstPurchases){
             
-            if([[[purchase order_type] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+            // case when both checkboxes are selected
+            if(_isApprovedSelected && _isUnApprovedSelected && [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                 
                 [_lstFilterPurchases addObject:purchase];
             }
-            else if([[[NSString stringWithFormat:@"%@", [ purchase po_id]] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
-                [_lstFilterPurchases addObject:purchase];
+            // case when any one checkbox is selected
+            else if(_isUnApprovedSelected || _isApprovedSelected){
+                if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                    &&  [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                    
+                    [_lstFilterPurchases addObject:purchase];
+                
+                }
+                
+                if(_isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]
+                   &&  [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+                    
+                    [_lstFilterPurchases addObject:purchase];
+                    
+                }
             }
-            else if([[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
+            
+            
+            if(_isPending && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
+               [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
+               [[[purchase vendor] lowercaseString] rangeOfString:[_filterText lowercaseString]].location != NSNotFound){
                 [_lstFilterPurchases addObject:purchase];
             }
         }
@@ -179,23 +325,36 @@
     else{
         
         for(Purchase_Orders *purchase in _lstPurchases){
-            [_lstFilterPurchases addObject:purchase];
             
-//            if(_isApprovedSelected && _isUnApprovedSelected){
-//                
-//                [_lstFilterLeave addObject:leave];
-//            }
-//            else{
-//                
-//                if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
-//                    [_lstFilterLeave addObject:leave];
-//                }
-//                
-//                if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-//                    [_lstFilterLeave addObject:leave];
-//                }
-//            }
+            // case when both checkboxes are selected
+            if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]] && _isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                
+                [_lstFilterPurchases addObject:purchase];
+            }
+             // case when any one checkbox is selected
+            else if(_isUnApprovedSelected || _isApprovedSelected){
+                
+                if(_isApprovedSelected && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                    [_lstFilterPurchases addObject:purchase];
+                }
+                
+                if(_isUnApprovedSelected && [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                    [_lstFilterPurchases addObject:purchase];
+                }
+            }
+
+            if(_isPending && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
+               [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                [_lstFilterPurchases addObject:purchase];
+            }
         }
+    }
+    
+    if(_lstFilterPurchases.count > 0){
+        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    else{
+        _selectedIndexPath = nil;
     }
 }
 
@@ -209,15 +368,42 @@
 #pragma purchase order delegates
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_lstFilterPurchases count];
+    if(tableView == self.tblPurchases){
+        return [_lstFilterPurchases count];
+    }
+    else if(tableView == self.tblPoItems) {
+        return [_lstPoItems count];
+    }
+    else if(tableView == self.tblPoInvoices) {
+        return [_lstPoInvoices count];
+    }
+    else{
+        return [_lstPoDelivery count];
+    }
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130.0f;
+    if(tableView == self.tblPurchases){
+        
+        return 130.0f;
+        
+    }else {
+        return 40.0f;
+    }
+    
+    
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 1.0f;
+    if(tableView == self.tblPurchases){
+    
+        return 1.0f;
+    }
+    else{
+     
+        return 30.0f;
+    }
+    
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -226,14 +412,55 @@
 
 -(UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    
 }
 
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    if(tableView == self.tblPoItems){
+        
+        return self.tblHeaderPoItems;
+    }
+    else if(tableView == self.tblPoDelivery){
+        
+        return self.tblHeaderPoDelivery;
+        
+    }
+    else if(tableView == self.tblPoInvoices){
+        
+        return self.tblHeaderPoInvoices;
+        
+    }
+    else{
+        return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    }
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if(tableView == self.tblPurchases){
+        
+        return [self initializePurchaseTable:tableView cellForRowAtIndexPath:indexPath];
+        
+    }
+    else if(tableView == self.tblPoItems) {
+        
+        return [self initializePoItemsTable:tableView cellForRowAtIndexPath:indexPath];
+        
+    }
+    else if(tableView == self.tblPoDelivery) {
+        
+        return [self initializePoDeliveryTable:tableView cellForRowAtIndexPath:indexPath];
+        
+    }
+    else{
+        
+        return [self initializePoInvoicesTable:tableView cellForRowAtIndexPath:indexPath];
+        
+    }
+    
+}
+
+-(UITableViewCell *) initializePurchaseTable:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *branchCellIdentifier = [NSString stringWithFormat:@"PurchaseViewCell"];
     UITableViewCell *cell;
     UILabel *lblPOId, *lblPODate, *lblVendor, *lblCurrency, *lblAmount, *lblOrderType;
@@ -284,6 +511,7 @@
     
     
     Purchase_Orders *purchaseObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
+    self.currentPO = purchaseObj;
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     
@@ -308,7 +536,15 @@
     }
     
     return cell;
+}
 
+-(void) setPODetailIndexAfterFilter{
+    if(_selectedIndexPath != nil){
+        Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+        [self getPurchaseOrderDetails: poFirst.po_id];
+    }else{
+        [self getPurchaseOrderDetails: 0];
+    }
     
 }
 
@@ -316,25 +552,268 @@
     _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
     Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
-    //NSLog(@"Purchase Details:%@", poObj);
     [self getPurchaseOrderDetails:poObj.po_id];
 }
 
 -(void) getPurchaseOrderDetails: (NSNumber*) poID{
+    [_tblPoInvoices setHidden:YES];
+    [_tblPoItems setHidden:NO];
+    [_tblPoDelivery setHidden:YES];
+    [_poItemsButton setUserInteractionEnabled:NO];
+    [_poInvoiceButton setUserInteractionEnabled:YES];
+    [_poDeliveryButton setUserInteractionEnabled:YES];
+    _btnApproved.enabled = _btnDeclined.enabled = NO;
+    _poDeliveryButton.alpha = _poInvoiceButton.alpha = 0.7f;
+    _poItemsButton.alpha = 1.0f;
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(po_id = %@)", poID];
-    NSMutableArray * poInvoices = [[NSMutableArray alloc] init];
-    NSMutableArray * poDelivery = [[NSMutableArray alloc] init];
-    NSMutableArray * poItems = [[NSMutableArray alloc] init];
-    poInvoices = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Invoice"];
-    poItems = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Items"];
-    poDelivery = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Delivery"];
+    _lstPoInvoices = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Invoice"];
+    _lstPoItems = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Items"];
+    _lstPoDelivery = [self fetchDataFromServerWithPredicate:predicate AndEntityName:@"PO_Delivery"];
     
-    //PO_Invoice *poInvoiceObj = [poInvoices objectAtIndex:0];
+    UILabel *lblPOId, *lblPODate, *lblVendor, *lblCurrency, *lblAmount, *lblOrderType, *lblMainVendor, *lblLocation;
+    UIImageView *imgViewVendor;
     
-    //NSLog(@"Invoice count, %d", [poInvoices count]);
+    lblMainVendor = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:10];
+    lblPOId = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:11];
+    lblVendor = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:12];
+    lblAmount = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:13];
+    lblPODate = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:14];
+    lblOrderType = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:15];
+    lblCurrency = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:16];
+    lblLocation = (UILabel *)[self.purchaseViewDetailUpper viewWithTag:20];
+    imgViewVendor = (UIImageView *)[self.purchaseViewDetailUpper viewWithTag:30];
+    
+    if(_lstFilterPurchases.count > 0){
+        Purchase_Orders *purchaseObj = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateStyle:NSDateFormatterMediumStyle];
+        
+        lblPOId.text = [NSString stringWithFormat:@"%@", purchaseObj.po_id];
+        lblPODate.text = [format stringFromDate:purchaseObj.po_date];
+        lblVendor.text = lblMainVendor.text = purchaseObj.vendor;
+        lblOrderType.text = purchaseObj.order_type;
+        lblAmount.text = [NSString stringWithFormat:@"%@", purchaseObj.amount];
+        lblCurrency.text = purchaseObj.currency;
+        
+        
+        if([[lblMainVendor.text lowercaseString] isEqualToString:@"lanier professional services"]){
+            [imgViewVendor setImage:[UIImage imageNamed:@"avatar-1.png"]];
+            lblLocation.text = @"  Victoria, Canada";
+        }else if([[lblMainVendor.text lowercaseString] isEqualToString:@"tlf services"]){
+            [imgViewVendor setImage:[UIImage imageNamed:@"avatar-2.png"]];
+            lblLocation.text = @"  Sydney, Australia";
+        }else{
+            [imgViewVendor setImage:[UIImage imageNamed:@"avatar-3.png"]];
+            lblLocation.text = @"  Florida, US";
+        }
+        
+        if([[purchaseObj approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
+           [[purchaseObj declined] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+            _btnApproved.enabled = _btnDeclined.enabled = YES;
+        }
+        
+        [_tblPoItems reloadData];
+        [_tblPoInvoices reloadData];
+        [_tblPoDelivery reloadData];
+    }else{
+        [_tblPoInvoices setHidden:YES];
+        [_tblPoItems setHidden:YES];
+        [_tblPoDelivery setHidden:YES];
+        
+        [_poItemsButton setUserInteractionEnabled:NO];
+        [_poInvoiceButton setUserInteractionEnabled:NO];
+        [_poDeliveryButton setUserInteractionEnabled:NO];
+        
+        lblPOId.text = lblMainVendor.text = lblPODate.text = lblVendor.text =
+        lblOrderType.text = lblAmount.text = lblCurrency.text = lblLocation.text =  @"";
+        [imgViewVendor setImage:[UIImage imageNamed:@""]];
+
+    }
+}
+
+-(UITableViewCell *) initializePoItemsTable:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *branchCellIdentifier = [NSString stringWithFormat:@"PoItemCell"];
+    UITableViewCell *cell;
+    UILabel *lblItems, *lblA, *lblL, *lblMaterial, *lblShortText, *lblQuantity, *lblUnits, *lblPoDate;
+    UIImageView *imgViewBackground;
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:3];
+        
+    }
     
     
+    lblItems = (UILabel *)[cell.contentView viewWithTag:1];
+    lblA = (UILabel *)[cell.contentView viewWithTag:2];
+    lblL = (UILabel *)[cell.contentView viewWithTag:3];
+    lblMaterial = (UILabel *)[cell.contentView viewWithTag:4];
+    lblShortText = (UILabel *)[cell.contentView viewWithTag:5];
+    lblQuantity = (UILabel *)[cell.contentView viewWithTag:6];
+    lblUnits = (UILabel *)[cell.contentView viewWithTag:7];
+    lblPoDate = (UILabel *)[cell.contentView viewWithTag:8];
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:30];
+    //imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if(indexPath.row % 2 == 0){
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+        [imgViewBackground  setBackgroundColor:[UIColor whiteColor]];
+        
+    }
+    else{
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+    }
+    
+    
+    
+    PO_Items  *poItemsObj = [_lstPoItems objectAtIndex:indexPath.row];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    lblItems.text = poItemsObj.items;
+    lblA.text = [NSString stringWithFormat:@"%@", poItemsObj.a];
+    lblL.text = [NSString stringWithFormat:@"%@", poItemsObj.l];
+    lblMaterial.text = poItemsObj.material;
+    lblShortText.text = poItemsObj.short_text;
+    lblQuantity.text = [NSString stringWithFormat:@"%@", poItemsObj.quantity];
+    lblUnits.text = poItemsObj.units;
+    lblPoDate.text = [format stringFromDate:poItemsObj.delivery_date];
+    
+    return cell;
 }
 
 
+#pragma PO Delivery table cell delegate
+
+-(UITableViewCell *) initializePoDeliveryTable:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *branchCellIdentifier = [NSString stringWithFormat:@"PoDeliveryCell"];
+    UITableViewCell *cell;
+    UILabel *lblPoDeliveryId, *lblDeliveryType, *lblDate, *lblStatus;
+    UIImageView *imgViewBackground;
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:4];
+        
+    }
+    
+    
+    lblPoDeliveryId = (UILabel *)[cell.contentView viewWithTag:1];
+    lblDeliveryType = (UILabel *)[cell.contentView viewWithTag:2];
+    lblDate = (UILabel *)[cell.contentView viewWithTag:3];
+    lblStatus = (UILabel *)[cell.contentView viewWithTag:4];
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:30];
+    //imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if(indexPath.row % 2 == 0){
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+        [imgViewBackground  setBackgroundColor:[UIColor whiteColor]];
+        
+    }
+    else{
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+    }
+    
+    
+    PO_Delivery  *poDeliveryObj = [_lstPoDelivery objectAtIndex:indexPath.row];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    lblPoDeliveryId.text = [NSString stringWithFormat:@"%@", poDeliveryObj.po_delivery_id];
+    lblDeliveryType.text = poDeliveryObj.delivery_type;
+    lblStatus.text = [NSString stringWithFormat:@"%@", poDeliveryObj.status];
+    lblDate.text = [format stringFromDate:poDeliveryObj.delivery_date];
+    
+    return cell;
+}
+
+
+#pragma PO Invoice table cell delegate
+
+-(UITableViewCell *) initializePoInvoicesTable:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *branchCellIdentifier = [NSString stringWithFormat:@"PoInvoiceCell"];
+    UITableViewCell *cell;
+    UILabel *lblPoInvoiceId, *lblInvoiceDate, *lblAmount;
+    UIImageView *imgViewBackground;
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:branchCellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:5];
+        
+    }
+    
+    
+    lblPoInvoiceId = (UILabel *)[cell.contentView viewWithTag:1];
+    lblInvoiceDate = (UILabel *)[cell.contentView viewWithTag:2];
+    lblAmount = (UILabel *)[cell.contentView viewWithTag:3];
+    
+    imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:30];
+    //imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if(indexPath.row % 2 == 0){
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+        [imgViewBackground  setBackgroundColor:[UIColor whiteColor]];
+    }
+    else{
+        [cell setFrame:CGRectMake(0, 0, 665, 44)];
+    }
+    
+    
+    PO_Invoice  *poInvoiceObj = [_lstPoInvoices objectAtIndex:indexPath.row];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    lblAmount.text = [NSString stringWithFormat:@"%@", poInvoiceObj.amount];
+    lblPoInvoiceId.text = [NSString stringWithFormat:@"%@", poInvoiceObj.po_invoice_id];
+    lblInvoiceDate.text = [format stringFromDate:poInvoiceObj.invoice_date];
+    
+    return cell;
+}
+
+- (IBAction)poDetailsBtnPressed:(id)sender {
+    
+    if(sender == self.poItemsButton){
+        
+        self.poItemsButton.userInteractionEnabled = FALSE;
+        self.poItemsButton.alpha = 1.0f;
+        self.poDeliveryButton.userInteractionEnabled = self.poInvoiceButton.userInteractionEnabled = !self.poItemsButton.userInteractionEnabled;
+        self.poDeliveryButton.alpha = self.poInvoiceButton.alpha = 0.7f;
+        
+        _tblPoItems.hidden = NO;
+        _tblPoDelivery.hidden = _tblPoInvoices.hidden = YES;
+        
+    }else if(sender == self.poDeliveryButton){
+        
+        self.poDeliveryButton.userInteractionEnabled = FALSE;
+        self.poDeliveryButton.alpha = 1.0f;
+        self.poItemsButton.userInteractionEnabled = self.poInvoiceButton.userInteractionEnabled = !self.poDeliveryButton.userInteractionEnabled;
+        self.poItemsButton.alpha = self.poInvoiceButton.alpha = 0.7f;
+        
+        _tblPoDelivery.hidden = NO;
+        _tblPoItems.hidden = _tblPoInvoices.hidden = YES;
+        
+    }else if (sender == self.poInvoiceButton){
+        
+        self.poInvoiceButton.userInteractionEnabled = FALSE;
+        self.poInvoiceButton.alpha = 1.0f;
+        self.poDeliveryButton.userInteractionEnabled = self.poItemsButton.userInteractionEnabled = !self.poInvoiceButton.userInteractionEnabled;
+        self.poDeliveryButton.alpha = self.poItemsButton.alpha = 0.7f;
+        
+        _tblPoInvoices.hidden = NO;
+        _tblPoDelivery.hidden = _tblPoItems.hidden = YES;
+    }
+    
+}
 @end

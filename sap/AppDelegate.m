@@ -89,6 +89,11 @@
     NSArray* po_items = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathPOItems]
                                                          options:kNilOptions
                                                            error:&err];
+    
+    NSString* dataPathWorkOrder = [[NSBundle mainBundle] pathForResource:@"Work_Order" ofType:@"json"];
+    NSArray* work_order = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPathWorkOrder]
+                                                        options:kNilOptions
+                                                          error:&err];
     //NSLog(@"Items: %@", employees);
     //NSLog(@"Items: %@", po_items);
     
@@ -102,7 +107,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving Department: %@", [error localizedDescription]);
+            NSLog(@"Error saving Department: %@", [error localizedDescription]);
         }
     }];
     
@@ -119,7 +124,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving Employee: %@", [error localizedDescription]);
+            NSLog(@"Error saving Employee: %@", [error localizedDescription]);
         }
     }];
     
@@ -164,7 +169,7 @@
         
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving Purchase: %@", [error localizedDescription]);
+            NSLog(@"Error saving Purchase: %@", [error localizedDescription]);
         }
     }];
     
@@ -182,7 +187,7 @@
         NSLog(@"OBJ: %@", poInvoiceObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving PO Invoice: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Invoice: %@", [error localizedDescription]);
         }
     }];
 
@@ -206,7 +211,7 @@
         NSLog(@"OBJ: %@", poItemsObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving PO Item: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Item: %@", [error localizedDescription]);
         }
     }];
     
@@ -224,7 +229,31 @@
         //NSLog(@"OBJ: %@", poDeliveryObj);
         NSError *error;
         if (![_managedObjectContext save:&error]) {
-            //NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);
+            NSLog(@"Error saving PO Delivery: %@", [error localizedDescription]);
+        }
+    }];
+    
+    // saving work order
+    [work_order enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Work_Order *workOrderObj = [NSEntityDescription
+                                      insertNewObjectForEntityForName:@"Work_Order"
+                                      inManagedObjectContext:_managedObjectContext];
+        workOrderObj.order_id = [NSNumber numberWithLongLong:[[obj objectForKey:@"order_id"] longLongValue]];
+        workOrderObj.start_date = [self convertStringToDate:[obj objectForKey:@"start_date"]];
+        workOrderObj.end_date = [self convertStringToDate:[obj objectForKey:@"end_date"]];
+        workOrderObj.last_updated = [self convertStringToDate:[obj objectForKey:@"last_updated"]];
+        workOrderObj.equipment = [obj objectForKey:@"equipment"];
+        workOrderObj.serial_number = [obj objectForKey:@"serial_number"];
+        workOrderObj.word_center = [obj objectForKey:@"word_center"];
+        workOrderObj.updated_by = [obj objectForKey:@"updated_by"];
+        workOrderObj.order_type = [obj objectForKey:@"order_type"];
+        workOrderObj.priority = [obj objectForKey:@"priority"];
+        workOrderObj.status = [NSNumber numberWithLongLong:[[obj objectForKey:@"status"] longLongValue]];
+        
+        NSLog(@"OBJ: %@", workOrderObj);
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Error saving Work Order: %@", [error localizedDescription]);
         }
     }];
     

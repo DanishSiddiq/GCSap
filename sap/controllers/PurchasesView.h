@@ -15,9 +15,18 @@
 
 @interface PurchasesView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
+@property (strong, nonatomic) Protocol* tableDelegate;
+@property (strong, nonatomic) IBOutlet UIButton *btnApproved;
+@property (strong, nonatomic) IBOutlet UIButton *btnDeclined;
 
 // overriding the constructor
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 - (IBAction)slideBtnPressed:(id)sender;
+//selectors
+- (IBAction)btnPressedApproved:(id)sender;
+- (IBAction)btnPressedUnApproved:(id)sender;
+- (IBAction)btnPressedPending:(id)sender;
+- (IBAction)btnPoApprovedPressed:(id)sender;
+- (IBAction)btnPoDeclinedPressed:(id)sender;
 
 @end
