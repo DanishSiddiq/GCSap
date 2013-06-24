@@ -18,7 +18,7 @@
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isUnApprovedSelected;
-@property (nonatomic) BOOL isProcessedSelected;
+@property (nonatomic) BOOL isPendingSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 // detail view
@@ -123,7 +123,7 @@
     _lstLeave = [[NSMutableArray alloc] init];
     _isApprovedSelected = YES;
     _isUnApprovedSelected = YES;
-    _isProcessedSelected = YES;
+    _isPendingSelected = YES;
     _selectedIndexPath = nil;
     
     
@@ -174,8 +174,8 @@
 
 - (IBAction)btnPressedFilterProcessed:(id)sender{
     
-    _isProcessedSelected = !_isProcessedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isProcessedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    _isPendingSelected = !_isPendingSelected;
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPendingSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
@@ -229,7 +229,7 @@
     [_lstFilterLeave removeAllObjects];        
     for(HR_leaves *leave in _lstLeave){
         
-        if(_isApprovedSelected && _isUnApprovedSelected && _isProcessedSelected){
+        if(_isApprovedSelected && _isUnApprovedSelected && _isPendingSelected){
             
             if([[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                 [_lstFilterLeave addObject:leave];
@@ -240,11 +240,11 @@
             // approved selected
             if(_isApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                 
-                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
 
                     [_lstFilterLeave addObject:leave];
                 }
-                else if(!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                else if(!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                     
                     [_lstFilterLeave addObject:leave];
                 }
@@ -253,11 +253,11 @@
             // un-approved selected
             if(_isUnApprovedSelected && [[leave approved] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                 
-                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
 
                     [_lstFilterLeave addObject:leave];
                 }
-                else if(!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                else if(!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
 
                     [_lstFilterLeave addObject:leave];
                 }
@@ -267,11 +267,11 @@
             // if both approved and un-approved not selected
             if(!_isApprovedSelected && !_isUnApprovedSelected){
                 
-                if(_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                if(_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:YES]]){
                     
                     [_lstFilterLeave addObject:leave];
                 }
-                else if (!_isProcessedSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+                else if (!_isPendingSelected && [[leave isProcessed] isEqualToNumber:[NSNumber numberWithBool:NO]]){
                     
                     [_lstFilterLeave addObject:leave];
                 }
