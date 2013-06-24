@@ -15,8 +15,15 @@
 
 @interface SidebarView ()
 
+@property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView* sidebarView;
 
+-(IBAction) hrButtonPressed:(id)sender;
+-(IBAction) purchaseButtonPressed:(id)sender;
+-(IBAction) financeButtonPressed:(id)sender;
+-(IBAction) maintenanceButtonPressed:(id)sender;
+-(IBAction) workOrderButtonPressed:(id)sender;
+-(IBAction) btnPressedResetData :(id)sender;
 
 @end
 
@@ -33,17 +40,41 @@
     self = [super initWithFrame:frame];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"SidebarView" owner:self options:nil];
-        self.sidebarView.frame = frame;
-        UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBg-1.png"]];
-        self.sidebarView.backgroundColor = background;
-        
-        
-        [self addSubview:self.sidebarView];
                 
     }
     return self;
 }
 
+
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        [[NSBundle mainBundle] loadNibNamed:@"SidebarView" owner:self options:nil];
+        
+        [self initializeData:sapDelegate];
+        [self initializeViews:frame];
+    }
+    return self;
+}
+
+
+- (void) initializeViews : (CGRect) frame {
+    
+    self.sidebarView.frame = frame;
+    UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBg-1.png"]];
+    self.sidebarView.backgroundColor = background;
+    
+    
+    [self addSubview:self.sidebarView];
+    
+}
+
+- (void) initializeData : (AppDelegate *) sapDelegate{
+
+    _sapDelegate = sapDelegate;
+}
 
 -(IBAction)hrButtonPressed:(id)sender{
     
@@ -143,6 +174,10 @@
     [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
     [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
     [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+}
+
+-(IBAction) btnPressedResetData :(id)sender{
+    
 }
 
 

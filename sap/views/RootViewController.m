@@ -45,7 +45,7 @@
 
 - (void) viewWillAppear:(BOOL)animated{
 
-    SidebarView* sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0)];
+    SidebarView* sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0) sapDelegate:_sapDelegate];
     [self.view addSubview:sidebarview];
     
     HRView* hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];

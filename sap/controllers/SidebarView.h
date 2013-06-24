@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface SidebarView : UIView
 
@@ -16,10 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton* maintenancerBtn;
 @property (strong, nonatomic) IBOutlet UIButton* workOrderBtn;
 
--(IBAction)hrButtonPressed:(id)sender;
--(IBAction)purchaseButtonPressed:(id)sender;
--(IBAction)financeButtonPressed:(id)sender;
--(IBAction)maintenanceButtonPressed:(id)sender;
--(IBAction)workOrderButtonPressed:(id)sender;
+
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
 @end
