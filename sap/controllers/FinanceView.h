@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface FinanceView : UIView
+
+- (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
+- (IBAction)slideBtnPressed:(id)sender;
 
 @end

@@ -118,7 +118,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="970415140"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Maintenance.png</string>
+							<string key="NSResourceName">WorkOrder.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="448085987"/>
 						<reference key="IBUIFont" ref="302584400"/>
@@ -399,7 +399,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="Finance.png">{188, 200}</string>
 			<string key="Human.png">{188, 200}</string>
-			<string key="Maintenance.png">{188, 200}</string>
+			<string key="WorkOrder.png">{188, 200}</string>
 			<string key="purchasingHover.png">{188, 200}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
