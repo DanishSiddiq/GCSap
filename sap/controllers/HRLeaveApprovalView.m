@@ -186,18 +186,28 @@
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
         
         NSError *error;
-        HR_leaves *leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
-        [leave setIsProcessed:[NSNumber numberWithBool:YES]];
-        [leave setApproved:[NSNumber numberWithBool:YES]];
-        [_sapDelegate.managedObjectContext save:&error];
+        HR_leaves *leave;
         
-        if(!error){
+        @try {
             
-            [self filterLeaves];
-            [self updateViews ];
+            leave =  [_lstFilterLeave objectAtIndex:_selectedIndexPath.row];
+            [leave setIsProcessed:[NSNumber numberWithBool:YES]];
+            [leave setApproved:[NSNumber numberWithBool:YES]];
+            [_sapDelegate.managedObjectContext save:&error];
         }
-        else{
+        @catch (NSException *exception) {
+            NSLog(@"Exception: %@", error);
+        }
+        @finally {
             
+            if(!error){
+                
+                [self filterLeaves];
+                [self updateViews ];
+            }
+            else{
+                
+            }
         }
     }
     
