@@ -23,6 +23,23 @@
 @property (nonatomic) BOOL isUnApprovedSelected;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
+
+// fields
+@property (retain, nonatomic) IBOutlet UIView *vwDetailRequestApproval;
+@property (retain, nonatomic) IBOutlet UIButton *btnLeaveType;
+@property (retain, nonatomic) IBOutlet UIButton *btnAppliedDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnDuration;
+@property (retain, nonatomic) IBOutlet UIButton *btnFromDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnToDate;
+@property (retain, nonatomic) IBOutlet UIButton *btnApprover;
+@property (retain, nonatomic) IBOutlet UITextView *tvNotes;
+
+//selectors
+- (IBAction)btnPressedFilterApproved:(id)sender;
+- (IBAction)btnPressedFilterUnApproved:(id)sender;
+- (IBAction)btnPressedApproved:(id)sender;
+- (IBAction)btnPressedUnApproved:(id)sender;
+
 @end
 
 @implementation HRLeaveRequestView
@@ -88,7 +105,7 @@
 }
 
 // selectors
-- (IBAction)btnPressedApproved:(id)sender {
+- (IBAction)btnPressedFilterApproved:(id)sender{
     
     _isApprovedSelected = !_isApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
@@ -97,13 +114,19 @@
     [self updateViews ];
 }
 
-- (IBAction)btnPressedUnApproved:(id)sender {
+- (IBAction)btnPressedFilterUnApproved:(id)sender{
     
     _isUnApprovedSelected = !_isUnApprovedSelected;
     [(UIButton *)sender setImage:[UIImage imageNamed:_isUnApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
+}
+
+- (IBAction)btnPressedApproved:(id)sender {
+}
+
+- (IBAction)btnPressedUnApproved:(id)sender {
 }
 
 #pragma searchbar delegates

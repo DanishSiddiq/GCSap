@@ -15,9 +15,5 @@
 // constructor
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
-//selectors
-- (IBAction)btnPressedApproved:(id)sender;
-- (IBAction)btnPressedUnApproved:(id)sender;
-
 
 @end
