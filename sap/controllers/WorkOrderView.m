@@ -22,6 +22,8 @@
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isPending;
+@property (retain, nonatomic) IBOutlet UIView *contentVew;
+
 
 @property bool _isSlided;
 
@@ -65,12 +67,8 @@
     // data base calling for fetching data
     _lstWorkOrders = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Work_Order"];
     [_lstFilterWorkOrders addObjectsFromArray:_lstWorkOrders];
-    
-//    [self filterWorkOrders];
-//    [_tblPurchases reloadData];
-//    
-//    Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
-//    [self getPurchaseOrderDetails: poFirst.po_id];
+    [self getSelectedWorkOrder:0];
+
 }
 
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
@@ -117,6 +115,12 @@
         [UIView commitAnimations];
     }
     
+}
+
+- (IBAction)btnSubmitPressed:(id)sender {
+}
+
+- (IBAction)btnCancelPressed:(id)sender {
 }
 
 // selectors
@@ -404,8 +408,45 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndexPath = indexPath;
     [_tblWorkOrders reloadData];
-//    Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
-//    [self getPurchaseOrderDetails:poObj.po_id];
+        
+    [self getSelectedWorkOrder:indexPath.row];
+
+}
+
+-(void) getSelectedWorkOrder:(NSInteger) withIndex{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:withIndex];
+    UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
+    
+    lblOrderID = (UILabel *)[self.contentVew viewWithTag:1];
+    lblOrderType = (UILabel *)[self.contentVew viewWithTag:2];
+    lblStartDate = (UILabel *)[self.contentVew viewWithTag:3];
+    lblEndDate = (UILabel *)[self.contentVew viewWithTag:4];
+    lblPriority = (UILabel *)[self.contentVew viewWithTag:5];
+    lblSerialNumber = (UILabel *)[self.contentVew viewWithTag:6];
+    lblEquipment = (UILabel *)[self.contentVew viewWithTag:7];
+    lblWordCenter = (UILabel *)[self.contentVew viewWithTag:8];
+    lblStatus = (UILabel *)[self.contentVew viewWithTag:9];
+    lblLastUpdated = (UILabel *)[self.contentVew viewWithTag:10];
+    lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
+    
+    lblOrderID.text = [NSString stringWithFormat:@"%@", workOrderObj.order_id];
+    lblLastUpdated.text = [format stringFromDate:workOrderObj.last_updated];
+    lblEndDate.text = [format stringFromDate:workOrderObj.end_date];
+    lblStartDate.text = [format stringFromDate:workOrderObj.start_date];
+    lblOrderType.text = workOrderObj.order_type;
+    lblStatus.text = [workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Open" : @"Closed";
+    lblUpdatedBy.text = workOrderObj.updated_by;
+    lblWordCenter.text = workOrderObj.word_center;
+    lblEquipment.text = workOrderObj.equipment;
+    lblPriority.text = workOrderObj.priority;
+    lblSerialNumber.text = workOrderObj.serial_number;
+    
+    if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
+        
+    }
 }
 
 

@@ -12,11 +12,13 @@
 @interface WorkOrderView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 
-@property (strong, nonatomic) IBOutlet UIButton *btnApproved;
-@property (strong, nonatomic) IBOutlet UIButton *btnDeclined;
+@property (strong, nonatomic) IBOutlet UIButton *btnSubmit;
+@property (strong, nonatomic) IBOutlet UIButton *btnCancel;
 
 // overriding the constructor
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 - (IBAction)slideBtnPressed:(id)sender;
+- (IBAction)btnSubmitPressed:(id)sender;
+- (IBAction)btnCancelPressed:(id)sender;
 
 @end
