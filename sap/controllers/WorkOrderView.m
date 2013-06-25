@@ -24,6 +24,8 @@
 @property (nonatomic) BOOL isPending;
 @property (retain, nonatomic) IBOutlet UIView *contentVew;
 
+@property (weak, nonatomic) Work_Order *currentWO;
+
 
 @property bool _isSlided;
 
@@ -67,7 +69,12 @@
     // data base calling for fetching data
     _lstWorkOrders = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Work_Order"];
     [_lstFilterWorkOrders addObjectsFromArray:_lstWorkOrders];
-    [self getSelectedWorkOrder:0];
+    
+    if(_lstFilterWorkOrders.count > 0){
+        [self getSelectedWorkOrder:0];   
+    }else{
+        [self emptyControls];
+    }
 
 }
 
@@ -118,9 +125,31 @@
 }
 
 - (IBAction)btnSubmitPressed:(id)sender {
+    
+    
+    [self.currentWO setStatus: [NSNumber numberWithBool:YES]];
+    
+    [_lstFilterWorkOrders replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentWO];
+    
+    NSError *error = nil;
+	[_sapDelegate.managedObjectContext save:&error];
+	
+	if (error) {
+		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
+		return;
+	}
+	
+    self.currentWO = nil;
+	
+	[_tblWorkOrders reloadData];
+    
+    [self filterWorkOrders];
+    [self updateViews ];
+    
 }
 
 - (IBAction)btnCancelPressed:(id)sender {
+    
 }
 
 // selectors
@@ -144,55 +173,6 @@
     
     
 }
-
-//- (IBAction)btnPoApprovedPressed:(id)sender {
-//    
-//    [self.currentPO setApproved: [NSNumber numberWithBool:YES]];
-//    
-//    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
-//    
-//    NSError *error = nil;
-//	[_sapDelegate.managedObjectContext save:&error];
-//	
-//	if (error) {
-//		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
-//		return;
-//	}
-//	
-//    self.currentPO = nil;
-//	
-//	[_tblPurchases reloadData];
-//    
-//    [self filterWorkOrders];
-//    [self updateViews ];
-//    
-//    [self setPODetailIndexAfterFilter];
-//    
-//}
-//
-//- (IBAction)btnPoDeclinedPressed:(id)sender {
-//    
-//    [self.currentPO setDeclined: [NSNumber numberWithBool:YES]];
-//    
-//    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
-//    
-//    NSError *error = nil;
-//	[_sapDelegate.managedObjectContext save:&error];
-//	
-//	if (error) {
-//		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
-//		return;
-//	}
-//	
-//    self.currentPO = nil;
-//	
-//	[_tblPurchases reloadData];
-//    
-//    [self filterWorkOrders];
-//    [self updateViews ];
-//    
-//    [self setPODetailIndexAfterFilter];
-//}
 
 
 
@@ -297,7 +277,9 @@
         _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     }
     else{
+        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
         _selectedIndexPath = nil;
+        [self emptyControls];
     }
 }
 
@@ -384,6 +366,7 @@
     }
     
     Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:indexPath.row];
+    self.currentWO = workOrderObj;
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
 
@@ -414,11 +397,13 @@
 }
 
 -(void) getSelectedWorkOrder:(NSInteger) withIndex{
+    self.btnCancel.enabled = self.btnSubmit.enabled = YES;
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     
     Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:withIndex];
     UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
+    UITextView *txtViewNotes;
     
     lblOrderID = (UILabel *)[self.contentVew viewWithTag:1];
     lblOrderType = (UILabel *)[self.contentVew viewWithTag:2];
@@ -431,25 +416,83 @@
     lblStatus = (UILabel *)[self.contentVew viewWithTag:9];
     lblLastUpdated = (UILabel *)[self.contentVew viewWithTag:10];
     lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
+    txtViewNotes = (UITextView *)[self.contentVew viewWithTag:50];
     
     lblOrderID.text = [NSString stringWithFormat:@"%@", workOrderObj.order_id];
     lblLastUpdated.text = [format stringFromDate:workOrderObj.last_updated];
     lblEndDate.text = [format stringFromDate:workOrderObj.end_date];
     lblStartDate.text = [format stringFromDate:workOrderObj.start_date];
     lblOrderType.text = workOrderObj.order_type;
-    lblStatus.text = [workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Open" : @"Closed";
+    lblStatus.text = [workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Closed" : @"Open";
     lblUpdatedBy.text = workOrderObj.updated_by;
     lblWordCenter.text = workOrderObj.word_center;
     lblEquipment.text = workOrderObj.equipment;
     lblPriority.text = workOrderObj.priority;
     lblSerialNumber.text = workOrderObj.serial_number;
+    txtViewNotes.text = workOrderObj.notes;
     
     if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
-        
+        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
     }
 }
 
+- (IBAction)btnTabPressed:(id)sender{
+    
+    [self.btnOverview setBackgroundImage:[UIImage imageNamed:@"rsz_overview.png"] forState:UIControlStateNormal];
+    [self.btnOperations setBackgroundImage:[UIImage imageNamed:@"rsz_operations.png"] forState:UIControlStateNormal];
+    [self.btnComponents setBackgroundImage:[UIImage imageNamed:@"rsz_components.png"] forState:UIControlStateNormal];
+    [self.btnBusiness setBackgroundImage:[UIImage imageNamed:@"rsz_businesspartners.png"] forState:UIControlStateNormal];
+    [self.btnMaterial setBackgroundImage:[UIImage imageNamed:@"rsz_matetialconf.png"] forState:UIControlStateNormal];
+    
+    if(sender == self.btnOverview){
+        [self.btnOverview setBackgroundImage:[UIImage imageNamed:@"rsz_overviewhover.png"] forState:UIControlStateNormal];
+        
+    }else if(sender == self.btnOperations){
+        [self.btnOperations setBackgroundImage:[UIImage imageNamed:@"rsz_operationshover.png"] forState:UIControlStateNormal];
+        
+    }else if(sender == self.btnComponents){
+        [self.btnComponents setBackgroundImage:[UIImage imageNamed:@"rsz_componentshover.png"] forState:UIControlStateNormal];
+        
+    }else if(sender == self.btnBusiness){
+        [self.btnBusiness setBackgroundImage:[UIImage imageNamed:@"rsz_businesspartnershover.png"] forState:UIControlStateNormal];
+        
+    }else if(sender == self.btnMaterial){
+        [self.btnMaterial setBackgroundImage:[UIImage imageNamed:@"rsz_matetialconfhover.png"] forState:UIControlStateNormal];
+        
+    }
+    
+}
 
+-(void) emptyControls{
+    UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
+    UITextView *txtViewNotes;
+    
+    lblOrderID = (UILabel *)[self.contentVew viewWithTag:1];
+    lblOrderType = (UILabel *)[self.contentVew viewWithTag:2];
+    lblStartDate = (UILabel *)[self.contentVew viewWithTag:3];
+    lblEndDate = (UILabel *)[self.contentVew viewWithTag:4];
+    lblPriority = (UILabel *)[self.contentVew viewWithTag:5];
+    lblSerialNumber = (UILabel *)[self.contentVew viewWithTag:6];
+    lblEquipment = (UILabel *)[self.contentVew viewWithTag:7];
+    lblWordCenter = (UILabel *)[self.contentVew viewWithTag:8];
+    lblStatus = (UILabel *)[self.contentVew viewWithTag:9];
+    lblLastUpdated = (UILabel *)[self.contentVew viewWithTag:10];
+    lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
+    txtViewNotes = (UITextView *)[self.contentVew viewWithTag:50];
+    
+    lblOrderID.text =
+    lblLastUpdated.text =
+    lblEndDate.text =
+    lblStartDate.text =
+    lblOrderType.text =
+    lblStatus.text =
+    lblUpdatedBy.text =
+    lblWordCenter.text =
+    lblEquipment.text =
+    lblPriority.text =
+    lblSerialNumber.text =
+    txtViewNotes.text = @"";
 
+}
 
 @end

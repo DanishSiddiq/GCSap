@@ -1049,7 +1049,7 @@
 										<reference key="IBUIBackgroundColor" ref="854210078"/>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<bool key="IBUIMultipleTouchEnabled">YES</bool>
-										<int key="IBUITag">20</int>
+										<int key="IBUITag">50</int>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 										<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 										<string key="IBUIText">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
@@ -1187,6 +1187,46 @@
 					<int key="connectionID">124</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnOverview</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="208561419"/>
+					</object>
+					<int key="connectionID">125</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnOperations</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="979909411"/>
+					</object>
+					<int key="connectionID">126</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnComponents</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="247246051"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnBusiness</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="309698602"/>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnMaterial</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="632310607"/>
+					</object>
+					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">slideBtnPressed:</string>
 						<reference key="source" ref="848145336"/>
@@ -1236,6 +1276,51 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">77</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnTabPressed:</string>
+						<reference key="source" ref="208561419"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">134</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnTabPressed:</string>
+						<reference key="source" ref="979909411"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">133</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnTabPressed:</string>
+						<reference key="source" ref="247246051"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">132</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnTabPressed:</string>
+						<reference key="source" ref="309698602"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">131</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">btnTabPressed:</string>
+						<reference key="source" ref="632310607"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">130</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1645,7 +1730,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">124</int>
+			<int key="maxID">135</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1655,6 +1740,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="btnCancelPressed:">id</string>
 						<string key="btnSubmitPressed:">id</string>
+						<string key="btnTabPressed:">id</string>
 						<string key="slideBtnPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -1666,13 +1752,22 @@
 							<string key="name">btnSubmitPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="btnTabPressed:">
+							<string key="name">btnTabPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="slideBtnPressed:">
 							<string key="name">slideBtnPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnBusiness">UIButton</string>
 						<string key="btnCancel">UIButton</string>
+						<string key="btnComponents">UIButton</string>
+						<string key="btnMaterial">UIButton</string>
+						<string key="btnOperations">UIButton</string>
+						<string key="btnOverview">UIButton</string>
 						<string key="btnSubmit">UIButton</string>
 						<string key="contentVew">UIView</string>
 						<string key="mainView">UIView</string>
@@ -1681,8 +1776,28 @@
 						<string key="titleView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnBusiness">
+							<string key="name">btnBusiness</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="btnCancel">
 							<string key="name">btnCancel</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnComponents">
+							<string key="name">btnComponents</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnMaterial">
+							<string key="name">btnMaterial</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnOperations">
+							<string key="name">btnOperations</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnOverview">
+							<string key="name">btnOverview</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="btnSubmit">

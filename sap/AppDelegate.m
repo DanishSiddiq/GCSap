@@ -290,6 +290,7 @@
         workOrderObj.order_type = [obj objectForKey:@"order_type"];
         workOrderObj.priority = [obj objectForKey:@"priority"];
         workOrderObj.status = [NSNumber numberWithLongLong:[[obj objectForKey:@"status"] longLongValue]];
+        workOrderObj.notes = [obj objectForKey:@"notes"];
         
         NSLog(@"OBJ: %@", workOrderObj);
         NSError *error;

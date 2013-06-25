@@ -10,7 +10,8 @@
  "word_center": "Mechanical Maintenance",
  "status": "0",
  "last_updated": "17/04/2013",
- "updated_by": "Robert"
+ "updated_by": "Robert",
+ "notes": "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
  },
  {
  "order_id": 5552,
@@ -23,7 +24,8 @@
  "word_center": "Mechanical Maintenance",
  "status": "1",
  "last_updated": "13/04/2013",
- "updated_by": "Miller"
+ "updated_by": "Miller",
+ "notes": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
  },
  {
  "order_id": 5553,
@@ -36,6 +38,7 @@
  "word_center": "Mechanical Maintenance",
  "status": "0",
  "last_updated": "25/04/2013",
- "updated_by": "Berry"
+ "updated_by": "Berry",
+ "notes": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
  }
 ]

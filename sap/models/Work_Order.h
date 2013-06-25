@@ -23,5 +23,6 @@
 @property (nonatomic, retain) NSString * serial_number;
 @property (nonatomic, retain) NSDate * last_updated;
 @property (nonatomic, retain) NSString * updated_by;
+@property (nonatomic, retain) NSString * notes;
 
 @end

@@ -22,5 +22,6 @@
 @dynamic serial_number;
 @dynamic last_updated;
 @dynamic updated_by;
+@dynamic notes;
 
 @end

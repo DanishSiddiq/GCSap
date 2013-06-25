@@ -65,6 +65,7 @@
         <attribute name="end_date" attributeType="Date" syncable="YES"/>
         <attribute name="equipment" attributeType="String" syncable="YES"/>
         <attribute name="last_updated" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" attributeType="String" syncable="YES"/>
         <attribute name="order_id" attributeType="Integer 32" syncable="YES"/>
         <attribute name="order_type" attributeType="String" syncable="YES"/>
         <attribute name="priority" attributeType="String" syncable="YES"/>
@@ -82,6 +83,6 @@
         <element name="PO_Invoice" positionX="-5022" positionY="-3825" width="128" height="105"/>
         <element name="PO_Items" positionX="-5024" positionY="-4077" width="128" height="195"/>
         <element name="Purchase_Orders" positionX="-4691" positionY="-3816" width="128" height="165"/>
-        <element name="Work_Order" positionX="-4862" positionY="-3726" width="128" height="210"/>
+        <element name="Work_Order" positionX="-4862" positionY="-3726" width="128" height="225"/>
     </elements>
 </model>
