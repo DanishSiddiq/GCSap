@@ -28,4 +28,6 @@
 
 - (IBAction)btnTabPressed:(id)sender;
 
+-(void) resetDataInViews;
+
 @end

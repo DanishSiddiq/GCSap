@@ -29,4 +29,6 @@
 - (IBAction)btnPoApprovedPressed:(id)sender;
 - (IBAction)btnPoDeclinedPressed:(id)sender;
 
+-(void) resetDataInViews;
+
 @end

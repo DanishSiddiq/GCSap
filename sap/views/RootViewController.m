@@ -82,6 +82,14 @@
             [_hrView resetDataInViews];
         }
         
+        if([_purchaseView respondsToSelector:@selector(resetDataInViews)]){
+            [_purchaseView resetDataInViews];
+        }
+        
+        if([_workOrderView respondsToSelector:@selector(resetDataInViews)]){
+            [_workOrderView resetDataInViews];
+        }
+        
         [SVProgressHUD showSuccessWithStatus:@"Data and View's reset successfully" duration:2.0f];        
     }
     else{

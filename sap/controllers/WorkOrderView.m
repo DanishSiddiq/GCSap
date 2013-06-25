@@ -67,15 +67,24 @@
     _isApprovedSelected = _isPending = YES;
     
     // data base calling for fetching data
+    [_lstWorkOrders removeAllObjects];
     _lstWorkOrders = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Work_Order"];
-    [_lstFilterWorkOrders addObjectsFromArray:_lstWorkOrders];
-    
-    if(_lstFilterWorkOrders.count > 0){
+    [self filterWorkOrders];
+    [_tblWorkOrders reloadData];
+    if(_lstWorkOrders.count > 0){
         [self getSelectedWorkOrder:0];   
     }else{
         [self emptyControls];
     }
 
+}
+
+-(void) resetDataInViews{
+    _lstWorkOrders = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Work_Order"];
+    [self filterWorkOrders];
+    [_tblWorkOrders reloadData];
+    
+    self.currentWO = [_lstWorkOrders objectAtIndex:0];
 }
 
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
@@ -126,7 +135,6 @@
 
 - (IBAction)btnSubmitPressed:(id)sender {
     
-    
     [self.currentWO setStatus: [NSNumber numberWithBool:YES]];
     
     [_lstFilterWorkOrders replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentWO];
@@ -140,12 +148,44 @@
 	}
 	
     self.currentWO = nil;
-	
-	[_tblWorkOrders reloadData];
+    
+    UITableViewCell *theCell = [_tblWorkOrders cellForRowAtIndexPath:_selectedIndexPath];
+    
+    theCell.alpha = 1.0;
+    
+    [UIView animateWithDuration:2.0 animations:^{
+        [theCell setFrame:CGRectZero];
+        
+    }];
+    
+    
+    [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];
     
     [self filterWorkOrders];
-    [self updateViews ];
+    [_tblWorkOrders reloadData];
     
+    if(_lstFilterWorkOrders.count > 0){
+        [self getSelectedWorkOrder:0];
+    }
+    
+    /*
+    [UIView animateWithDuration:2.0
+                          delay:0.0
+                        options:UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                         
+                         
+                     }
+                     completion:^(BOOL finished) {
+
+                         [_tblWorkOrders reloadData];
+                         
+                         [self filterWorkOrders];
+                         [self updateViews ];
+                     }
+     ];*/
+
 }
 
 - (IBAction)btnCancelPressed:(id)sender {
@@ -348,7 +388,7 @@
     if(_selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 292, 125)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(10, 0, 282, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
         [lblOrderID setTextColor:[UIColor whiteColor]];
@@ -357,7 +397,7 @@
     }
     else{
         [cell setFrame:CGRectMake(0, 0, 292, 125)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(10, 0, 282, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
         [lblOrderID setTextColor:[UIColor blackColor]];
@@ -366,7 +406,7 @@
     }
     
     Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:indexPath.row];
-    self.currentWO = workOrderObj;
+    
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
 
@@ -402,6 +442,7 @@
     [format setDateStyle:NSDateFormatterMediumStyle];
     
     Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:withIndex];
+    self.currentWO = workOrderObj;
     UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
     UITextView *txtViewNotes;
     

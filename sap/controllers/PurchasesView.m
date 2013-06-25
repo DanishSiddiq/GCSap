@@ -10,15 +10,15 @@
 
 @interface PurchasesView()
 
-@property (retain, nonatomic) IBOutlet UIView* purchaseView;
+@property (strong, nonatomic) IBOutlet UIView* purchaseView;
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) NSMutableArray* lstPurchases;
 @property (retain, nonatomic) NSMutableArray *lstFilterPurchases;
-@property (retain, nonatomic) NSMutableString *filterText;
+@property (weak, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
-@property (retain, nonatomic) IBOutlet UITableView *tblPurchases;
-@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITableView *tblPurchases;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isDeclined;
 @property (nonatomic) BOOL isPending;
@@ -26,22 +26,22 @@
 @property (retain, nonatomic) Purchase_Orders *currentPO;
 
 // PO Detail Objects
-@property (retain, nonatomic) IBOutlet UITableView *tblPoItems;
+@property (strong, nonatomic) IBOutlet UITableView *tblPoItems;
 @property (retain, nonatomic) NSMutableArray* lstPoItems;
-@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoItems;
+@property (strong, nonatomic) IBOutlet UIView * tblHeaderPoItems;
 
-@property (retain, nonatomic) IBOutlet UITableView *tblPoInvoices;
+@property (strong, nonatomic) IBOutlet UITableView *tblPoInvoices;
 @property (retain, nonatomic) NSMutableArray* lstPoInvoices;
-@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoInvoices;
+@property (strong, nonatomic) IBOutlet UIView * tblHeaderPoInvoices;
 
-@property (retain, nonatomic) IBOutlet UITableView *tblPoDelivery;
+@property (strong, nonatomic) IBOutlet UITableView *tblPoDelivery;
 @property (retain, nonatomic) NSMutableArray* lstPoDelivery;
-@property (retain, nonatomic) IBOutlet UIView * tblHeaderPoDelivery;
+@property (strong, nonatomic) IBOutlet UIView * tblHeaderPoDelivery;
 
-@property (retain, nonatomic) IBOutlet UIView* purchaseViewDetailUpper;
-@property (retain, nonatomic) IBOutlet UIButton * poItemsButton;
-@property (retain, nonatomic) IBOutlet UIButton * poInvoiceButton;
-@property (retain, nonatomic) IBOutlet UIButton * poDeliveryButton;
+@property (strong, nonatomic) IBOutlet UIView* purchaseViewDetailUpper;
+@property (strong, nonatomic) IBOutlet UIButton * poItemsButton;
+@property (strong, nonatomic) IBOutlet UIButton * poInvoiceButton;
+@property (strong, nonatomic) IBOutlet UIButton * poDeliveryButton;
 
 - (IBAction)poDetailsBtnPressed:(id)sender;
 
@@ -93,12 +93,21 @@
     _isApprovedSelected = _isDeclined = _isPending = YES;
     
     // data base calling for fetching data
+    [_lstPurchases removeAllObjects];
     _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
-    [_lstFilterPurchases addObjectsFromArray:_lstPurchases];
     
     [self filterPurchases];
     [_tblPurchases reloadData];
     
+    Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+    self.currentPO = poFirst;
+    [self getPurchaseOrderDetails: poFirst.po_id];
+}
+
+-(void) resetDataInViews{
+    _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
+    [self filterPurchases];
+    [_tblPurchases reloadData];
     Purchase_Orders * poFirst = [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
     [self getPurchaseOrderDetails: poFirst.po_id];
 }
@@ -155,7 +164,7 @@
     [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
     
     [self filterPurchases];
-    [self updateViews ];
+    [self updateViews];
     
     [self setPODetailIndexAfterFilter];
 }
@@ -488,7 +497,7 @@
     if(_selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 292, 125)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(10, 0, 282, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [lblPOId setTextColor:[UIColor whiteColor]];
         [lblVendor setTextColor:[UIColor whiteColor]];
@@ -499,7 +508,7 @@
     }
     else{
         [cell setFrame:CGRectMake(0, 0, 292, 125)];
-        [imgViewBackground setFrame:CGRectMake(0, 0, 292, 125)];
+        [imgViewBackground setFrame:CGRectMake(10, 0, 282, 125)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [lblPOId setTextColor:[UIColor blackColor]];
         [lblVendor setTextColor:[UIColor blackColor]];
@@ -511,7 +520,7 @@
     
     
     Purchase_Orders *purchaseObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
-    self.currentPO = purchaseObj;
+    
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     
@@ -552,6 +561,7 @@
     _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
     Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
+    self.currentPO = poObj;
     [self getPurchaseOrderDetails:poObj.po_id];
 }
 
