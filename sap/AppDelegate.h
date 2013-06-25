@@ -33,6 +33,6 @@
 
 
 // to delete all core data
-- (void) pergeAllObjects;
+- (BOOL) pergeAllObjects;
 
 @end
