@@ -11,6 +11,7 @@
 @interface HRView()
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
+@property (retain, nonatomic) IBOutlet UIView* titleView;
 @property (retain, nonatomic) IBOutlet UIView *hrView;
 @property (retain, nonatomic) IBOutlet UILabel *lblTitle;
 @property (retain, nonatomic) IBOutlet UIButton *btnLeaveRequest;
@@ -51,6 +52,10 @@
     
     // leave request will be shown for toggling
     [_btnLeaveApproval setHidden:YES];
+    
+    // setting background title view color
+    self.titleView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"topBar.png"]];
+    
 }
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{
