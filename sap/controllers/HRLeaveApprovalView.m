@@ -148,7 +148,7 @@
     } completion:^(BOOL finished) {
         
         // now hide it again after 2 sec
-        [UIView animateWithDuration:2.0 animations:^{
+        [UIView animateWithDuration:2.5 animations:^{
             [_vwStatusPanel setAlpha:0.1];
             
         } completion:^(BOOL finished) {
