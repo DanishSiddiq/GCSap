@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "SVProgressHUD.h"
+#import "RootViewController.h"
 
 @interface SidebarView : UIView
 
@@ -20,7 +22,6 @@
 
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
-- (void) setSiblingView : (UIView *) rootView
-                 hrView : (UIView *) hrView;
+- (void) setSiblingView : (id) rootView;
 
 @end

@@ -7,16 +7,15 @@
 //
 
 #import "RootViewController.h"
-#import "SidebarView.h"
-#import "HRView.h"
-#import "FinanceView.h"
-#import "MaintenanceView.h"
-#import "PurchasesView.h"
-#import "WorkOrderView.h"
 
 @interface RootViewController ()
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
+@property (nonatomic, strong) SidebarView *sidebarview;
+@property (nonatomic, strong) HRView *hrView;
+@property (nonatomic, strong) FinanceView *financeView;
+@property (nonatomic, strong) WorkOrderView *workOrderView;
+@property (nonatomic, strong) PurchasesView *purchaseView;
 
 @end
 
@@ -45,32 +44,53 @@
 
 - (void) viewWillAppear:(BOOL)animated{
 
-    SidebarView* sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0) sapDelegate:_sapDelegate];
-    [self.view addSubview:sidebarview];
+    _sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0) sapDelegate:_sapDelegate];
+    [self.view addSubview:_sidebarview];
     
-    HRView* hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    hrView.hidden = YES;
-    [self.view addSubview:hrView];
+    _hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
+    _hrView.hidden = YES;
+    [self.view addSubview:_hrView];
     
-    FinanceView* financeView = [[FinanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    financeView.hidden = YES;
-    [self.view addSubview:financeView];
+    _financeView = [[FinanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
+    _financeView.hidden = YES;
+    [self.view addSubview:_financeView];
     
 //    MaintenanceView* maintenanceView = [[MaintenanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
 //    maintenanceView.hidden = YES;
 //    [self.view addSubview:maintenanceView];
     
-    WorkOrderView* workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    workOrderView.hidden = YES;
-    [self.view addSubview:workOrderView];
+    _workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
+    _workOrderView.hidden = YES;
+    [self.view addSubview:_workOrderView];
     
-    PurchasesView* purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    purchaseView.hidden = NO;
-    [self.view addSubview:purchaseView];
+    _purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
+    _purchaseView.hidden = NO;
+    [self.view addSubview:_purchaseView];
     
-    
-    [sidebarview setSiblingView:self.view hrView:hrView];
+    [_sidebarview setSiblingView:self];
 }
+
+
+- (void) resetDataInViews{
+    
+    [SVProgressHUD showWithStatus:@"Reseting"];
+    
+    if([_sapDelegate purgeAllObjects]){
+        [_sapDelegate populateWithPrerequisiteData];
+        
+        if([_hrView respondsToSelector:@selector(resetDataInViews)]){
+            [_hrView resetDataInViews];
+        }
+        
+        [SVProgressHUD showSuccessWithStatus:@"Data and View's reset successfully" duration:2.0f];        
+    }
+    else{
+        
+        [SVProgressHUD showErrorWithStatus:@"Data reset failed" duration:2.0f];
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

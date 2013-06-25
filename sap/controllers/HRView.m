@@ -72,7 +72,6 @@
     [_hrleaveRequest fetchHRLeavesFromCoreData];
     [_hrleaveRequest filterLeaves];
     [_hrleaveRequest updateViews];
-    
 }
 
 // selectors

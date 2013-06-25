@@ -8,11 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "SidebarView.h"
+#import "HRView.h"
+#import "FinanceView.h"
+#import "MaintenanceView.h"
+#import "PurchasesView.h"
+#import "WorkOrderView.h"
+#import "SVProgressHUD.h"
+
 
 @class SidebarView;
 
-@interface RootViewController : UIViewController
+@protocol RootViewDelegate <NSObject>
 
-@property (retain, nonatomic) SidebarView *sidebarView;
+@required
+- (void) resetDataInViews;
+
+@end
+
+@interface RootViewController : UIViewController <RootViewDelegate>
+
+//@property (retain, nonatomic) SidebarView *sidebarView;
+- (void) resetDataInViews;
 
 @end

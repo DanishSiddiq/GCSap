@@ -12,16 +12,9 @@
 #import "HR_leaves.h"
 #import "HRLeaveRequestView.h"
 #import "HRLeaveApprovalView.h"
+#import "SVProgressHUD.h"
 
-
-@protocol HRViewDelegate <NSObject>
-
-@required
-- (void) resetDataInViews;
-
-@end
-
-@interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, HRViewDelegate>
+@interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 
 // constructor
