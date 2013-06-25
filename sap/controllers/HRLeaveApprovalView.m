@@ -282,27 +282,19 @@
             
             if(!error){
                 
+                if(_isDeclinedSelected){
+                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully"];
+                }
+                else{
+                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
+                }
+                
                 [self filterLeaves];
                 [self updateViews ];
             }
             else{
-                
-                if(!error){
                     
-                    if(_isDeclinedSelected){
-                        [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully"];
-                    }
-                    else{
-                        [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
-                    }
-                    
-                    [self filterLeaves];
-                    [self updateViews ];
-                }
-                else{
-                    
-                    [self showPanelBarWithMessage:NO msg:@"Request decline failed"];
-                }
+                [self showPanelBarWithMessage:NO msg:@"Request decline failed"];
             }
         }
     }
