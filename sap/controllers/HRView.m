@@ -63,6 +63,18 @@
     _sapDelegate = sapDelegate;
 }
 
+- (void) resetDataInViews{
+    
+    [_hrleaveApproval fetchHRLeavesFromCoreData];
+    [_hrleaveApproval filterLeaves];
+    [_hrleaveApproval updateViews];
+    
+    [_hrleaveRequest fetchHRLeavesFromCoreData];
+    [_hrleaveRequest filterLeaves];
+    [_hrleaveRequest updateViews];
+    
+}
+
 // selectors
 - (IBAction)btnPressedSlide:(id)sender {
  

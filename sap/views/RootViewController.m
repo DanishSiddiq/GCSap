@@ -67,6 +67,9 @@
     PurchasesView* purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     purchaseView.hidden = NO;
     [self.view addSubview:purchaseView];
+    
+    
+    [sidebarview setSiblingView:self.view hrView:hrView];
 }
 
 - (void)didReceiveMemoryWarning

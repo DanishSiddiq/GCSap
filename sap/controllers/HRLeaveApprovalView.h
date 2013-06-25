@@ -17,4 +17,9 @@
 // constructor
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
+
+-(void) fetchHRLeavesFromCoreData;
+-(void) filterLeaves;
+-(void) updateViews;
+
 @end

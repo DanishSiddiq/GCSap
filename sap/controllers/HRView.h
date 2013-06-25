@@ -13,7 +13,15 @@
 #import "HRLeaveRequestView.h"
 #import "HRLeaveApprovalView.h"
 
-@interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+
+@protocol HRViewDelegate <NSObject>
+
+@required
+- (void) resetDataInViews;
+
+@end
+
+@interface HRView : UIView <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, HRViewDelegate>
 
 
 // constructor
@@ -22,5 +30,9 @@
 - (IBAction)btnPressedSlide:(id)sender;
 - (IBAction)btnPressedLeaveRequest:(id)sender;
 - (IBAction)btnPressedLeaveApproval:(id)sender;
+
+
+// protocol implementation
+- (void) resetDataInViews;
 
 @end

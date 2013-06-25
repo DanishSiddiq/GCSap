@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) IBOutlet UIView* sidebarView;
+@property (retain, nonatomic) UIView* rootView;
+@property (retain, nonatomic) id hrView;
 
 -(IBAction) hrButtonPressed:(id)sender;
 -(IBAction) purchaseButtonPressed:(id)sender;
@@ -75,6 +77,14 @@
 
     _sapDelegate = sapDelegate;
 }
+
+- (void) setSiblingView : (UIView *) rootView
+                 hrView : (UIView *) hrView {
+    
+    _rootView = rootView;
+    _hrView = hrView;
+}
+
 
 -(IBAction)hrButtonPressed:(id)sender{
     
@@ -180,6 +190,10 @@
     
     if([_sapDelegate purgeAllObjects]){
         [_sapDelegate populateWithPrerequisiteData];
+        
+        if([_hrView respondsToSelector:@selector(resetDataInViews)]){
+            [_hrView resetDataInViews];
+        }
     }    
 }
 

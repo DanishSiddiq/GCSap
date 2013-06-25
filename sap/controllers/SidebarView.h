@@ -20,4 +20,7 @@
 
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
+- (void) setSiblingView : (UIView *) rootView
+                 hrView : (UIView *) hrView;
+
 @end

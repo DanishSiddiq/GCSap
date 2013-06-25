@@ -126,8 +126,7 @@
     _isPendingSelected = YES;
     _selectedIndexPath = nil;
     
-    
-    // data base calling for fetching data
+    // data base calling for fetching data and refreshign data
     [self fetchHRLeavesFromCoreData];
     [self filterLeaves];
     [self updateViews];
