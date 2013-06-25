@@ -51,6 +51,47 @@
     return YES;
 }
 
+- (void) pergeAllObjects{
+    
+    [self pergeObjetForEntity:@"Departments"];
+    [self pergeObjetForEntity:@"Employees"];
+    [self pergeObjetForEntity:@"HR_leaves"];
+    [self pergeObjetForEntity:@"Purchase_Orders"];
+    [self pergeObjetForEntity:@"PO_Invoice"];
+    [self pergeObjetForEntity:@"PO_Items"];
+    [self pergeObjetForEntity:@"PO_Delivery"];
+    [self pergeObjetForEntity:@"Work_Order"];
+    
+}
+
+- (void) pergeObjetForEntity: (NSString *) entityDescription  {
+
+    NSFetchRequest *fetchRequest;
+    
+    @try {
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:_managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        NSError *error;
+        NSArray *items = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+      
+        for (NSManagedObject *managedObject in items) {
+            [_managedObjectContext deleteObject:managedObject];
+            NSLog(@"%@ object deleted",entityDescription);
+        }
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception %@", exception);
+    }
+    @finally {
+        fetchRequest = nil;
+    }
+}
 
 - (void) populateWithPrerequisiteData {
     
