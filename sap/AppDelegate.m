@@ -51,42 +51,63 @@
     return YES;
 }
 
-- (void) pergeAllObjects{
+- (BOOL) pergeAllObjects{
     
-    [self pergeObjetForEntity:@"Departments"];
-    [self pergeObjetForEntity:@"Employees"];
-    [self pergeObjetForEntity:@"HR_leaves"];
-    [self pergeObjetForEntity:@"Purchase_Orders"];
-    [self pergeObjetForEntity:@"PO_Invoice"];
-    [self pergeObjetForEntity:@"PO_Items"];
-    [self pergeObjetForEntity:@"PO_Delivery"];
-    [self pergeObjetForEntity:@"Work_Order"];
+    NSError *error;
+    NSManagedObjectContext *managedObjectContextLocal;
     
+    @try {
+        
+        managedObjectContextLocal = [self managedObjectContextLocal];
+        [self pergeObjetForEntity:@"Departments" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"Employees" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"HR_leaves" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"Purchase_Orders" managedObjectContextLocal:managedObjectContextLocal ];
+        [self pergeObjetForEntity:@"PO_Invoice" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"PO_Items" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"PO_Delivery" managedObjectContextLocal:managedObjectContextLocal];
+        [self pergeObjetForEntity:@"Work_Order" managedObjectContextLocal:managedObjectContextLocal];
+    }
+    @catch (NSException *exception) {
+        
+        error = [[NSError alloc] init];
+        NSLog(@"Exception caught in parent perge method %@", exception);
+    }
+    @finally {
+        
+        if(!error){
+            // might be error can appear during saving
+            [managedObjectContextLocal save:&error];
+        }
+        
+        return !error ? YES : NO ;
+    }
 }
 
-- (void) pergeObjetForEntity: (NSString *) entityDescription  {
+- (void) pergeObjetForEntity: (NSString *) entityDescription
+  managedObjectContextLocal : (NSManagedObjectContext *) managedObjectContextLocal{
 
+    NSError *error;
     NSFetchRequest *fetchRequest;
     
     @try {
         
         fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:_managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:managedObjectContextLocal];
         [fetchRequest setEntity:entity];
         
-        NSError *error;
-        NSArray *items = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-      
+        // first fetch items
+        NSArray *items = [managedObjectContextLocal executeFetchRequest:fetchRequest error:&error];
+        
+        // deleting items
         for (NSManagedObject *managedObject in items) {
-            [_managedObjectContext deleteObject:managedObject];
-            NSLog(@"%@ object deleted",entityDescription);
-        }
-        if (![_managedObjectContext save:&error]) {
-            NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+            [managedObjectContextLocal deleteObject:managedObject];
         }
     }
     @catch (NSException *exception) {
-        NSLog(@"exception %@", exception);
+        
+        NSLog(@"Nested exception in perge %@", exception);
+        @throw exception;
     }
     @finally {
         fetchRequest = nil;
@@ -354,6 +375,21 @@
 
 #pragma mark - Core Data stack
 
+//local context
+- (NSManagedObjectContext *)managedObjectContextLocal
+{
+    
+    NSManagedObjectContext *managedObjectContext;
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return managedObjectContext;
+}
+
+
+// main context
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)managedObjectContext
