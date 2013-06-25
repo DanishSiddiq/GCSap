@@ -24,18 +24,6 @@
   "short_text": "APC BK 535"
   },
   {
-  "po_Items_id": 1313,
-  "po_id": 450019,
-  "items": "Data 3",
-  "a": 15,
-  "l": 10,
-  "material": "ccc",
-  "quantity": 12,
-  "units": "C",
-  "delivery_date": "20/06/2013",
-  "short_text": "APC BK 535"
-  },
-  {
   "po_Items_id": 1314,
   "po_id": 450020,
   "items": "Data 1",

@@ -525,7 +525,7 @@
     if([purchaseObj.approved isEqualToNumber:[NSNumber numberWithBool:NO]] &&
        [purchaseObj.declined isEqualToNumber:[NSNumber numberWithBool:NO]]){
         
-        [imgViewStatus setImage:[UIImage imageNamed:@"blueCircle"]];
+        [imgViewStatus setImage:[UIImage imageNamed:@"orangeCircle"]];
         
     }else if([purchaseObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
         
@@ -709,7 +709,6 @@
     lblDate = (UILabel *)[cell.contentView viewWithTag:3];
     lblStatus = (UILabel *)[cell.contentView viewWithTag:4];
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:30];
-    //imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -758,7 +757,6 @@
     lblAmount = (UILabel *)[cell.contentView viewWithTag:3];
     
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:30];
-    //imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:8];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
