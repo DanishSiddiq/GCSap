@@ -12,12 +12,6 @@
   "invoice_date": "25/06/2013"
   },
   {
-  "po_invoice_id": 1413,
-  "po_id": 450019,
-  "amount": 10000,
-  "invoice_date": "27/06/2013"
-  },
-  {
   "po_invoice_id": 1414,
   "po_id": 450020,
   "amount": 2000,

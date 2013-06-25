@@ -85,6 +85,12 @@
 
 -(IBAction)hrButtonPressed:(id)sender{
     
+    [self.financeBtn setUserInteractionEnabled:YES];
+    [self.purchaseBtn setUserInteractionEnabled:YES];
+    [self.workOrderBtn setUserInteractionEnabled:YES];
+    
+    [sender setUserInteractionEnabled:NO];
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [HRView class]){
@@ -106,6 +112,12 @@
 
 -(IBAction)purchaseButtonPressed:(id)sender{
     
+    [self.financeBtn setUserInteractionEnabled:YES];
+    [self.hrBtn setUserInteractionEnabled:YES];
+    [self.workOrderBtn setUserInteractionEnabled:YES];
+    
+    [sender setUserInteractionEnabled:NO];
+
     
     for (UIView *subview in self.superview.subviews)
     {
@@ -127,6 +139,12 @@
 
 -(IBAction)financeButtonPressed:(id)sender{
     
+    [self.purchaseBtn setUserInteractionEnabled:YES];
+    [self.hrBtn setUserInteractionEnabled:YES];
+    [self.workOrderBtn setUserInteractionEnabled:YES];
+    
+    [sender setUserInteractionEnabled:NO];
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [FinanceView class]){
@@ -146,7 +164,12 @@
 }
 
 -(IBAction)maintenanceButtonPressed:(id)sender{
+    [self.financeBtn setUserInteractionEnabled:YES];
+    [self.hrBtn setUserInteractionEnabled:YES];
+    [self.workOrderBtn setUserInteractionEnabled:YES];
     
+    [sender setUserInteractionEnabled:NO];
+
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [MaintenanceView class]){
@@ -165,7 +188,12 @@
 }
 
 -(IBAction)workOrderButtonPressed:(id)sender{
+    [self.financeBtn setUserInteractionEnabled:YES];
+    [self.hrBtn setUserInteractionEnabled:YES];
+    [self.purchaseBtn setUserInteractionEnabled:YES];
     
+    [sender setUserInteractionEnabled:NO];
+
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [WorkOrderView class]){

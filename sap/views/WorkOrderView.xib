@@ -113,7 +113,7 @@
 							<object class="IBUILabel" id="256840209">
 								<reference key="NSNextResponder" ref="907522297"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{393, 10}, {296, 30}}</string>
+								<string key="NSFrame">{{433, 10}, {296, 30}}</string>
 								<reference key="NSSuperview" ref="907522297"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="690331904"/>
@@ -1107,7 +1107,7 @@
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="675986819">
+							<object class="NSColorSpace" key="NSCustomColorSpace">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -1119,11 +1119,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="907522297"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="675986819"/>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="936824752"/>
 				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
