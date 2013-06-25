@@ -131,12 +131,12 @@
         [_lblStatusPanel setTextColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0]];
     }
     else{
-        
-        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:0/255.f green:0/255.f blue:0/255.f alpha:1.0]];
-        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:0/255.f green:0/255.f blue:0/255.f alpha:1.0].CGColor];
+
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:255/255.f green:192/255.f blue:192/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0].CGColor];
         [_vwStatusPanel.layer setBorderWidth:1.0];
         
-        [_lblStatusPanel setTextColor:[UIColor colorWithRed:0/255.f green:0/255.f blue:0/255.f alpha:1.0]];
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0]];
     }
     
     [_lblStatusPanel setText:msg];
@@ -240,6 +240,7 @@
             [leave setSubmitted:[NSNumber numberWithBool:YES]];
             [leave setApplied_date:[NSDate date]];
             [_sapDelegate.managedObjectContext save:&error];
+            
         }
         @catch (NSException *exception) {
             NSLog(@"Exception: %@", error);
@@ -260,7 +261,7 @@
             }
             else{
              
-                [self showPanelBarWithMessage:YES msg:@"Request submition failed"];
+                [self showPanelBarWithMessage:NO msg:@"Request submition failed"];
             }
         }
     }
@@ -294,7 +295,7 @@
             }
             else{
                 
-                [self showPanelBarWithMessage:YES msg:@"Request deletion failed"];
+                [self showPanelBarWithMessage:NO msg:@"Request deletion failed"];
             }
         }
     }
