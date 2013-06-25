@@ -274,7 +274,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="531416973"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="251876706">
+						<object class="NSColor" key="IBUIBackgroundColor" id="304816820">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -713,18 +713,18 @@
 								<reference key="IBUIFontDescription" ref="135671730"/>
 								<reference key="IBUIFont" ref="251029454"/>
 							</object>
-							<object class="IBUIView" id="162576730">
+							<object class="IBUIView" id="988964657">
 								<reference key="NSNextResponder" ref="673144452"/>
 								<int key="NSvFlags">292</int>
 								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUILabel" id="300781575">
-										<reference key="NSNextResponder" ref="162576730"/>
+									<object class="IBUILabel" id="122495095">
+										<reference key="NSNextResponder" ref="988964657"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{0, 5}, {600, 18}}</string>
-										<reference key="NSSuperview" ref="162576730"/>
+										<reference key="NSSuperview" ref="988964657"/>
 										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<reference key="IBUIBackgroundColor" ref="251876706"/>
+										<reference key="IBUIBackgroundColor" ref="304816820"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">7</int>
@@ -754,7 +754,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{333, 35}, {646, 460}}</string>
+						<string key="NSFrame">{{333, 35}, {646, 452}}</string>
 						<reference key="NSSuperview" ref="331698484"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1067131105"/>
@@ -892,7 +892,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">vwStatusPanel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="162576730"/>
+						<reference key="destination" ref="988964657"/>
 					</object>
 					<int key="connectionID">208</int>
 				</object>
@@ -900,7 +900,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lblStatusPanel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="300781575"/>
+						<reference key="destination" ref="122495095"/>
 					</object>
 					<int key="connectionID">209</int>
 				</object>
@@ -1085,7 +1085,7 @@
 							<reference ref="32437446"/>
 							<reference ref="340538276"/>
 							<reference ref="183294143"/>
-							<reference ref="162576730"/>
+							<reference ref="988964657"/>
 						</array>
 						<reference key="parent" ref="331698484"/>
 					</object>
@@ -1193,16 +1193,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">206</int>
-						<reference key="object" ref="162576730"/>
+						<reference key="object" ref="988964657"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="300781575"/>
+							<reference ref="122495095"/>
 						</array>
 						<reference key="parent" ref="673144452"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">207</int>
-						<reference key="object" ref="300781575"/>
-						<reference key="parent" ref="162576730"/>
+						<reference key="object" ref="122495095"/>
+						<reference key="parent" ref="988964657"/>
 					</object>
 				</array>
 			</object>

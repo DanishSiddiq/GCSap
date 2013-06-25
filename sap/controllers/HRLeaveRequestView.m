@@ -156,8 +156,6 @@
             [_vwStatusPanel setHidden:YES];
         }];
     }];
-    
-    
 }
 
 
@@ -261,7 +259,7 @@
             }
             else{
              
-                [self showPanelBarWithMessage:NO msg:@"Request submition failed"];
+                [self showPanelBarWithMessage:NO msg:@"Request submit failed"];
             }
         }
     }
@@ -295,7 +293,7 @@
             }
             else{
                 
-                [self showPanelBarWithMessage:NO msg:@"Request deletion failed"];
+                [self showPanelBarWithMessage:NO msg:@"Request delete failed"];
             }
         }
     }
