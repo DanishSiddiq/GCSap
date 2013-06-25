@@ -33,7 +33,7 @@
 
 
 // to delete all core data
-- (BOOL) pergeAllObjects;
+- (BOOL) purgeAllObjects;
 - (void) populateWithPrerequisiteData ;
 
 @end

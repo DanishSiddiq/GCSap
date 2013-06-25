@@ -51,7 +51,7 @@
     return YES;
 }
 
-- (BOOL) pergeAllObjects{
+- (BOOL) purgeAllObjects{
     
     NSError *error;
     NSManagedObjectContext *managedObjectContextLocal;
@@ -59,14 +59,14 @@
     @try {
         
         managedObjectContextLocal = [self managedObjectContextLocal];
-        [self pergeObjetForEntity:@"Departments" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"Employees" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"HR_leaves" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"Purchase_Orders" managedObjectContextLocal:managedObjectContextLocal ];
-        [self pergeObjetForEntity:@"PO_Invoice" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"PO_Items" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"PO_Delivery" managedObjectContextLocal:managedObjectContextLocal];
-        [self pergeObjetForEntity:@"Work_Order" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"Departments" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"Employees" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"HR_leaves" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"Purchase_Orders" managedObjectContextLocal:managedObjectContextLocal ];
+        [self purgeObjectForEntity:@"PO_Invoice" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"PO_Items" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"PO_Delivery" managedObjectContextLocal:managedObjectContextLocal];
+        [self purgeObjectForEntity:@"Work_Order" managedObjectContextLocal:managedObjectContextLocal];
     }
     @catch (NSException *exception) {
         
@@ -84,7 +84,7 @@
     }
 }
 
-- (void) pergeObjetForEntity: (NSString *) entityDescription
+- (void) purgeObjectForEntity: (NSString *) entityDescription
   managedObjectContextLocal : (NSManagedObjectContext *) managedObjectContextLocal{
 
     NSError *error;
