@@ -212,7 +212,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/AppDelegate.m"
@@ -234,7 +234,33 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "109"
          endingLineNumber = "109"
-         landmarkName = "-pergeObjetForEntity:managedObjectContextLocal:error:"
+         landmarkName = "-pergeObjetForEntity:managedObjectContextLocal:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sap/controllers/SidebarView.m"
+         timestampString = "393838182.398563"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
+         landmarkName = "-btnPressedResetData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sap/AppDelegate.m"
+         timestampString = "393838219.181185"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
+         landmarkName = "-populateWithPrerequisiteData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

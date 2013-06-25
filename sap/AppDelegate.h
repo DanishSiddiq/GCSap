@@ -34,5 +34,6 @@
 
 // to delete all core data
 - (BOOL) pergeAllObjects;
+- (void) populateWithPrerequisiteData ;
 
 @end

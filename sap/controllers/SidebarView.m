@@ -178,7 +178,9 @@
 
 -(IBAction) btnPressedResetData :(id)sender{
     
-    [_sapDelegate pergeAllObjects];
+    if([_sapDelegate pergeAllObjects]){
+        [_sapDelegate populateWithPrerequisiteData];
+    }    
 }
 
 
