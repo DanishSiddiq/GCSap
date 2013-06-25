@@ -14,6 +14,8 @@
 @property (retain, nonatomic) IBOutlet UIView *hrLeaveRequest;
 
 @property (nonatomic, strong) AppDelegate *sapDelegate;
+@property (retain, nonatomic) IBOutlet UIView *vwStatusPanel;
+@property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet UITableView *tblLeave;
 @property (retain, nonatomic) NSMutableArray *lstLeave;
@@ -86,6 +88,10 @@
     
     
     // detail view
+    // status panel
+    [_vwStatusPanel.layer setCornerRadius:3.0f];
+    [_vwStatusPanel setHidden:YES];
+    
     [_vwDetailLeaveRequest.layer setCornerRadius:4.0f];
     [_vwDetailLeaveRequest.layer setBorderWidth:1.0f];
     [_vwDetailLeaveRequest.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
@@ -113,6 +119,43 @@
     [_tvNotes.layer setCornerRadius:4.0f];
     [_tvNotes.layer setBorderWidth:1.0f];
     [_tvNotes.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
+}
+
+- (void) showPanelBarWithMessage : (BOOL) isSuccess msg : (NSString *) msg {
+    
+    if(isSuccess){
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:223/255.f green:240/255.f blue:216/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0]];
+    }
+    else{
+
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:255/255.f green:192/255.f blue:192/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0]];
+    }
+    
+    [_lblStatusPanel setText:msg];
+    [_vwStatusPanel setAlpha:0.0];
+    [_vwStatusPanel setHidden:NO];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        [_vwStatusPanel setAlpha:1.0];
+        
+    } completion:^(BOOL finished) {
+        
+        // now hide it again after 2 sec
+        [UIView animateWithDuration:2.5 animations:^{
+            [_vwStatusPanel setAlpha:0.1];
+            
+        } completion:^(BOOL finished) {
+            [_vwStatusPanel setHidden:YES];
+        }];
+    }];
 }
 
 
@@ -195,6 +238,7 @@
             [leave setSubmitted:[NSNumber numberWithBool:YES]];
             [leave setApplied_date:[NSDate date]];
             [_sapDelegate.managedObjectContext save:&error];
+            
         }
         @catch (NSException *exception) {
             NSLog(@"Exception: %@", error);
@@ -203,11 +247,19 @@
             
             if(!error){
                 
+                if(_isPendingSelected){
+                    [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully"];
+                }
+                else{
+                    [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully and moved into Pending panel"];
+                }
+                
                 [self filterLeaves];
                 [self updateViews ];
             }
             else{
-                
+             
+                [self showPanelBarWithMessage:NO msg:@"Request submit failed"];
             }
         }
     }
@@ -233,13 +285,15 @@
         @finally {
             
             if(!isError){
-             
+                
+                [self showPanelBarWithMessage:YES msg:@"Request has been deleted successfully"];
                 [_lstLeave removeObject:leave];
                 [self filterLeaves];
                 [self updateViews ];
             }
             else{
-                // show error report
+                
+                [self showPanelBarWithMessage:NO msg:@"Request delete failed"];
             }
         }
     }
