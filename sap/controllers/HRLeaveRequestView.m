@@ -201,7 +201,7 @@
 - (IBAction)btnPressedFilterApproved:(id)sender{
     
     _isApprovedSelected = !_isApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"checkGreenHover" : @"checkGreen"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
@@ -210,7 +210,7 @@
 - (IBAction)btnPressedFilterDeclined:(id)sender{
     
     _isDeclinedSelected = !_isDeclinedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclinedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclinedSelected ? @"checkRedHover" : @"checkRed"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
@@ -219,7 +219,7 @@
 - (IBAction)btnPressedFilterPending:(id)sender{
     
     _isPendingSelected = !_isPendingSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isPendingSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPendingSelected ? @"checkYellowHover" : @"checkYellow"] forState:UIControlStateNormal];
     
     [self filterLeaves];
     [self updateViews ];
