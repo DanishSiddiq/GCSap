@@ -342,7 +342,8 @@
             for(index = 0; index < [_lstFilterLeave count]; index++){
                 
                 HR_leaves *obj = [_lstFilterLeave objectAtIndex:index];
-                if(obj.leave_id == _selectedId){
+                if([obj.leave_id isEqualToNumber:_selectedId]){
+                    
                     isExist = YES;
                     break;
                 }

@@ -208,7 +208,7 @@
 							<object class="IBUITableView" id="566826848">
 								<reference key="NSNextResponder" ref="520793368"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 84}, {275, 517}}</string>
+								<string key="NSFrame">{{0, 84}, {275, 548}}</string>
 								<reference key="NSSuperview" ref="520793368"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="673144452"/>
@@ -269,7 +269,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{28, 25}, {275, 612}}</string>
+						<string key="NSFrame">{{28, 25}, {275, 632}}</string>
 						<reference key="NSSuperview" ref="331698484"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="531416973"/>
