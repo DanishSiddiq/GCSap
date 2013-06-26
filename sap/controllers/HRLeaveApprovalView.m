@@ -17,6 +17,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
 @property (retain, nonatomic) NSMutableArray *lstLeave;
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
+@property (retain, nonatomic) NSNumber *selectedId;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isDeclinedSelected;
 @property (nonatomic) BOOL isPendingSelected;
@@ -165,6 +166,7 @@
     _isApprovedSelected = YES;
     _isDeclinedSelected = YES;
     _isPendingSelected = YES;
+    _selectedId = nil;
     _selectedIndexPath = nil;
     
     // data base calling for fetching data and refreshign data
@@ -302,6 +304,7 @@
 
 - (void) filterLeaves {
     
+    _selectedIndexPath = nil;
     [_lstFilterLeave removeAllObjects];        
     for(HR_leaves *leave in _lstLeave){
         
@@ -324,11 +327,29 @@
         }
     }
     
+    [self updateSelectedIndexPath];
+}
+
+- (void) updateSelectedIndexPath {
+    
     if(_lstFilterLeave.count > 0){
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    else{
-        _selectedIndexPath = nil;
+        
+        NSInteger index;
+        BOOL isExist = NO;
+        
+        if(_selectedId){
+            
+            for(index = 0; index < [_lstFilterLeave count]; index++){
+                
+                HR_leaves *obj = [_lstFilterLeave objectAtIndex:index];
+                if(obj.leave_id == _selectedId){
+                    isExist = YES;
+                    break;
+                }
+            }
+        }
+        _selectedIndexPath = [NSIndexPath indexPathForRow:isExist ? index : 0 inSection:0];
+    
     }
 }
 
@@ -337,7 +358,7 @@
     
     [_tblLeave reloadData];
     [self updateLeaveApprovalDetail];
-    
+    [_tblLeave scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 - (void) updateLeaveApprovalDetail{
@@ -518,6 +539,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     _selectedIndexPath = indexPath;
+    HR_leaves *hrLeave = [_lstFilterLeave objectAtIndex:indexPath.row];
+    _selectedId = hrLeave.leave_id;
+    
+    // update view for changing selection background image
     [self updateViews];
     
 }
