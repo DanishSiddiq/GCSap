@@ -16,14 +16,16 @@
 @property (retain, nonatomic) NSMutableArray *lstFilterPurchases;
 @property (weak, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
-@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 @property (strong, nonatomic) IBOutlet UITableView *tblPurchases;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isDeclined;
 @property (nonatomic) BOOL isPending;
 
-@property (retain, nonatomic) Purchase_Orders *currentPO;
+@property (strong, nonatomic) NSNumber *selectedId;
+@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
+
+@property (strong, nonatomic) Purchase_Orders *currentPO;
 
 // PO Detail Objects
 @property (strong, nonatomic) IBOutlet UITableView *tblPoItems;
@@ -89,6 +91,7 @@
     _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     _lstFilterPurchases = [[NSMutableArray alloc] init];
     _filterText = [NSMutableString stringWithFormat:@""];
+    _selectedId = nil;
     
     _isApprovedSelected = _isDeclined = _isPending = YES;
     
@@ -166,7 +169,6 @@
     [self filterPurchases];
     [self updateViews];
     
-    [self setPODetailIndexAfterFilter];
 }
 
 - (IBAction)btnPressedDeclined:(id)sender {
@@ -177,7 +179,6 @@
     [self filterPurchases];
     [self updateViews ];
     
-    [self setPODetailIndexAfterFilter];
 }
 
 - (IBAction)btnPressedPending:(id)sender {
@@ -188,8 +189,6 @@
     [self filterPurchases];
     [self updateViews ];
     
-    
-    [self setPODetailIndexAfterFilter];
 }
 
 - (IBAction)btnPoApprovedPressed:(id)sender {
@@ -212,8 +211,6 @@
     
     [self filterPurchases];
     [self updateViews ];
-    
-    [self setPODetailIndexAfterFilter];
     
 }
 
@@ -238,7 +235,6 @@
     [self filterPurchases];
     [self updateViews ];
     
-    [self setPODetailIndexAfterFilter];
 }
 
 
@@ -271,7 +267,6 @@
     [self filterPurchases];
     [self updateViews];
     
-    [self setPODetailIndexAfterFilter];
 }
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
@@ -288,13 +283,13 @@
     [self filterPurchases];
     [self updateViews];
     
-    [self setPODetailIndexAfterFilter];
 }
 
 - (void) filterPurchases {
     
     [_lstFilterPurchases removeAllObjects];
     [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    _selectedIndexPath = nil;
     
     if([_filterText length] > 0){
         
@@ -321,7 +316,6 @@
                     
                 }
             }
-            
             
             if(_isPending && [[purchase approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
                [[purchase declined] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
@@ -359,11 +353,28 @@
         }
     }
     
+    [self updateSelectedIndexPath];
+}
+
+- (void) updateSelectedIndexPath {
+    
     if(_lstFilterPurchases.count > 0){
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    else{
-        _selectedIndexPath = nil;
+        
+        NSInteger index;
+        BOOL isExist = NO;
+        
+        if(_selectedId){
+            
+            for(index = 0; index < [_lstFilterPurchases count]; index++){
+                
+                Purchase_Orders *obj = [_lstFilterPurchases objectAtIndex:index];                
+                if([obj.po_id isEqualToNumber:_selectedId]){
+                    isExist = YES;
+                    break;
+                }
+            }
+        }
+        _selectedIndexPath = [NSIndexPath indexPathForRow:isExist ? index : 0 inSection:0];
     }
 }
 
@@ -371,6 +382,8 @@
 -(void) updateViews {
     
     [_tblPurchases reloadData];
+    [self setPODetailIndexAfterFilter];
+    [_tblPurchases scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 #pragma table delegates
@@ -494,7 +507,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if(_selectedIndexPath.row == indexPath.row){
+    if(_selectedIndexPath && _selectedIndexPath.row == indexPath.row){
         
         [cell setFrame:CGRectMake(0, 0, 292, 125)];
         [imgViewBackground setFrame:CGRectMake(10, 0, 282, 125)];
@@ -554,15 +567,15 @@
     }else{
         [self getPurchaseOrderDetails: 0];
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _selectedIndexPath = indexPath;
     [_tblPurchases reloadData];
     Purchase_Orders * poObj = [_lstFilterPurchases objectAtIndex:indexPath.row];
     self.currentPO = poObj;
-    [self getPurchaseOrderDetails:poObj.po_id];
+    _selectedIndexPath = indexPath;
+    _selectedId = poObj.po_id;
+    [self updateViews];
 }
 
 -(void) getPurchaseOrderDetails: (NSNumber*) poID{

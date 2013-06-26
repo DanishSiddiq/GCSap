@@ -17,12 +17,14 @@
 @property (retain, nonatomic) NSMutableArray *lstFilterWorkOrders;
 @property (retain, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
-@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 @property (retain, nonatomic) IBOutlet UITableView *tblWorkOrders;
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isPending;
 @property (retain, nonatomic) IBOutlet UIView *contentVew;
+
+@property (strong, nonatomic) NSNumber *selectedId;
+@property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 @property (weak, nonatomic) Work_Order *currentWO;
 
@@ -71,12 +73,7 @@
     _lstWorkOrders = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Work_Order"];
     [self filterWorkOrders];
     [_tblWorkOrders reloadData];
-    if(_lstWorkOrders.count > 0){
-        [self getSelectedWorkOrder:0];   
-    }else{
-        [self emptyControls];
-    }
-
+    [self getSelectedWorkOrder];
 }
 
 -(void) resetDataInViews{
@@ -84,13 +81,8 @@
     [self filterWorkOrders];
     [_tblWorkOrders reloadData];
     
-    if(_lstWorkOrders.count > 0){
-        [self getSelectedWorkOrder:0];
-    }else{
-        [self emptyControls];
-    }
-    
-    //self.currentWO = [_lstWorkOrders objectAtIndex:0];
+    [self getSelectedWorkOrder];
+   
 }
 
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
@@ -169,11 +161,7 @@
                           withRowAnimation:UITableViewRowAnimationTop];
     
     [self filterWorkOrders];
-    [_tblWorkOrders reloadData];
-    
-    if(_lstFilterWorkOrders.count > 0){
-        [self getSelectedWorkOrder:0];
-    }
+    [self updateViews];
     
     /*
     [UIView animateWithDuration:2.0
@@ -272,6 +260,7 @@
     
     [_lstFilterWorkOrders removeAllObjects];
     [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    _selectedIndexPath = nil;
     
     if([_filterText length] > 0){
         
@@ -319,14 +308,38 @@
          }
     }
     
+//    if(_lstFilterWorkOrders.count > 0){
+//        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//        [self getSelectedWorkOrder:0];
+//    }
+//    else{
+//        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
+//        _selectedIndexPath = nil;
+//        [self emptyControls];
+//    }
+    
+    [self updateSelectedIndexPath];
+}
+
+- (void) updateSelectedIndexPath {
+    
     if(_lstFilterWorkOrders.count > 0){
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self getSelectedWorkOrder:0];
-    }
-    else{
-        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
-        _selectedIndexPath = nil;
-        [self emptyControls];
+        
+        NSInteger index;
+        BOOL isExist = NO;
+        
+        if(_selectedId){
+            
+            for(index = 0; index < [_lstFilterWorkOrders count]; index++){
+                
+                Work_Order *obj = [_lstFilterWorkOrders objectAtIndex:index];
+                if([obj.order_id isEqualToNumber:_selectedId]){
+                    isExist = YES;
+                    break;
+                }
+            }
+        }
+        _selectedIndexPath = [NSIndexPath indexPathForRow:isExist ? index : 0 inSection:0];
     }
 }
 
@@ -334,6 +347,8 @@
 -(void) updateViews {
     
     [_tblWorkOrders reloadData];
+    [_tblWorkOrders scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    [self getSelectedWorkOrder];
 }
 
 
@@ -344,9 +359,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return 130.0f;
-    
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -384,8 +397,7 @@
     imgViewBackground = (UIImageView *)[cell.contentView viewWithTag:7];
     imgViewCalender = (UIImageView *)[cell.contentView viewWithTag:40];
     imgViewStatus = (UIImageView *)[cell.contentView viewWithTag:41];
-    
-    
+        
     lblOrderID = (UILabel *)[cell.contentView viewWithTag:1];
     lblStartDate = (UILabel *)[cell.contentView viewWithTag:2];
     lblOrderType = (UILabel *)[cell.contentView viewWithTag:3];
@@ -436,51 +448,57 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _selectedIndexPath = indexPath;
     [_tblWorkOrders reloadData];
-        
-    [self getSelectedWorkOrder:indexPath.row];
-
+    Work_Order *obj = [_lstFilterWorkOrders objectAtIndex:indexPath.row];
+    _selectedIndexPath = indexPath;
+    _selectedId = obj.order_id;
+    [self getSelectedWorkOrder];
 }
 
--(void) getSelectedWorkOrder:(NSInteger) withIndex{
-    self.btnCancel.enabled = self.btnSubmit.enabled = YES;
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateStyle:NSDateFormatterMediumStyle];
+-(void) getSelectedWorkOrder{
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+
+        self.btnCancel.enabled = self.btnSubmit.enabled = YES;
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateStyle:NSDateFormatterMediumStyle];
+        
+        Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:_selectedIndexPath.row];
+        self.currentWO = workOrderObj;
+        UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
+        UITextView *txtViewNotes;
+        
+        lblOrderID = (UILabel *)[self.contentVew viewWithTag:1];
+        lblOrderType = (UILabel *)[self.contentVew viewWithTag:2];
+        lblStartDate = (UILabel *)[self.contentVew viewWithTag:3];
+        lblEndDate = (UILabel *)[self.contentVew viewWithTag:4];
+        lblPriority = (UILabel *)[self.contentVew viewWithTag:5];
+        lblSerialNumber = (UILabel *)[self.contentVew viewWithTag:6];
+        lblEquipment = (UILabel *)[self.contentVew viewWithTag:7];
+        lblWordCenter = (UILabel *)[self.contentVew viewWithTag:8];
+        lblStatus = (UILabel *)[self.contentVew viewWithTag:9];
+        lblLastUpdated = (UILabel *)[self.contentVew viewWithTag:10];
+        lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
+        txtViewNotes = (UITextView *)[self.contentVew viewWithTag:50];
+        
+        lblOrderID.text = [NSString stringWithFormat:@"%@", workOrderObj.order_id];
+        lblLastUpdated.text = [format stringFromDate:workOrderObj.last_updated];
+        lblEndDate.text = [format stringFromDate:workOrderObj.end_date];
+        lblStartDate.text = [format stringFromDate:workOrderObj.start_date];
+        lblOrderType.text = workOrderObj.order_type;
+        lblStatus.text = [workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Closed" : @"Open";
+        lblUpdatedBy.text = workOrderObj.updated_by;
+        lblWordCenter.text = workOrderObj.word_center;
+        lblEquipment.text = workOrderObj.equipment;
+        lblPriority.text = workOrderObj.priority;
+        lblSerialNumber.text = workOrderObj.serial_number;
+        txtViewNotes.text = workOrderObj.notes;
+        
+        if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
+            self.btnCancel.enabled = self.btnSubmit.enabled = NO;
+        }
     
-    Work_Order *workOrderObj = [_lstFilterWorkOrders objectAtIndex:withIndex];
-    self.currentWO = workOrderObj;
-    UILabel *lblOrderID, *lblStartDate, *lblEndDate, *lblOrderType, *lblStatus, *lblUpdatedBy, *lblLastUpdated, *lblEquipment, *lblSerialNumber, *lblPriority, *lblWordCenter;
-    UITextView *txtViewNotes;
-    
-    lblOrderID = (UILabel *)[self.contentVew viewWithTag:1];
-    lblOrderType = (UILabel *)[self.contentVew viewWithTag:2];
-    lblStartDate = (UILabel *)[self.contentVew viewWithTag:3];
-    lblEndDate = (UILabel *)[self.contentVew viewWithTag:4];
-    lblPriority = (UILabel *)[self.contentVew viewWithTag:5];
-    lblSerialNumber = (UILabel *)[self.contentVew viewWithTag:6];
-    lblEquipment = (UILabel *)[self.contentVew viewWithTag:7];
-    lblWordCenter = (UILabel *)[self.contentVew viewWithTag:8];
-    lblStatus = (UILabel *)[self.contentVew viewWithTag:9];
-    lblLastUpdated = (UILabel *)[self.contentVew viewWithTag:10];
-    lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
-    txtViewNotes = (UITextView *)[self.contentVew viewWithTag:50];
-    
-    lblOrderID.text = [NSString stringWithFormat:@"%@", workOrderObj.order_id];
-    lblLastUpdated.text = [format stringFromDate:workOrderObj.last_updated];
-    lblEndDate.text = [format stringFromDate:workOrderObj.end_date];
-    lblStartDate.text = [format stringFromDate:workOrderObj.start_date];
-    lblOrderType.text = workOrderObj.order_type;
-    lblStatus.text = [workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Closed" : @"Open";
-    lblUpdatedBy.text = workOrderObj.updated_by;
-    lblWordCenter.text = workOrderObj.word_center;
-    lblEquipment.text = workOrderObj.equipment;
-    lblPriority.text = workOrderObj.priority;
-    lblSerialNumber.text = workOrderObj.serial_number;
-    txtViewNotes.text = workOrderObj.notes;
-    
-    if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
-        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
+    }else{
+        [self emptyControls];
     }
 }
 
@@ -528,18 +546,9 @@
     lblUpdatedBy = (UILabel *)[self.contentVew viewWithTag:11];
     txtViewNotes = (UITextView *)[self.contentVew viewWithTag:50];
     
-    lblOrderID.text =
-    lblLastUpdated.text =
-    lblEndDate.text =
-    lblStartDate.text =
-    lblOrderType.text =
-    lblStatus.text =
-    lblUpdatedBy.text =
-    lblWordCenter.text =
-    lblEquipment.text =
-    lblPriority.text =
-    lblSerialNumber.text =
-    txtViewNotes.text = @"";
+    lblOrderID.text = lblLastUpdated.text = lblEndDate.text = lblStartDate.text =
+    lblOrderType.text = lblStatus.text = lblUpdatedBy.text = lblWordCenter.text =
+    lblEquipment.text = lblPriority.text = lblSerialNumber.text = txtViewNotes.text = @"";
 
 }
 
