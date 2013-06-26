@@ -56,6 +56,9 @@
     // setting background title view color
     self.titleView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"topBar.png"]];
     
+    UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
+    lblName.text = NAME;
+    
 }
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{

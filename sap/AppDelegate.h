@@ -16,6 +16,8 @@
 #import "PO_Items.h"
 #import "Work_Order.h"
 
+#define NAME @"Jack, Smith"
+
 @class RootViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -27,6 +29,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

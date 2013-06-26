@@ -35,6 +35,9 @@
         self.financeView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:self.financeView];
         
+        UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
+        lblName.text = NAME;
+        
     }
     return self;
 }

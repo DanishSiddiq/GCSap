@@ -74,6 +74,9 @@
         
         _tblPoDelivery.hidden = _tblPoInvoices.hidden = YES;
         
+        UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
+        lblName.text = NAME;
+        
         self._isSlided = self.poItemsButton.userInteractionEnabled = NO;
         [self initializeData:sapDelegate];
         

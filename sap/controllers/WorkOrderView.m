@@ -50,7 +50,10 @@
         self.mainView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:self.mainView];
         
-        //[_tblPurchases setShowsVerticalScrollIndicator:NO];
+        [_tblWorkOrders setShowsVerticalScrollIndicator:NO];
+        
+        UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
+        lblName.text = NAME;
                 
         self._isSlided = NO;
         [self initializeData:sapDelegate];
