@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isDeclinedSelected;
 @property (nonatomic) BOOL isPendingSelected;
+@property (retain, nonatomic) NSNumber *selectedId;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 
@@ -345,6 +346,7 @@
 
 - (void) filterLeaves {
     
+    _selectedIndexPath = nil;
     [_lstFilterLeave removeAllObjects];
     [_filterText setString:[_filterText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
     
@@ -398,19 +400,39 @@
         }
     }
     
-    if(_lstFilterLeave.count > 0){
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    else{
-        _selectedIndexPath = nil;
-    }
+    [self updateSelectedIndexPath];
+}
+
+- (void) updateSelectedIndexPath {
     
+    if(_lstFilterLeave.count > 0){
+        
+        NSInteger index;
+        BOOL isExist = NO;
+        
+        if(_selectedId){
+            
+            for(index = 0; index < [_lstFilterLeave count]; index++){
+                
+                HR_leaves *obj = [_lstFilterLeave objectAtIndex:index];
+                if(obj.leave_id == _selectedId){
+                    isExist = YES;
+                    break;
+                }
+            }
+        }
+        _selectedIndexPath = [NSIndexPath indexPathForRow:isExist ? index : 0 inSection:0];
+        
+    }
 }
 
 // you have to update the view also have to change the side vise fileds accordingly
 -(void) updateViews {
     
     [_tblLeave reloadData];
+    [_tblLeave scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        
+    // right side detail view
     [self updateLeaveApprovalRequest];
 }
 
@@ -585,7 +607,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     _selectedIndexPath = indexPath;
+    HR_leaves *hrLeave = [_lstFilterLeave objectAtIndex:indexPath.row];
+    _selectedId = hrLeave.leave_id;
+    
+    // update view for changing selection background image
     [self updateViews ];
     
 }

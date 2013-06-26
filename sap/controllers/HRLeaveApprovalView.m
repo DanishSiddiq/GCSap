@@ -17,10 +17,10 @@
 @property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
 @property (retain, nonatomic) NSMutableArray *lstLeave;
 @property (retain, nonatomic) NSMutableArray *lstFilterLeave;
-@property (retain, nonatomic) NSNumber *selectedId;
 @property (nonatomic) BOOL isApprovedSelected;
 @property (nonatomic) BOOL isDeclinedSelected;
 @property (nonatomic) BOOL isPendingSelected;
+@property (retain, nonatomic) NSNumber *selectedId;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
 // detail view
@@ -357,8 +357,10 @@
 - (void) updateViews {
     
     [_tblLeave reloadData];
-    [self updateLeaveApprovalDetail];
     [_tblLeave scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+    // right side detail view
+    [self updateLeaveApprovalDetail];
 }
 
 - (void) updateLeaveApprovalDetail{
