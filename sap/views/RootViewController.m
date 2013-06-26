@@ -73,7 +73,7 @@
 
 - (void) resetDataInViews{
     
-    [SVProgressHUD showWithStatus:@"Reseting"];
+    [SVProgressHUD showWithStatus:@"Resetting"];
     
     if([_sapDelegate purgeAllObjects]){
         [_sapDelegate populateWithPrerequisiteData];
