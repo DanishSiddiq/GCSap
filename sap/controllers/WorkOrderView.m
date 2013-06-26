@@ -84,7 +84,13 @@
     [self filterWorkOrders];
     [_tblWorkOrders reloadData];
     
-    self.currentWO = [_lstWorkOrders objectAtIndex:0];
+    if(_lstWorkOrders.count > 0){
+        [self getSelectedWorkOrder:0];
+    }else{
+        [self emptyControls];
+    }
+    
+    //self.currentWO = [_lstWorkOrders objectAtIndex:0];
 }
 
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
@@ -315,6 +321,7 @@
     
     if(_lstFilterWorkOrders.count > 0){
         _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self getSelectedWorkOrder:0];
     }
     else{
         self.btnCancel.enabled = self.btnSubmit.enabled = NO;
