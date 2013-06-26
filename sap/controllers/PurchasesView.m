@@ -27,6 +27,9 @@
 
 @property (strong, nonatomic) Purchase_Orders *currentPO;
 
+@property (retain, nonatomic) IBOutlet UIView *vwStatusPanel;
+@property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
+
 // PO Detail Objects
 @property (strong, nonatomic) IBOutlet UITableView *tblPoItems;
 @property (retain, nonatomic) NSMutableArray* lstPoItems;
@@ -72,6 +75,9 @@
         [_tblPoInvoices setShowsVerticalScrollIndicator:NO];
         [_tblPoDelivery setShowsVerticalScrollIndicator:NO];
         
+        [_vwStatusPanel.layer setCornerRadius:3.0f];
+        [_vwStatusPanel setHidden:YES];
+        
         _tblPoDelivery.hidden = _tblPoInvoices.hidden = YES;
         
         UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
@@ -109,6 +115,44 @@
     self.currentPO = poFirst;
     [self getPurchaseOrderDetails: poFirst.po_id];
 }
+
+- (void) showPanelBarWithMessage : (BOOL) isSuccess msg : (NSString *) msg {
+    
+    if(isSuccess){
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:223/255.f green:240/255.f blue:216/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0]];
+    }
+    else{
+        
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:255/255.f green:192/255.f blue:192/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0]];
+    }
+    
+    [_lblStatusPanel setText:msg];
+    [_vwStatusPanel setAlpha:0.0];
+    [_vwStatusPanel setHidden:NO];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        [_vwStatusPanel setAlpha:1.0];
+        
+    } completion:^(BOOL finished) {
+        
+        // now hide it again after 2 sec
+        [UIView animateWithDuration:2.5 animations:^{
+            [_vwStatusPanel setAlpha:0.1];
+            
+        } completion:^(BOOL finished) {
+            [_vwStatusPanel setHidden:YES];
+        }];
+    }];
+}
+
 
 -(void) resetDataInViews{
     _lstPurchases = [self fetchDataFromServerWithPredicate:nil AndEntityName:@"Purchase_Orders"];
@@ -167,7 +211,7 @@
 - (IBAction)btnPressedApproved:(id)sender {
     
     _isApprovedSelected = !_isApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"checkGreenHover" : @"checkGreen"] forState:UIControlStateNormal];
     
     [self filterPurchases];
     [self updateViews];
@@ -177,7 +221,7 @@
 - (IBAction)btnPressedDeclined:(id)sender {
     
     _isDeclined = !_isDeclined;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclined ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isDeclined ? @"checkRedHover" : @"checkRed"] forState:UIControlStateNormal];
     
     [self filterPurchases];
     [self updateViews ];
@@ -187,7 +231,7 @@
 - (IBAction)btnPressedPending:(id)sender {
     
     _isPending = !_isPending;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"checkYellowHover" : @"checkYellow"] forState:UIControlStateNormal];
     
     [self filterPurchases];
     [self updateViews ];
@@ -195,48 +239,93 @@
 }
 
 - (IBAction)btnPoApprovedPressed:(id)sender {
-    
-    [self.currentPO setApproved: [NSNumber numberWithBool:YES]];
-    
-    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
-    
-    NSError *error = nil;
-	[_sapDelegate.managedObjectContext save:&error];
-	
-	if (error) {
-		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
-		return;
-	}
-	
-    self.currentPO = nil;
-	
-	[_tblPurchases reloadData];
-    
-    [self filterPurchases];
-    [self updateViews ];
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        Purchase_Orders *poObj;
+        
+        @try {
+            
+            poObj =  [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+            [poObj setApproved:[NSNumber numberWithBool:YES]];
+            [_sapDelegate.managedObjectContext save:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception: %@", error);
+        }
+        @finally {
+            
+            if(!error){
+                
+                if(_isApprovedSelected){
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully"];
+                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationLeft];
+                }
+                else{
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
+                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationTop];
+                }
+                
+                [self filterPurchases];
+                [self updateViews ];
+            }
+            else{
+                
+                [self showPanelBarWithMessage:NO msg:@"Request approve failed"];
+            }
+        }
+    }
+
     
 }
 
 - (IBAction)btnPoDeclinedPressed:(id)sender {
     
-    [self.currentPO setDeclined: [NSNumber numberWithBool:YES]];
-    
-    [_lstFilterPurchases replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentPO];
-    
-    NSError *error = nil;
-	[_sapDelegate.managedObjectContext save:&error];
-	
-	if (error) {
-		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
-		return;
-	}
-	
-    self.currentPO = nil;
-	
-	[_tblPurchases reloadData];
-    
-    [self filterPurchases];
-    [self updateViews ];
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        Purchase_Orders *poObj;
+        
+        @try {
+            
+            poObj =  [_lstFilterPurchases objectAtIndex:_selectedIndexPath.row];
+            [poObj setDeclined:[NSNumber numberWithBool:YES]];
+            [_sapDelegate.managedObjectContext save:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception: %@", error);
+        }
+        @finally {
+            
+            if(!error){
+                
+                if(_isDeclined){
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully"];
+                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationLeft];
+                }
+                else{
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
+                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationTop];
+                }
+                
+                [self filterPurchases];
+                [self updateViews ];
+            }
+            else{
+                
+                [self showPanelBarWithMessage:NO msg:@"Request decline failed"];
+            }
+        }
+    }
+
     
 }
 

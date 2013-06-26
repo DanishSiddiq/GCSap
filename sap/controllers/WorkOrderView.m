@@ -26,6 +26,9 @@
 @property (strong, nonatomic) NSNumber *selectedId;
 @property (retain, nonatomic) NSIndexPath* selectedIndexPath;
 
+@property (retain, nonatomic) IBOutlet UIView *vwStatusPanel;
+@property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
+
 @property (weak, nonatomic) Work_Order *currentWO;
 
 
@@ -52,6 +55,9 @@
         
         [_tblWorkOrders setShowsVerticalScrollIndicator:NO];
         
+        [_vwStatusPanel.layer setCornerRadius:3.0f];
+        [_vwStatusPanel setHidden:YES];
+        
         UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
         lblName.text = NAME;
                 
@@ -61,6 +67,45 @@
     }
     return self;
 }
+
+
+- (void) showPanelBarWithMessage : (BOOL) isSuccess msg : (NSString *) msg {
+    
+    if(isSuccess){
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:223/255.f green:240/255.f blue:216/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:70/255.f green:149/255.f blue:105/255.f alpha:1.0]];
+    }
+    else{
+        
+        [_vwStatusPanel setBackgroundColor:[UIColor colorWithRed:255/255.f green:192/255.f blue:192/255.f alpha:1.0]];
+        [_vwStatusPanel.layer setBorderColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0].CGColor];
+        [_vwStatusPanel.layer setBorderWidth:1.0];
+        
+        [_lblStatusPanel setTextColor:[UIColor colorWithRed:185/255.f green:74/255.f blue:72/255.f alpha:1.0]];
+    }
+    
+    [_lblStatusPanel setText:msg];
+    [_vwStatusPanel setAlpha:0.0];
+    [_vwStatusPanel setHidden:NO];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        [_vwStatusPanel setAlpha:1.0];
+        
+    } completion:^(BOOL finished) {
+        
+        // now hide it again after 2 sec
+        [UIView animateWithDuration:2.5 animations:^{
+            [_vwStatusPanel setAlpha:0.1];
+            
+        } completion:^(BOOL finished) {
+            [_vwStatusPanel setHidden:YES];
+        }];
+    }];
+}
+
 
 -(void) initializeData  : (AppDelegate *) sapDelegate{
     
@@ -136,42 +181,46 @@
 
 - (IBAction)btnSubmitPressed:(id)sender {
     
-    [self.currentWO setStatus: [NSNumber numberWithBool:YES]];
-    
-    [_lstFilterWorkOrders replaceObjectAtIndex:_selectedIndexPath.row withObject:self.currentWO];
-    
-    NSError *error = nil;
-	[_sapDelegate.managedObjectContext save:&error];
-	
-	if (error) {
-		NSLog(@"[ERROR] COREDATA: Save raised an error - '%@'", [error description]);
-		return;
-	}
-	
-    self.currentWO = nil;
-    
-    [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
-                          withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self filterWorkOrders];
-    [self updateViews];
-    
-    /*
-    [UIView animateWithDuration:2.0
-                          delay:0.0
-                        options:UIViewAnimationOptionTransitionCrossDissolve
-                     animations:^{
-                         
-                         
-                     }
-                     completion:^(BOOL finished) {
-
-                         [_tblWorkOrders reloadData];
-                         
-                         [self filterWorkOrders];
-                         [self updateViews ];
-                     }
-     ];*/
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        NSError *error;
+        Work_Order *woObj;
+        
+        @try {
+            
+            woObj =  [_lstFilterWorkOrders objectAtIndex:_selectedIndexPath.row];
+            [woObj setStatus:[NSNumber numberWithBool:YES]];
+            [_sapDelegate.managedObjectContext save:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception: %@", error);
+        }
+        @finally {
+            
+            if(!error){
+                
+                if(_isApprovedSelected){
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully"];
+                    [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                         withRowAnimation:UITableViewRowAnimationLeft];
+                }
+                else{
+                    
+                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
+                    [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                         withRowAnimation:UITableViewRowAnimationTop];
+                }
+                
+                [self filterWorkOrders];
+                [self updateViews ];
+            }
+            else{
+                
+                [self showPanelBarWithMessage:NO msg:@"Request approve failed"];
+            }
+        }
+    }
 
 }
 
@@ -183,7 +232,7 @@
 - (IBAction)btnPressedApproved:(id)sender {
     
     _isApprovedSelected = !_isApprovedSelected;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isApprovedSelected ? @"checkGreenHover" : @"checkGreen"] forState:UIControlStateNormal];
     
     [self filterWorkOrders];
     [self updateViews ];
@@ -193,7 +242,7 @@
 - (IBAction)btnPressedPending:(id)sender {
     
     _isPending = !_isPending;
-    [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"check2" : @"check"] forState:UIControlStateNormal];
+    [(UIButton *)sender setImage:[UIImage imageNamed:_isPending ? @"checkYellowHover" : @"checkYellow"] forState:UIControlStateNormal];
     
     [self filterWorkOrders];
     [self updateViews ];

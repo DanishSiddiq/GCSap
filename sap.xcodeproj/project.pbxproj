@@ -98,6 +98,15 @@
 		3DCDDD7D17795C920069856E /* rsz_overviewhover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCDDD7317795C920069856E /* rsz_overviewhover.png */; };
 		3DCDDD7F17795F370069856E /* gridViewBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCDDD7E17795F370069856E /* gridViewBg.png */; };
 		3DCDDD81177961570069856E /* rsz_gridviewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCDDD80177961570069856E /* rsz_gridviewbg.png */; };
+		3DE30AB5177B248700C44275 /* checkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AAC177B248700C44275 /* checkBlue.png */; };
+		3DE30AB6177B248700C44275 /* checkBlueHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AAD177B248700C44275 /* checkBlueHover.png */; };
+		3DE30AB7177B248700C44275 /* checkGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AAE177B248700C44275 /* checkGreen.png */; };
+		3DE30AB8177B248700C44275 /* checkGreenHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AAF177B248700C44275 /* checkGreenHover.png */; };
+		3DE30AB9177B248700C44275 /* checkRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AB0177B248700C44275 /* checkRed.png */; };
+		3DE30ABA177B248700C44275 /* checkRedHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AB1177B248700C44275 /* checkRedHover.png */; };
+		3DE30ABB177B248700C44275 /* checkYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AB2177B248700C44275 /* checkYellow.png */; };
+		3DE30ABC177B248700C44275 /* checkYellowHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AB3177B248700C44275 /* checkYellowHover.png */; };
+		3DE30ABD177B248700C44275 /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE30AB4177B248700C44275 /* reload.png */; };
 		3DE993BD1770358200DC4B98 /* Departments.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BC1770358200DC4B98 /* Departments.m */; };
 		3DE993C0177035C600DC4B98 /* Employees.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993BF177035C600DC4B98 /* Employees.m */; };
 		3DE993C3177035E000DC4B98 /* HR_leaves.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE993C2177035E000DC4B98 /* HR_leaves.m */; };
@@ -276,6 +285,15 @@
 		3DCDDD7317795C920069856E /* rsz_overviewhover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_overviewhover.png; sourceTree = "<group>"; };
 		3DCDDD7E17795F370069856E /* gridViewBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridViewBg.png; sourceTree = "<group>"; };
 		3DCDDD80177961570069856E /* rsz_gridviewbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_gridviewbg.png; sourceTree = "<group>"; };
+		3DE30AAC177B248700C44275 /* checkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlue.png; sourceTree = "<group>"; };
+		3DE30AAD177B248700C44275 /* checkBlueHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlueHover.png; sourceTree = "<group>"; };
+		3DE30AAE177B248700C44275 /* checkGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkGreen.png; sourceTree = "<group>"; };
+		3DE30AAF177B248700C44275 /* checkGreenHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkGreenHover.png; sourceTree = "<group>"; };
+		3DE30AB0177B248700C44275 /* checkRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkRed.png; sourceTree = "<group>"; };
+		3DE30AB1177B248700C44275 /* checkRedHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkRedHover.png; sourceTree = "<group>"; };
+		3DE30AB2177B248700C44275 /* checkYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkYellow.png; sourceTree = "<group>"; };
+		3DE30AB3177B248700C44275 /* checkYellowHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkYellowHover.png; sourceTree = "<group>"; };
+		3DE30AB4177B248700C44275 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
 		3DE993BB1770358200DC4B98 /* Departments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departments.h; sourceTree = "<group>"; };
 		3DE993BC1770358200DC4B98 /* Departments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departments.m; sourceTree = "<group>"; };
 		3DE993BE177035C600DC4B98 /* Employees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employees.h; sourceTree = "<group>"; };
@@ -497,6 +515,15 @@
 		3DE993E417709AC600DC4B98 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3DE30AAC177B248700C44275 /* checkBlue.png */,
+				3DE30AAD177B248700C44275 /* checkBlueHover.png */,
+				3DE30AAE177B248700C44275 /* checkGreen.png */,
+				3DE30AAF177B248700C44275 /* checkGreenHover.png */,
+				3DE30AB0177B248700C44275 /* checkRed.png */,
+				3DE30AB1177B248700C44275 /* checkRedHover.png */,
+				3DE30AB2177B248700C44275 /* checkYellow.png */,
+				3DE30AB3177B248700C44275 /* checkYellowHover.png */,
+				3DE30AB4177B248700C44275 /* reload.png */,
 				3DCDDD80177961570069856E /* rsz_gridviewbg.png */,
 				3DCDDD7E17795F370069856E /* gridViewBg.png */,
 				3DCDDD6A17795C920069856E /* rsz_businesspartners.png */,
@@ -752,6 +779,15 @@
 				3DCDDD7F17795F370069856E /* gridViewBg.png in Resources */,
 				3DCDDD81177961570069856E /* rsz_gridviewbg.png in Resources */,
 				3A980BDC1779888C007D18B8 /* SVProgressHUD.bundle in Resources */,
+				3DE30AB5177B248700C44275 /* checkBlue.png in Resources */,
+				3DE30AB6177B248700C44275 /* checkBlueHover.png in Resources */,
+				3DE30AB7177B248700C44275 /* checkGreen.png in Resources */,
+				3DE30AB8177B248700C44275 /* checkGreenHover.png in Resources */,
+				3DE30AB9177B248700C44275 /* checkRed.png in Resources */,
+				3DE30ABA177B248700C44275 /* checkRedHover.png in Resources */,
+				3DE30ABB177B248700C44275 /* checkYellow.png in Resources */,
+				3DE30ABC177B248700C44275 /* checkYellowHover.png in Resources */,
+				3DE30ABD177B248700C44275 /* reload.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
