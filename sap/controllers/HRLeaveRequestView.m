@@ -250,9 +250,14 @@
                 
                 if(_isPendingSelected){
                     [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully"];
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationLeft];
+                    
                 }
                 else{
                     [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully and moved into Pending panel"];
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationTop];
                 }
                 
                 [self filterLeaves];
@@ -287,6 +292,8 @@
             
             if(!isError){
                 
+                [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                 withRowAnimation:UITableViewRowAnimationTop];
                 [self showPanelBarWithMessage:YES msg:@"Request has been deleted successfully"];
                 [_lstLeave removeObject:leave];
                 [self filterLeaves];

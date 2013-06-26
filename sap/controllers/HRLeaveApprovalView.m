@@ -245,11 +245,17 @@
             if(!error){
                 
                 if(_isApprovedSelected){
+                    
                     [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully"];
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationLeft];
                 }
                 else{
+                    
                     [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
-                }                
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationTop];
+                }
                 
                 [self filterLeaves];
                 [self updateViews ];
@@ -285,10 +291,16 @@
             if(!error){
                 
                 if(_isDeclinedSelected){
+                    
                     [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully"];
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationLeft];
                 }
                 else{
+                    
                     [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
+                    [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                     withRowAnimation:UITableViewRowAnimationTop];
                 }
                 
                 [self filterLeaves];

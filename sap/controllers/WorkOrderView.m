@@ -150,16 +150,6 @@
 	
     self.currentWO = nil;
     
-    UITableViewCell *theCell = [_tblWorkOrders cellForRowAtIndexPath:_selectedIndexPath];
-    
-    theCell.alpha = 1.0;
-    
-    [UIView animateWithDuration:2.0 animations:^{
-        [theCell setFrame:CGRectZero];
-        
-    }];
-    
-    
     [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                           withRowAnimation:UITableViewRowAnimationTop];
     
@@ -311,16 +301,6 @@
          }
     }
     
-//    if(_lstFilterWorkOrders.count > 0){
-//        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//        [self getSelectedWorkOrder:0];
-//    }
-//    else{
-//        self.btnCancel.enabled = self.btnSubmit.enabled = NO;
-//        _selectedIndexPath = nil;
-//        [self emptyControls];
-//    }
-    
     [self updateSelectedIndexPath];
 }
 
@@ -443,7 +423,7 @@
     }
     else{
 
-        [imgViewStatus setImage:[UIImage imageNamed:@"blueCircle"]];
+        [imgViewStatus setImage:[UIImage imageNamed:@"orangeCircle"]];
     }
     
     return cell;
@@ -499,8 +479,8 @@
         if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
             self.btnCancel.enabled = self.btnSubmit.enabled = NO;
         }
-    
-    }else{
+    }
+    else{
         [self emptyControls];
     }
 }
