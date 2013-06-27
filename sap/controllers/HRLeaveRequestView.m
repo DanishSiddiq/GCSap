@@ -122,6 +122,20 @@
     [_tvNotes.layer setBorderColor:[UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.0].CGColor];
 }
 
+- (void) setSearchBarCancelButtonStyle {
+    for (UIView *possibleButton in _searchBar.subviews)
+    {
+        if ([possibleButton isKindOfClass:[UIButton class]])
+        {
+            UIButton *cancelButton = (UIButton*)possibleButton;
+            cancelButton.enabled = YES;
+            [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [[cancelButton titleLabel] setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0f]];
+            break;
+        }
+    }
+}
+
 - (void) showPanelBarWithMessage : (BOOL) isSuccess msg : (NSString *) msg {
     
     if(isSuccess){
@@ -352,6 +366,7 @@
     
     // search logic will go here
     [searchBar resignFirstResponder];
+    [self setSearchBarCancelButtonStyle];
 }
 
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -451,7 +466,10 @@
     
     [_tblLeave reloadData];
     [_tblLeave scrollToRowAtIndexPath:_selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-        
+    
+    // search bar cancel button style
+    [self setSearchBarCancelButtonStyle];
+    
     // right side detail view
     [self updateLeaveApprovalRequest];
 }
