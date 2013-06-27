@@ -32,6 +32,7 @@
 @property (weak, nonatomic) Work_Order *currentWO;
 
 
+
 @property bool _isSlided;
 
 @end
@@ -201,15 +202,19 @@
                 
                 if(_isApprovedSelected){
                     
-                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully"];
+                    [self showPanelBarWithMessage:YES msg:@"Work order has been approved successfully"];
                     [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                          withRowAnimation:UITableViewRowAnimationLeft];
                 }
                 else{
                     
-                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
-                    [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
-                                         withRowAnimation:UITableViewRowAnimationTop];
+                    [self showPanelBarWithMessage:YES msg:@"Work order has been approved successfully and moved into Approved panel"];
+                    
+                    [UIView transitionWithView:_contentVew
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterWorkOrders];
