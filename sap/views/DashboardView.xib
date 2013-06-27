@@ -36,10 +36,10 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="607556923">
+					<object class="IBUIImageView" id="910651266">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{1004, 768}</string>
+						<string key="NSFrameSize">{1024, 768}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="851799660"/>
@@ -48,13 +48,13 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">FinanceStaticImg.png</string>
+							<string key="NSResourceName">dashboardBg.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="851799660">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{334, 237}, {148, 110}}</string>
+						<string key="NSFrame">{{503, 148}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="46886191"/>
@@ -64,7 +64,6 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">HR</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="570063395">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -76,6 +75,10 @@
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="273097784">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dashboardHumanResource.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="55074571">
 							<int key="type">2</int>
@@ -90,7 +93,7 @@
 					<object class="IBUIButton" id="46886191">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{515, 237}, {148, 110}}</string>
+						<string key="NSFrame">{{267, 148}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="467056419"/>
@@ -100,20 +103,23 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">PO</string>
 						<reference key="IBUIHighlightedTitleColor" ref="570063395"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="273097784"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dashboardPurchasing.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="55074571"/>
 						<reference key="IBUIFont" ref="1064009122"/>
 					</object>
 					<object class="IBUIButton" id="467056419">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{334, 394}, {148, 110}}</string>
+						<string key="NSFrame">{{503, 384}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="88877618"/>
@@ -123,20 +129,23 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">WO</string>
 						<reference key="IBUIHighlightedTitleColor" ref="570063395"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="273097784"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dashboardWorkOrder.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="55074571"/>
 						<reference key="IBUIFont" ref="1064009122"/>
 					</object>
 					<object class="IBUIButton" id="88877618">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{515, 394}, {148, 110}}</string>
+						<string key="NSFrame">{{267, 384}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -145,21 +154,24 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Finance</string>
 						<reference key="IBUIHighlightedTitleColor" ref="570063395"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="273097784"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dashboardFinanceAnalysis.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="55074571"/>
 						<reference key="IBUIFont" ref="1064009122"/>
 					</object>
 				</array>
-				<string key="NSFrameSize">{1004, 768}</string>
+				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="607556923"/>
+				<reference key="NSNextKeyView" ref="910651266"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -241,11 +253,11 @@
 						<int key="objectID">3</int>
 						<reference key="object" ref="778254983"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="910651266"/>
 							<reference ref="851799660"/>
 							<reference ref="46886191"/>
 							<reference ref="467056419"/>
 							<reference ref="88877618"/>
-							<reference ref="607556923"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -275,7 +287,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">42</int>
-						<reference key="object" ref="607556923"/>
+						<reference key="object" ref="910651266"/>
 						<reference key="parent" ref="778254983"/>
 					</object>
 				</array>
@@ -349,10 +361,13 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">FinanceStaticImg.png</string>
-			<string key="NS.object.0">{2048, 1346}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="dashboardBg.png">{2048, 1536}</string>
+			<string key="dashboardFinanceAnalysis.png">{468, 512}</string>
+			<string key="dashboardHumanResource.png">{468, 512}</string>
+			<string key="dashboardPurchasing.png">{468, 512}</string>
+			<string key="dashboardWorkOrder.png">{468, 512}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

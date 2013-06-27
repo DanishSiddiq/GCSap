@@ -175,7 +175,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">FinanceStaticImg.png</string>
+									<string key="NSResourceName">FinancePage.png</string>
 								</object>
 							</object>
 						</array>
@@ -365,7 +365,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="FinanceStaticImg.png">{2048, 1346}</string>
+			<string key="FinancePage.png">{2048, 1346}</string>
 			<string key="bg.png">{2048, 1536}</string>
 			<string key="sliderBtn.png">{83, 95}</string>
 		</dictionary>

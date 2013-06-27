@@ -31,6 +31,7 @@
 
 @property (weak, nonatomic) Work_Order *currentWO;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblWOStatus;
 
 
 @property bool _isSlided;
@@ -562,6 +563,7 @@
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
 
         self.btnCancel.hidden = self.btnSubmit.hidden = NO;
+        _lblWOStatus.hidden = YES;
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         [format setDateStyle:NSDateFormatterMediumStyle];
         
@@ -598,7 +600,9 @@
         
         if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
             self.btnCancel.hidden = self.btnSubmit.hidden = YES;
+            _lblWOStatus.hidden = NO;
         }
+        
     }
     else{
         [self emptyControls];
