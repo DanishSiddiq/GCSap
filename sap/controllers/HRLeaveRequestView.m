@@ -480,13 +480,13 @@
         
         if([leaveObj.submitted isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
-            [_btnSubmit setEnabled:YES];
-            [_btnCancel setEnabled:YES];
+            [_btnSubmit setHidden:NO];
+            [_btnCancel setHidden:NO];
         }
         else{
             
-            [_btnSubmit setEnabled:NO];
-            [_btnCancel setEnabled:NO];
+            [_btnSubmit setHidden:YES];
+            [_btnCancel setHidden:YES];
         }
     }
     else{
@@ -499,8 +499,8 @@
         [_btnApprover    setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes           setText:@""];
         
-        [_btnSubmit setEnabled:NO];
-        [_btnCancel setEnabled:NO];
+        [_btnSubmit setHidden:YES];
+        [_btnCancel setHidden:YES];
     }
 }
 

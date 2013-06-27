@@ -417,13 +417,13 @@
         
         if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
-            [_btnApprove setEnabled:YES];
-            [_btnDecline setEnabled:YES];
+            [_btnApprove setHidden:NO];
+            [_btnDecline setHidden:NO];
         }
         else{
             
-            [_btnApprove setEnabled:NO];
-            [_btnDecline setEnabled:NO];
+            [_btnApprove setHidden:YES];
+            [_btnDecline setHidden:YES];
         }
     }
     else{
@@ -438,8 +438,8 @@
         [_btnLeaveType      setTitle:@"" forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes           setText:@""];
         
-        [_btnApprove setEnabled:NO];
-        [_btnDecline setEnabled:NO];
+        [_btnApprove setHidden:YES];
+        [_btnDecline setHidden:YES];
     }
 }
 
