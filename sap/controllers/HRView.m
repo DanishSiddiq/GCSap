@@ -110,6 +110,11 @@
     [self endEditing:YES];
     
     [_lblTitle setText:@"LEAVE REQUEST (EMPLOYEE SECTION)"];
+
+    // get latest data
+    [_hrleaveRequest fetchHRLeavesFromCoreData];
+    [_hrleaveRequest filterLeaves];
+    [_hrleaveRequest updateViews];
     
     [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlUp
                     animations:^{
@@ -132,6 +137,11 @@
     [self endEditing:YES];
     
     [_lblTitle setText:@"LEAVE APPROVAL (MANAGERIAL SECTION)"];
+    
+    // get latest data after changes
+    [_hrleaveApproval fetchHRLeavesFromCoreData];
+    [_hrleaveApproval filterLeaves];
+    [_hrleaveApproval updateViews];
     
     [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlDown
                     animations:^{
