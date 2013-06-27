@@ -81,7 +81,9 @@
 - (IBAction)btnPressedSlide:(id)sender {
  
     // hide keyboard
+    // hide keyboard
     [self endEditing:YES];
+    [_hrleaveRequest setSearchBarCancelButtonStyle];
     
     if(self.frame.origin.x == 120){
         

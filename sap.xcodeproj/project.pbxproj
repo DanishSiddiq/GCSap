@@ -70,6 +70,7 @@
 		3D59A1E2177C78A300C297F9 /* dashboardHumanResource.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D59A1DD177C78A300C297F9 /* dashboardHumanResource.png */; };
 		3D59A1E3177C78A300C297F9 /* dashboardPurchasing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D59A1DE177C78A300C297F9 /* dashboardPurchasing.png */; };
 		3D59A1E4177C78A300C297F9 /* dashboardWorkOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D59A1DF177C78A300C297F9 /* dashboardWorkOrder.png */; };
+		3D59A1E6177C7ED400C297F9 /* rejectBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D59A1E5177C7ED400C297F9 /* rejectBtn.png */; };
 		3D84F03C176F3C1B00449C09 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D84F03B176F3C1B00449C09 /* CoreData.framework */; };
 		3D84F03F176F3C6000449C09 /* sapDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D84F03D176F3C6000449C09 /* sapDatabase.xcdatamodeld */; };
 		3DC669421771989200B8CB79 /* PO_Delivery.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669411771989200B8CB79 /* PO_Delivery.json */; };
@@ -246,6 +247,7 @@
 		3D59A1DD177C78A300C297F9 /* dashboardHumanResource.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboardHumanResource.png; sourceTree = "<group>"; };
 		3D59A1DE177C78A300C297F9 /* dashboardPurchasing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboardPurchasing.png; sourceTree = "<group>"; };
 		3D59A1DF177C78A300C297F9 /* dashboardWorkOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboardWorkOrder.png; sourceTree = "<group>"; };
+		3D59A1E5177C7ED400C297F9 /* rejectBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rejectBtn.png; sourceTree = "<group>"; };
 		3D84F03B176F3C1B00449C09 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3D84F03E176F3C6000449C09 /* sapDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sapDatabase.xcdatamodel; sourceTree = "<group>"; };
 		3DC669411771989200B8CB79 /* PO_Delivery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PO_Delivery.json; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		3DE993E417709AC600DC4B98 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3D59A1E5177C7ED400C297F9 /* rejectBtn.png */,
 				3D59A1DB177C78A300C297F9 /* dashboardBg.png */,
 				3D59A1DC177C78A300C297F9 /* dashboardFinanceAnalysis.png */,
 				3D59A1DD177C78A300C297F9 /* dashboardHumanResource.png */,
@@ -741,6 +744,7 @@
 				3D59A1E2177C78A300C297F9 /* dashboardHumanResource.png in Resources */,
 				3D59A1E3177C78A300C297F9 /* dashboardPurchasing.png in Resources */,
 				3D59A1E4177C78A300C297F9 /* dashboardWorkOrder.png in Resources */,
+				3D59A1E6177C7ED400C297F9 /* rejectBtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -172,35 +172,25 @@
     [self endEditing:YES];
     [self setSearchBarCancelButtonStyle];
     
-    if(!self._isSlided){
-        self._isSlided = YES;
-        CGRect splashTop = self.frame;
-        splashTop.origin.x = 0.0;
+    if(self.frame.origin.x == 120){
         
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        CGRect toFrame = self.frame;
+        toFrame.origin.x = 0.0;
         
-        self.frame = splashTop;
-        
-        [UIView commitAnimations];
-        
-    }else{
-        self._isSlided = NO;
-        CGRect splashTop = self.frame;
-        splashTop.origin.x = 120;
-        
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        
-        self.frame = splashTop;
-        
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.frame = toFrame;
+        } completion:nil];
     }
-    
+    else{
+        
+        CGRect toFrame = self.frame;
+        toFrame.origin.x = 120;
+        
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.frame = toFrame;
+        } completion:nil];
+    }
 }
 
 - (IBAction)btnSubmitPressed:(id)sender {

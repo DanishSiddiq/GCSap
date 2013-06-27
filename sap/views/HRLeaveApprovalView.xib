@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63b</string>
+		<string key="IBDocument.SystemVersion">11G56</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
@@ -778,7 +778,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="375035979"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">declineBtn.png</string>
+									<string key="NSResourceName">rejectBtn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="868181709"/>
 								<reference key="IBUIFont" ref="882839502"/>
@@ -1539,8 +1539,8 @@
 			<string key="checkRedHover.png">{30, 30}</string>
 			<string key="checkYellowHover.png">{30, 30}</string>
 			<string key="dd.png">{367, 61}</string>
-			<string key="declineBtn.png">{228, 65}</string>
 			<string key="plainFlied.png">{367, 61}</string>
+			<string key="rejectBtn.png">{228, 65}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
