@@ -36,6 +36,7 @@
 @property (retain, nonatomic) IBOutlet UITextView *tvNotes;
 @property (retain, nonatomic) IBOutlet UIButton *btnApprove;
 @property (retain, nonatomic) IBOutlet UIButton *btnDecline;
+@property (strong, nonatomic) IBOutlet UILabel *lblLeaveStatus;
 
 //selectors
 - (IBAction)btnPressedFilterApproved:(id)sender;
@@ -299,7 +300,7 @@
                 
                 if(_isDeclinedSelected){
                     
-                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully"];
+                    [self showPanelBarWithMessage:YES msg:@"Request has been rejected successfully"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationLeft];
                 }
@@ -313,7 +314,7 @@
                                        options:UIViewAnimationOptionTransitionCurlDown
                                     animations:nil
                                     completion:^(BOOL finished) {
-                                        [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
+                                        [self showPanelBarWithMessage:YES msg:@"Request has been rejected successfully and moved into Declined panel"];
                                     }];
                 }
                 
@@ -322,7 +323,7 @@
             }
             else{
                     
-                [self showPanelBarWithMessage:NO msg:@"Request decline failed"];
+                [self showPanelBarWithMessage:NO msg:@"Request reject failed"];
             }
         }
     }
@@ -421,11 +422,27 @@
             
             [_btnApprove setHidden:NO];
             [_btnDecline setHidden:NO];
+            [_lblLeaveStatus setHidden:YES];
         }
         else{
             
             [_btnApprove setHidden:YES];
             [_btnDecline setHidden:YES];
+            
+                
+            if([leaveObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                
+                [_lblLeaveStatus setHidden:NO];
+                [_lblLeaveStatus setText:@"Approved"];
+                [_lblLeaveStatus setTextColor:[UIColor whiteColor]];
+                [_lblLeaveStatus setBackgroundColor:[UIColor colorWithRed:140.0/255.f green:170.0/255.f blue:37.0/255.f alpha:1.0f]];
+            }
+            else{
+                
+                [_lblLeaveStatus setText:@"Rejected"];
+                [_lblLeaveStatus setBackgroundColor:[UIColor colorWithRed:182.0/255.f green:16.0/255.f blue:12.0/255.f alpha:1.0f]];
+                [_lblLeaveStatus setHidden:NO];
+            }
         }
     }
     else{

@@ -40,6 +40,7 @@
 
 @property (retain, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (retain, nonatomic) IBOutlet UIButton *btnCancel;
+@property (strong, nonatomic) IBOutlet UILabel *lblLeaveStatus;
 
 //selectors
 - (IBAction)btnPressedFilterApproved:(id)sender;
@@ -506,15 +507,43 @@
         [_btnApprover setTitle:leaveObj.approver forState:UIControlStateNormal & UIControlStateSelected];
         [_tvNotes setText:leaveObj.notes];
         
+        
         if([leaveObj.submitted isEqualToNumber:[NSNumber numberWithBool:NO]]){
             
             [_btnSubmit setHidden:NO];
             [_btnCancel setHidden:NO];
+            [_lblLeaveStatus setHidden:YES];
         }
         else{
             
             [_btnSubmit setHidden:YES];
             [_btnCancel setHidden:YES];
+            
+            
+            
+            if([leaveObj.isProcessed isEqualToNumber:[NSNumber numberWithBool:YES]]){
+                
+                if([leaveObj.approved isEqualToNumber:[NSNumber numberWithBool:YES]]){
+
+                    [_lblLeaveStatus setHidden:NO];
+                    [_lblLeaveStatus setText:@"Approved"];
+                    [_lblLeaveStatus setTextColor:[UIColor whiteColor]];
+                    [_lblLeaveStatus setBackgroundColor:[UIColor colorWithRed:140.0/255.f green:170.0/255.f blue:37.0/255.f alpha:1.0f]];
+                }
+                else{
+                    
+                    [_lblLeaveStatus setText:@"Rejected"];
+                    [_lblLeaveStatus setBackgroundColor:[UIColor colorWithRed:182.0/255.f green:16.0/255.f blue:12.0/255.f alpha:1.0f]];
+                    [_lblLeaveStatus setHidden:NO];
+                }
+            }
+            else{
+                
+                [_lblLeaveStatus setHidden:NO];
+                [_lblLeaveStatus setText:@"Submitted"];
+                [_lblLeaveStatus setTextColor:[UIColor whiteColor]];
+                [_lblLeaveStatus setBackgroundColor:[UIColor colorWithRed:140.0/255.f green:170.0/255.f blue:37.0/255.f alpha:1.0f]];
+            }
         }
     }
     else{
@@ -529,6 +558,7 @@
         
         [_btnSubmit setHidden:YES];
         [_btnCancel setHidden:YES];
+        [_lblLeaveStatus setHidden:YES];
     }
 }
 
