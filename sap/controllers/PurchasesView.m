@@ -31,6 +31,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *lblStatusPanel;
 
 // PO Detail Objects
+@property (strong, nonatomic) IBOutlet UIView *vwPurchaseDetail;
 @property (strong, nonatomic) IBOutlet UITableView *tblPoItems;
 @property (retain, nonatomic) NSMutableArray* lstPoItems;
 @property (strong, nonatomic) IBOutlet UIView * tblHeaderPoItems;
@@ -266,8 +267,12 @@
                 else{
                     
                     [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
-                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
-                                     withRowAnimation:UITableViewRowAnimationTop];
+                    
+                    [UIView transitionWithView:_vwPurchaseDetail
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterPurchases];
@@ -312,8 +317,12 @@
                 else{
                     
                     [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
-                    [_tblPurchases reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
-                                     withRowAnimation:UITableViewRowAnimationTop];
+                    
+                    [UIView transitionWithView:_vwPurchaseDetail
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterPurchases];
