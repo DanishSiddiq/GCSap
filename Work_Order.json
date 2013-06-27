@@ -11,7 +11,7 @@
  "status": "0",
  "last_updated": "17/04/2013",
  "updated_by": "Robert",
- "notes": "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+ "notes": "Work order for mechanical maintenance with serial number Pump CG235893 and priority set as high."
  },
  {
  "order_id": 5552,
@@ -25,7 +25,7 @@
  "status": "1",
  "last_updated": "13/04/2013",
  "updated_by": "Miller",
- "notes": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+ "notes": "Work order for mechanical maintenance with serial number Winding KP44552 and priority set as normal."
  },
  {
  "order_id": 5553,
@@ -39,6 +39,6 @@
  "status": "0",
  "last_updated": "25/04/2013",
  "updated_by": "Berry",
- "notes": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+ "notes": "Work order for mechanical maintenance with serial number Drill DG15634 and priority set as low."
  }
 ]

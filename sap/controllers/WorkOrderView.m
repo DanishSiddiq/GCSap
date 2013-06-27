@@ -226,6 +226,40 @@
 
 - (IBAction)btnCancelPressed:(id)sender {
     
+    if(_selectedIndexPath && _selectedIndexPath.row >= 0){
+        
+        Work_Order *woObj;
+        
+        BOOL isError = NO;
+        @try {
+            
+            woObj =  [_lstFilterWorkOrders objectAtIndex:_selectedIndexPath.row];
+            [_sapDelegate.managedObjectContext deleteObject:woObj];
+        }
+        @catch (NSException *exception) {
+            isError = YES;
+            
+            NSLog(@"Exception: %@", exception);
+        }
+        @finally {
+            
+            if(!isError){
+                
+                [_tblWorkOrders reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
+                                 withRowAnimation:UITableViewRowAnimationTop];
+                [self showPanelBarWithMessage:YES msg:@"Work order has been deleted successfully"];
+                [_lstWorkOrders removeObject:woObj];
+                [self filterWorkOrders];
+                [self updateViews ];
+            }
+            else{
+                
+                [self showPanelBarWithMessage:NO msg:@"Request delete failed"];
+            }
+        }
+    }
+
+    
 }
 
 // selectors
@@ -490,7 +524,7 @@
 -(void) getSelectedWorkOrder{
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
 
-        self.btnCancel.enabled = self.btnSubmit.enabled = YES;
+        self.btnCancel.hidden = self.btnSubmit.hidden = NO;
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         [format setDateStyle:NSDateFormatterMediumStyle];
         
@@ -526,7 +560,7 @@
         txtViewNotes.text = workOrderObj.notes;
         
         if([workOrderObj.status isEqualToNumber:[NSNumber numberWithBool:YES]]){
-            self.btnCancel.enabled = self.btnSubmit.enabled = NO;
+            self.btnCancel.hidden = self.btnSubmit.hidden = YES;
         }
     }
     else{
