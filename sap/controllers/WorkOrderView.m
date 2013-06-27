@@ -134,6 +134,21 @@
    
 }
 
+- (void) setSearchBarCancelButtonStyle {
+    for (UIView *possibleButton in _searchBar.subviews)
+    {
+        if ([possibleButton isKindOfClass:[UIButton class]])
+        {
+            UIButton *cancelButton = (UIButton*)possibleButton;
+            cancelButton.enabled = YES;
+            [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [[cancelButton titleLabel] setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0f]];
+            break;
+        }
+    }
+}
+
+
 - (NSMutableArray *) fetchDataFromServerWithPredicate: (NSPredicate *) predicate AndEntityName:(NSString *) entityName {
     
     NSError *error;
@@ -149,6 +164,11 @@
 
 
 - (IBAction)slideBtnPressed:(id)sender {
+    
+    // hide keyboard
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
+    
     if(!self._isSlided){
         self._isSlided = YES;
         CGRect splashTop = self.frame;
@@ -181,6 +201,9 @@
 }
 
 - (IBAction)btnSubmitPressed:(id)sender {
+    
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
     
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
         
@@ -230,6 +253,9 @@
 }
 
 - (IBAction)btnCancelPressed:(id)sender {
+    
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
     
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
         
@@ -325,6 +351,7 @@
     
     // search logic will go here
     [searchBar resignFirstResponder];
+    [self setSearchBarCancelButtonStyle];
 }
 
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -524,6 +551,9 @@
     _selectedIndexPath = indexPath;
     _selectedId = obj.order_id;
     [self getSelectedWorkOrder];
+    
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
 }
 
 -(void) getSelectedWorkOrder{
@@ -622,5 +652,18 @@
     lblEquipment.text = lblPriority.text = lblSerialNumber.text = txtViewNotes.text = @"";
 
 }
+
+// touch delegate
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([_searchBar isFirstResponder] && [touch view] != _searchBar) {
+        
+        [self endEditing:YES];
+        [self setSearchBarCancelButtonStyle];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
+
 
 @end
