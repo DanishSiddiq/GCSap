@@ -164,7 +164,7 @@
     } completion:^(BOOL finished) {
         
         // now hide it again after 2 sec
-        [UIView animateWithDuration:2.5 animations:^{
+        [UIView animateWithDuration:2.0 animations:^{
             [_vwStatusPanel setAlpha:0.1];
             
         } completion:^(BOOL finished) {
@@ -273,15 +273,16 @@
                     
                 }
                 else{
-                    [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully and moved into Pending panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
                     
                     [UIView transitionWithView:_vwDetailLeaveRequest
-                                      duration:1.0
+                                      duration:0.75
                                        options:UIViewAnimationOptionTransitionCurlDown
                                     animations:nil
-                                    completion:nil];
+                                    completion:^(BOOL finished) {
+                                        [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully and moved into Pending panel"];
+                                    }];
                 }
                 
                 [self filterLeaves];
@@ -322,16 +323,17 @@
                 
                 [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                  withRowAnimation:UITableViewRowAnimationTop];
-                [self showPanelBarWithMessage:YES msg:@"Request has been deleted successfully"];
                 [_lstLeave removeObject:leave];
                 [self filterLeaves];
                 [self updateViews ];
                 
                 [UIView transitionWithView:_vwDetailLeaveRequest
-                                  duration:1.0
+                                  duration:0.75
                                    options:UIViewAnimationOptionTransitionCurlDown
                                 animations:nil
-                                completion:nil];
+                                completion:^(BOOL finished) {
+                                    [self showPanelBarWithMessage:YES msg:@"Request has been deleted successfully"];
+                                }];
             }
             else{
                 

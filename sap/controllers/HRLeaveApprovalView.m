@@ -149,7 +149,7 @@
     } completion:^(BOOL finished) {
         
         // now hide it again after 2 sec
-        [UIView animateWithDuration:2.5 animations:^{
+        [UIView animateWithDuration:2.0f animations:^{
             [_vwStatusPanel setAlpha:0.1];
             
         } completion:^(BOOL finished) {
@@ -252,15 +252,16 @@
                 }
                 else{
                     
-                    [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
                     
                     [UIView transitionWithView:_vwDetailLeaveApproval
-                                      duration:1.0
+                                      duration:0.75
                                        options:UIViewAnimationOptionTransitionCurlDown
                                     animations:nil
-                                    completion:nil];
+                                    completion:^(BOOL finished) {
+                                        [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
+                                    }];
                 }
                 
                 [self filterLeaves];
@@ -304,15 +305,16 @@
                 }
                 else{
                     
-                    [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
                     
                     [UIView transitionWithView:_vwDetailLeaveApproval
-                                      duration:1.0
+                                      duration:0.75
                                        options:UIViewAnimationOptionTransitionCurlDown
                                     animations:nil
-                                    completion:nil];
+                                    completion:^(BOOL finished) {
+                                        [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
+                                    }];
                 }
                 
                 [self filterLeaves];
