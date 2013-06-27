@@ -23,12 +23,14 @@
 
 @required
 - (void) resetDataInViews;
+- (void) hideKeyBoard;
 
 @end
 
 @interface RootViewController : UIViewController <RootViewDelegate>
 
-//@property (retain, nonatomic) SidebarView *sidebarView;
+
 - (void) resetDataInViews;
+- (void) hideKeyBoard;
 
 @end

@@ -89,6 +89,10 @@
     [self.purchaseBtn setUserInteractionEnabled:YES];
     [self.workOrderBtn setUserInteractionEnabled:YES];
     
+    if([_rootView respondsToSelector:@selector(hideKeyBoard)]){
+        [_rootView hideKeyBoard];
+    }
+    
     [sender setUserInteractionEnabled:NO];
     
     for (UIView *subview in self.superview.subviews)
@@ -118,6 +122,9 @@
     
     [sender setUserInteractionEnabled:NO];
 
+    if([_rootView respondsToSelector:@selector(hideKeyBoard)]){
+        [_rootView hideKeyBoard];
+    }
     
     for (UIView *subview in self.superview.subviews)
     {
@@ -145,6 +152,10 @@
     
     [sender setUserInteractionEnabled:NO];
     
+    if([_rootView respondsToSelector:@selector(hideKeyBoard)]){
+        [_rootView hideKeyBoard];
+    }
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [FinanceView class]){
@@ -170,6 +181,10 @@
     
     [sender setUserInteractionEnabled:NO];
 
+    if([_rootView respondsToSelector:@selector(hideKeyBoard)]){
+        [_rootView hideKeyBoard];
+    }
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [MaintenanceView class]){
@@ -194,6 +209,10 @@
     
     [sender setUserInteractionEnabled:NO];
 
+    if([_rootView respondsToSelector:@selector(hideKeyBoard)]){
+        [_rootView hideKeyBoard];
+    }
+    
     for (UIView *subview in self.superview.subviews)
     {
         if([subview class] == [WorkOrderView class]){

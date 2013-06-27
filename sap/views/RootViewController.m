@@ -99,6 +99,13 @@
     
 }
 
+- (void) hideKeyBoard {
+    [_hrView hideKeyBoard];
+    [_financeView hideKeyBoard];
+    [_purchaseView hideKeyBoard];
+    [_workOrderView hideKeyBoard];    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

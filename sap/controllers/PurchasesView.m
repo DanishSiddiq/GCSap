@@ -885,7 +885,7 @@
     
     lblPoDeliveryId.text = [NSString stringWithFormat:@"%@", poDeliveryObj.po_delivery_id];
     lblDeliveryType.text = poDeliveryObj.delivery_type;
-    lblStatus.text = [NSString stringWithFormat:@"%@", poDeliveryObj.status];
+    lblStatus.text = [poDeliveryObj.status isEqualToNumber:[NSNumber numberWithBool:YES]] ? @"Delivered" : @"Pending";
     lblDate.text = [format stringFromDate:poDeliveryObj.delivery_date];
     
     return cell;
@@ -982,6 +982,12 @@
         [self setSearchBarCancelButtonStyle];
     }
     [super touchesBegan:touches withEvent:event];
+}
+
+- (void) hideKeyBoard {
+    
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
 }
 
 @end

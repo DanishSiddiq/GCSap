@@ -74,5 +74,8 @@
     
 }
 
+- (void) hideKeyBoard {
+}
+
 
 @end

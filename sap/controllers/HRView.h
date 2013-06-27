@@ -25,7 +25,9 @@
 - (IBAction)btnPressedLeaveApproval:(id)sender;
 
 
+
 // protocol implementation
 - (void) resetDataInViews;
+- (void) hideKeyBoard;
 
 @end

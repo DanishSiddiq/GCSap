@@ -10,4 +10,6 @@
 
 @interface MaintenanceView : UIView
 
+- (void) hideKeyBoard;
+
 @end

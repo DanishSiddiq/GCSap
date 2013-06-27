@@ -32,4 +32,6 @@
 
 -(void) resetDataInViews;
 
+- (void) hideKeyBoard;
+
 @end

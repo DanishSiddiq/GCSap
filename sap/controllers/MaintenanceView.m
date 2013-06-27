@@ -40,4 +40,7 @@
 }
 */
 
+- (void) hideKeyBoard {
+}
+
 @end

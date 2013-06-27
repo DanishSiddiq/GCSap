@@ -14,4 +14,6 @@
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 - (IBAction)slideBtnPressed:(id)sender;
 
+- (void) hideKeyBoard;
+
 @end

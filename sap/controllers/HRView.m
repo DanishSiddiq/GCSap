@@ -164,4 +164,10 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (void) hideKeyBoard {
+    
+    [self endEditing:YES];
+    [_hrleaveRequest setSearchBarCancelButtonStyle];
+}
+
 @end
