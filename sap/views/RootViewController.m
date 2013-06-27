@@ -16,6 +16,7 @@
 @property (nonatomic, strong) FinanceView *financeView;
 @property (nonatomic, strong) WorkOrderView *workOrderView;
 @property (nonatomic, strong) PurchasesView *purchaseView;
+@property (nonatomic, strong) DashboardView *dashboardView;
 
 @end
 
@@ -43,9 +44,10 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
-
+    
     _sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0) sapDelegate:_sapDelegate];
     [self.view addSubview:_sidebarview];
+    _sidebarview.hidden = YES;
     
     _hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     _hrView.hidden = YES;
@@ -55,19 +57,20 @@
     _financeView.hidden = YES;
     [self.view addSubview:_financeView];
     
-//    MaintenanceView* maintenanceView = [[MaintenanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0)];
-//    maintenanceView.hidden = YES;
-//    [self.view addSubview:maintenanceView];
     
     _workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
     _workOrderView.hidden = YES;
     [self.view addSubview:_workOrderView];
     
     _purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    _purchaseView.hidden = NO;
+    _purchaseView.hidden = YES;
     [self.view addSubview:_purchaseView];
     
     [_sidebarview setSiblingView:self];
+    
+    _dashboardView = [[DashboardView alloc] initWithFrame:CGRectMake(0.0, 0.0, 1004.0, 768.0) sapDelegate:_sapDelegate];
+    [self.view addSubview:_dashboardView];
+    _dashboardView.hidden = NO;
 }
 
 

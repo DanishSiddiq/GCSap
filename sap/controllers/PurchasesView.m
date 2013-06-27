@@ -49,6 +49,8 @@
 @property (strong, nonatomic) IBOutlet UIButton * poInvoiceButton;
 @property (strong, nonatomic) IBOutlet UIButton * poDeliveryButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblPOStatus;
+
 - (IBAction)poDetailsBtnPressed:(id)sender;
 
 @property bool _isSlided;
@@ -78,6 +80,7 @@
         
         [_vwStatusPanel.layer setCornerRadius:3.0f];
         [_vwStatusPanel setHidden:YES];
+        [_lblPOStatus setHidden:YES];
         
         _tblPoDelivery.hidden = _tblPoInvoices.hidden = YES;
         
@@ -720,6 +723,7 @@
     [_poInvoiceButton setUserInteractionEnabled:YES];
     [_poDeliveryButton setUserInteractionEnabled:YES];
     _btnApproved.hidden = _btnDeclined.hidden = YES;
+    [_lblPOStatus setHidden:YES];
     _poDeliveryButton.alpha = _poInvoiceButton.alpha = 0.7f;
     _poItemsButton.alpha = 1.0f;
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(po_id = %@)", poID];
@@ -767,6 +771,17 @@
         if([[purchaseObj approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
            [[purchaseObj declined] isEqualToNumber:[NSNumber numberWithBool:NO]]){
             _btnApproved.hidden = _btnDeclined.hidden = NO;
+        }
+        
+        if([[purchaseObj approved] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+            [_lblPOStatus setText:@"Approved"];
+            [_lblPOStatus setTextColor:[UIColor whiteColor]];
+            [_lblPOStatus setBackgroundColor:[UIColor colorWithRed:140.0/255.f green:170.0/255.f blue:37.0/255.f alpha:1.0f]];
+            [_lblPOStatus setHidden:NO];
+        }else if([[purchaseObj declined] isEqualToNumber:[NSNumber numberWithBool:YES]]){
+            [_lblPOStatus setText:@"Rejected"];
+            [_lblPOStatus setBackgroundColor:[UIColor colorWithRed:182.0/255.f green:16.0/255.f blue:12.0/255.f alpha:1.0f]];
+            [_lblPOStatus setHidden:NO];
         }
         
         [_tblPoItems reloadData];

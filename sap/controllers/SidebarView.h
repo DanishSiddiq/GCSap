@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
 
+
 @interface SidebarView : UIView
 
 @property (strong, nonatomic) IBOutlet UIButton* hrBtn;
@@ -23,5 +24,6 @@
 - (id)initWithFrame:(CGRect)frame sapDelegate : (AppDelegate *) sapDelegate;
 
 - (void) setSiblingView : (id) rootView;
+- (void) selectButton : (NSInteger) btnIndex;
 
 @end

@@ -14,6 +14,7 @@
 #import "MaintenanceView.h"
 #import "PurchasesView.h"
 #import "WorkOrderView.h"
+#import "DashboardView.h"
 #import "SVProgressHUD.h"
 
 

@@ -59,6 +59,8 @@
         [_vwStatusPanel.layer setCornerRadius:3.0f];
         [_vwStatusPanel setHidden:YES];
         
+        _btnComponents.hidden = _btnMaterial.hidden = _btnOperations.hidden = _btnBusiness.hidden = YES;
+        
         UILabel *lblName = (UILabel *)[self.titleView viewWithTag:10];
         lblName.text = NAME;
                 

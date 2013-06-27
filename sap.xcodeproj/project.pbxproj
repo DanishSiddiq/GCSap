@@ -62,6 +62,8 @@
 		3D3DC6B2176B472100E5ACB7 /* FinanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3DC6B1176B472100E5ACB7 /* FinanceView.m */; };
 		3D3DC6B5176B473500E5ACB7 /* PurchasesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3DC6B4176B473500E5ACB7 /* PurchasesView.m */; };
 		3D3DC6B8176B474C00E5ACB7 /* MaintenanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3DC6B7176B474C00E5ACB7 /* MaintenanceView.m */; };
+		3D59A1D5177C5E6800C297F9 /* DashboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D59A1D4177C5E6800C297F9 /* DashboardView.xib */; };
+		3D59A1D8177C5EF900C297F9 /* DashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D59A1D7177C5EF900C297F9 /* DashboardView.m */; };
 		3D84F03C176F3C1B00449C09 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D84F03B176F3C1B00449C09 /* CoreData.framework */; };
 		3D84F03F176F3C6000449C09 /* sapDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D84F03D176F3C6000449C09 /* sapDatabase.xcdatamodeld */; };
 		3DC669421771989200B8CB79 /* PO_Delivery.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DC669411771989200B8CB79 /* PO_Delivery.json */; };
@@ -202,7 +204,7 @@
 		3D23C8F3177781E000A4F03A /* Work_Order.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Work_Order.json; sourceTree = "<group>"; };
 		3D23C8F6177785AE00A4F03A /* Work_Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Work_Order.h; sourceTree = "<group>"; };
 		3D23C8F7177785AE00A4F03A /* Work_Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Work_Order.m; sourceTree = "<group>"; };
-		3D3DC672176AF49D00E5ACB7 /* sap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3DC672176AF49D00E5ACB7 /* CFO Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CFO Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3DC675176AF49D00E5ACB7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D3DC677176AF49D00E5ACB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3D3DC679176AF49D00E5ACB7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,6 +235,9 @@
 		3D3DC6B4176B473500E5ACB7 /* PurchasesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchasesView.m; sourceTree = "<group>"; };
 		3D3DC6B6176B474C00E5ACB7 /* MaintenanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintenanceView.h; sourceTree = "<group>"; };
 		3D3DC6B7176B474C00E5ACB7 /* MaintenanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaintenanceView.m; sourceTree = "<group>"; };
+		3D59A1D4177C5E6800C297F9 /* DashboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardView.xib; sourceTree = "<group>"; };
+		3D59A1D6177C5EF800C297F9 /* DashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardView.h; sourceTree = "<group>"; };
+		3D59A1D7177C5EF900C297F9 /* DashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardView.m; sourceTree = "<group>"; };
 		3D84F03B176F3C1B00449C09 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3D84F03E176F3C6000449C09 /* sapDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sapDatabase.xcdatamodel; sourceTree = "<group>"; };
 		3DC669411771989200B8CB79 /* PO_Delivery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PO_Delivery.json; sourceTree = "<group>"; };
@@ -368,7 +373,7 @@
 		3D3DC673176AF49D00E5ACB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3D3DC672176AF49D00E5ACB7 /* sap.app */,
+				3D3DC672176AF49D00E5ACB7 /* CFO Dashboard.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				3AA00E041772F417005E9340 /* HRLeaveRequestView.xib */,
 				3AA00E091772FCF0005E9340 /* HRLeaveApprovalView.xib */,
 				3D0CBF04177813C80049C367 /* WorkOrderView.xib */,
+				3D59A1D4177C5E6800C297F9 /* DashboardView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -453,6 +459,8 @@
 				3AA00E0F1773031A005E9340 /* HRLeaveApprovalView.m */,
 				3D0CBF01177811AC0049C367 /* WorkOrderView.h */,
 				3D0CBF02177811AC0049C367 /* WorkOrderView.m */,
+				3D59A1D6177C5EF800C297F9 /* DashboardView.h */,
+				3D59A1D7177C5EF900C297F9 /* DashboardView.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -590,7 +598,7 @@
 			);
 			name = sap;
 			productName = sap;
-			productReference = 3D3DC672176AF49D00E5ACB7 /* sap.app */;
+			productReference = 3D3DC672176AF49D00E5ACB7 /* CFO Dashboard.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -724,6 +732,7 @@
 				3DE30ABB177B248700C44275 /* checkYellow.png in Resources */,
 				3DE30ABC177B248700C44275 /* checkYellowHover.png in Resources */,
 				3DE30ABD177B248700C44275 /* reload.png in Resources */,
+				3D59A1D5177C5E6800C297F9 /* DashboardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +764,7 @@
 				3D23C8F8177785AE00A4F03A /* Work_Order.m in Sources */,
 				3D0CBF03177811AC0049C367 /* WorkOrderView.m in Sources */,
 				3A980BDD1779888C007D18B8 /* SVProgressHUD.m in Sources */,
+				3D59A1D8177C5EF900C297F9 /* DashboardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +846,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sap/sap-Prefix.pch";
 				INFOPLIST_FILE = "sap/sap-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "CFO Dashboard";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -847,7 +857,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sap/sap-Prefix.pch";
 				INFOPLIST_FILE = "sap/sap-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "CFO Dashboard";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

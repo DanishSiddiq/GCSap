@@ -237,5 +237,41 @@
     }
 }
 
+- (void) selectButton : (NSInteger) btnIndex{
+    
+    if(btnIndex == 0){
+        
+        [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+        [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+        [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
+        
+        UIImage *image = [UIImage imageNamed:@"purchasingHover.png"];
+        [self.purchaseBtn setImage:image forState:UIControlStateNormal];
+    }
+    else if (btnIndex == 1){
+        UIImage *image = [UIImage imageNamed:@"WorkOrderHover.png"];
+        [self.workOrderBtn setImage:image forState:UIControlStateNormal];
+        
+        [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+        [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+        [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+    }
+    else if (btnIndex == 2){
+        UIImage *image = [UIImage imageNamed:@"FinanceHover.png"];
+        [self.financeBtn setImage:image forState:UIControlStateNormal];
+        
+        [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+        [self.hrBtn setImage:[UIImage imageNamed:@"Human.png"] forState:UIControlStateNormal];
+        [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.financeBtn setImage:[UIImage imageNamed:@"Finance.png"] forState:UIControlStateNormal];
+        [self.purchaseBtn setImage:[UIImage imageNamed:@"purchasing.png"] forState:UIControlStateNormal];
+        [self.workOrderBtn setImage:[UIImage imageNamed:@"WorkOrder.png"] forState:UIControlStateNormal];
+        
+        UIImage* image = [UIImage imageNamed:@"HumanHover.png"];
+        [self.hrBtn setImage:image forState:UIControlStateNormal];
+    }
+}
 
 @end
