@@ -677,7 +677,7 @@
     [_poItemsButton setUserInteractionEnabled:NO];
     [_poInvoiceButton setUserInteractionEnabled:YES];
     [_poDeliveryButton setUserInteractionEnabled:YES];
-    _btnApproved.enabled = _btnDeclined.enabled = NO;
+    _btnApproved.hidden = _btnDeclined.hidden = YES;
     _poDeliveryButton.alpha = _poInvoiceButton.alpha = 0.7f;
     _poItemsButton.alpha = 1.0f;
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(po_id = %@)", poID];
@@ -724,7 +724,7 @@
         
         if([[purchaseObj approved] isEqualToNumber:[NSNumber numberWithBool:NO]] &&
            [[purchaseObj declined] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-            _btnApproved.enabled = _btnDeclined.enabled = YES;
+            _btnApproved.hidden = _btnDeclined.hidden = NO;
         }
         
         [_tblPoItems reloadData];
