@@ -255,6 +255,12 @@
                     [self showPanelBarWithMessage:YES msg:@"Request has been approved successfully and moved into Approved panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
+                    
+                    [UIView transitionWithView:_vwDetailLeaveApproval
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterLeaves];
@@ -301,6 +307,12 @@
                     [self showPanelBarWithMessage:YES msg:@"Request has been declined successfully and moved into Declined panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
+                    
+                    [UIView transitionWithView:_vwDetailLeaveApproval
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterLeaves];

@@ -258,6 +258,12 @@
                     [self showPanelBarWithMessage:YES msg:@"Request has been submitted successfully and moved into Pending panel"];
                     [_tblLeave reloadRowsAtIndexPaths: [NSArray arrayWithObject:_selectedIndexPath]
                                      withRowAnimation:UITableViewRowAnimationTop];
+                    
+                    [UIView transitionWithView:_vwDetailLeaveRequest
+                                      duration:1.0
+                                       options:UIViewAnimationOptionTransitionCurlDown
+                                    animations:nil
+                                    completion:nil];
                 }
                 
                 [self filterLeaves];
@@ -298,6 +304,12 @@
                 [_lstLeave removeObject:leave];
                 [self filterLeaves];
                 [self updateViews ];
+                
+                [UIView transitionWithView:_vwDetailLeaveRequest
+                                  duration:1.0
+                                   options:UIViewAnimationOptionTransitionCurlDown
+                                animations:nil
+                                completion:nil];
             }
             else{
                 
