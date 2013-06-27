@@ -314,7 +314,7 @@
                                        options:UIViewAnimationOptionTransitionCurlDown
                                     animations:nil
                                     completion:^(BOOL finished) {
-                                        [self showPanelBarWithMessage:YES msg:@"Request has been rejected successfully and moved into Declined panel"];
+                                        [self showPanelBarWithMessage:YES msg:@"Request has been rejected successfully and moved into Rejected panel"];
                                     }];
                 }
                 

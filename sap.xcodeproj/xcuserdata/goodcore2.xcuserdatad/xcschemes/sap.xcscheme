@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3D3DC671176AF49D00E5ACB7"
-               BuildableName = "sap.app"
+               BuildableName = "CFO Dashboard.app"
                BlueprintName = "sap"
                ReferencedContainer = "container:sap.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D3DC671176AF49D00E5ACB7"
-            BuildableName = "sap.app"
+            BuildableName = "CFO Dashboard.app"
             BlueprintName = "sap"
             ReferencedContainer = "container:sap.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D3DC671176AF49D00E5ACB7"
-            BuildableName = "sap.app"
+            BuildableName = "CFO Dashboard.app"
             BlueprintName = "sap"
             ReferencedContainer = "container:sap.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D3DC671176AF49D00E5ACB7"
-            BuildableName = "sap.app"
+            BuildableName = "CFO Dashboard.app"
             BlueprintName = "sap"
             ReferencedContainer = "container:sap.xcodeproj">
          </BuildableReference>
