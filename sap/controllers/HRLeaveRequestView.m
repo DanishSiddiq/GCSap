@@ -603,9 +603,9 @@
         [vwSeperator setFrame:CGRectMake(5, 50, 245, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
-        [lblFromDate setTextColor:[UIColor blackColor]];
-        [lbltoDate setTextColor:[UIColor blackColor]];
-        [lblReason setTextColor:[UIColor blackColor]];
+        [lblFromDate setTextColor:[UIColor darkGrayColor]];
+        [lbltoDate setTextColor:[UIColor darkGrayColor]];
+        [lblReason setTextColor:[UIColor darkGrayColor]];
     }
     
     HR_leaves *leaveObj = [_lstFilterLeave objectAtIndex:indexPath.row];

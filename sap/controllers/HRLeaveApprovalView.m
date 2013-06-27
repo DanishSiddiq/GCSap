@@ -517,6 +517,7 @@
         [vwSeperatorLower setFrame:CGRectMake(5, 86, 250, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBoxHover"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"cal3"]];
+        [lblName setTextColor:[UIColor whiteColor]];
         [lblFromDate setTextColor:[UIColor whiteColor]];
         [lbltoDate setTextColor:[UIColor whiteColor]];
         [lblReason setTextColor:[UIColor whiteColor]];
@@ -528,9 +529,10 @@
         [vwSeperatorLower setFrame:CGRectMake(5, 86, 245, 1)];
         [imgViewBackground setImage:[UIImage imageNamed:@"DataBox"]];
         [imgViewCalender setImage:[UIImage imageNamed:@"calBlue"]];
-        [lblFromDate setTextColor:[UIColor blackColor]];
-        [lbltoDate setTextColor:[UIColor blackColor]];
-        [lblReason setTextColor:[UIColor blackColor]];
+        [lblName setTextColor:[UIColor blackColor]];
+        [lblFromDate setTextColor:[UIColor darkGrayColor]];
+        [lbltoDate setTextColor:[UIColor darkGrayColor]];
+        [lblReason setTextColor:[UIColor darkGrayColor]];
     }
     
     HR_leaves *leaveObj = [_lstFilterLeave objectAtIndex:indexPath.row];
