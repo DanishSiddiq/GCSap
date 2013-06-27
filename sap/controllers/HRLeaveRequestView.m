@@ -241,6 +241,10 @@
 
 - (IBAction)btnPressedSubmitted:(id)sender {
     
+    // hide keyboard
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
+    
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
 
         
@@ -292,6 +296,10 @@
 }
 
 - (IBAction)btnPressedCancel:(id)sender {
+
+    // hide keyboard
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
     
     if(_selectedIndexPath && _selectedIndexPath.row >= 0){
         
@@ -650,11 +658,27 @@
     HR_leaves *hrLeave = [_lstFilterLeave objectAtIndex:indexPath.row];
     _selectedId = hrLeave.leave_id;
     
+    
+    // hide keyboard
+    [self endEditing:YES];
+    [self setSearchBarCancelButtonStyle];
+    
     // update view for changing selection background image
     [self updateViews ];
     
 }
 
+// touch delegate
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([_searchBar isFirstResponder] && [touch view] != _searchBar) {
+        
+        [self endEditing:YES];
+        [self setSearchBarCancelButtonStyle];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
 
 
 @end

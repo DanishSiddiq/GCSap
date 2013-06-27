@@ -80,6 +80,9 @@
 // selectors
 - (IBAction)btnPressedSlide:(id)sender {
  
+    // hide keyboard
+    [self endEditing:YES];
+    
     if(self.frame.origin.x == 120){
         
         CGRect toFrame = self.frame;
@@ -103,6 +106,9 @@
 
 - (IBAction)btnPressedLeaveRequest:(id)sender {
     
+    // hide keyboard
+    [self endEditing:YES];
+    
     [_lblTitle setText:@"LEAVE REQUEST (EMPLOYEE SECTION)"];
     
     [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlUp
@@ -122,6 +128,9 @@
 
 - (IBAction)btnPressedLeaveApproval:(id)sender {
     
+    // hide keyboard
+    [self endEditing:YES];
+    
     [_lblTitle setText:@"LEAVE APPROVAL (MANAGERIAL SECTION)"];
     
     [UIView transitionWithView:self duration:1.0 options:UIViewAnimationOptionTransitionCurlDown
@@ -136,6 +145,13 @@
                         if(finished){
                         }
                     }];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self endEditing:YES];
+    [_hrleaveRequest setSearchBarCancelButtonStyle];
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end

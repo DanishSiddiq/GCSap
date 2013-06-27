@@ -20,4 +20,6 @@
 - (void) filterLeaves;
 - (void) updateViews;
 
+- (void) setSearchBarCancelButtonStyle;
+
 @end
