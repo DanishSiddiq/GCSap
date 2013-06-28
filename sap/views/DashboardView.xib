@@ -51,10 +51,24 @@
 							<string key="NSResourceName">dashboardBg.png</string>
 						</object>
 					</object>
+					<object class="IBUIImageView" id="320652742">
+						<reference key="NSNextResponder" ref="778254983"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrameSize">{1024, 117}</string>
+						<reference key="NSSuperview" ref="778254983"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">logo.png</string>
+						</object>
+					</object>
 					<object class="IBUIButton" id="851799660">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{503, 148}, {235, 235}}</string>
+						<string key="NSFrame">{{503, 184}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="46886191"/>
@@ -93,7 +107,7 @@
 					<object class="IBUIButton" id="46886191">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{267, 148}, {235, 235}}</string>
+						<string key="NSFrame">{{267, 184}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="467056419"/>
@@ -119,7 +133,7 @@
 					<object class="IBUIButton" id="467056419">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{503, 384}, {235, 235}}</string>
+						<string key="NSFrame">{{503, 420}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="88877618"/>
@@ -145,7 +159,7 @@
 					<object class="IBUIButton" id="88877618">
 						<reference key="NSNextResponder" ref="778254983"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{267, 384}, {235, 235}}</string>
+						<string key="NSFrame">{{267, 420}, {235, 235}}</string>
 						<reference key="NSSuperview" ref="778254983"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -258,6 +272,7 @@
 							<reference ref="46886191"/>
 							<reference ref="467056419"/>
 							<reference ref="88877618"/>
+							<reference ref="320652742"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -290,6 +305,11 @@
 						<reference key="object" ref="910651266"/>
 						<reference key="parent" ref="778254983"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">44</int>
+						<reference key="object" ref="320652742"/>
+						<reference key="parent" ref="778254983"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -302,13 +322,14 @@
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">43</int>
+			<int key="maxID">44</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -367,6 +388,7 @@
 			<string key="dashboardHumanResource.png">{468, 512}</string>
 			<string key="dashboardPurchasing.png">{468, 512}</string>
 			<string key="dashboardWorkOrder.png">{468, 512}</string>
+			<string key="logo.png">{2048, 237}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
