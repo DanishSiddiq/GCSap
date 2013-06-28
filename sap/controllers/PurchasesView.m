@@ -14,7 +14,7 @@
 @property (nonatomic, strong) AppDelegate *sapDelegate;
 @property (retain, nonatomic) NSMutableArray* lstPurchases;
 @property (retain, nonatomic) NSMutableArray *lstFilterPurchases;
-@property (weak, nonatomic) NSMutableString *filterText;
+@property (retain, nonatomic) NSMutableString *filterText;
 @property (retain, nonatomic) IBOutlet UIView* titleView;
 @property (strong, nonatomic) IBOutlet UITableView *tblPurchases;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;

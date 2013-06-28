@@ -1075,7 +1075,7 @@
 									<object class="IBUILabel" id="16182434">
 										<reference key="NSNextResponder" ref="107425788"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{39, 406}, {64, 20}}</string>
+										<string key="NSFrame">{{39, 358}, {64, 20}}</string>
 										<reference key="NSSuperview" ref="107425788"/>
 										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -1136,7 +1136,7 @@
 										</object>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									</object>
-									<object class="IBUIView" id="583755656">
+									<object class="IBUIView" id="381734995">
 										<reference key="NSNextResponder" ref="107425788"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{128, 77}, {533, 1}}</string>
@@ -1149,7 +1149,7 @@
 										</object>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									</object>
-									<object class="IBUIView" id="560838601">
+									<object class="IBUIView" id="528757994">
 										<reference key="NSNextResponder" ref="107425788"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{661, 77}, {1, 39}}</string>
@@ -1162,7 +1162,7 @@
 										</object>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									</object>
-									<object class="IBUILabel" id="108434037">
+									<object class="IBUILabel" id="676870886">
 										<reference key="NSNextResponder" ref="107425788"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{290, 521}, {130, 32}}</string>
@@ -1352,7 +1352,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lblWOStatus</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="108434037"/>
+						<reference key="destination" ref="676870886"/>
 					</object>
 					<int key="connectionID">143</int>
 				</object>
@@ -1631,9 +1631,9 @@
 							<reference ref="16182434"/>
 							<reference ref="605890550"/>
 							<reference ref="24853051"/>
-							<reference ref="583755656"/>
-							<reference ref="560838601"/>
-							<reference ref="108434037"/>
+							<reference ref="381734995"/>
+							<reference ref="528757994"/>
+							<reference ref="676870886"/>
 						</array>
 						<reference key="parent" ref="690331904"/>
 						<string key="objectName">ContentView</string>
@@ -1818,17 +1818,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">140</int>
-						<reference key="object" ref="583755656"/>
+						<reference key="object" ref="381734995"/>
 						<reference key="parent" ref="107425788"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">141</int>
-						<reference key="object" ref="560838601"/>
+						<reference key="object" ref="528757994"/>
 						<reference key="parent" ref="107425788"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">142</int>
-						<reference key="object" ref="108434037"/>
+						<reference key="object" ref="676870886"/>
 						<reference key="parent" ref="107425788"/>
 					</object>
 				</array>
