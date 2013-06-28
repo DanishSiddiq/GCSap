@@ -255,26 +255,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sap/views/RootViewController.m"
-         timestampString = "393842954.022801"
+         timestampString = "394092952.29238"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-viewWillAppear:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "sap/views/RootViewController.m"
-         timestampString = "393843616.50501"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
-         landmarkName = "-resetDataInViews"
-         landmarkType = "5">
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "@implementation RootViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
