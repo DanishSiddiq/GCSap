@@ -31,6 +31,7 @@
 @interface RootViewController : UIViewController <RootViewDelegate>
 
 
+- (void) showSplashScreen;
 - (void) resetDataInViews;
 - (void) hideKeyBoard;
 

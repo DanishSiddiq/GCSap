@@ -40,39 +40,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _sapDelegate = [[UIApplication sharedApplication] delegate];    
+    _sapDelegate = [[UIApplication sharedApplication] delegate];
+    
+    // initiating views
+    [self initializeViews];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) initializeViews {
     
     _sidebarview = [[SidebarView alloc] initWithFrame:CGRectMake(0.0, 0.0, 120.0, 748.0) sapDelegate:_sapDelegate];
     [self.view addSubview:_sidebarview];
-    _sidebarview.hidden = YES;
     
     _hrView = [[HRView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    _hrView.hidden = YES;
     [self.view addSubview:_hrView];
     
     _financeView = [[FinanceView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    _financeView.hidden = YES;
     [self.view addSubview:_financeView];
     
     
     _workOrderView = [[WorkOrderView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    _workOrderView.hidden = YES;
     [self.view addSubview:_workOrderView];
     
     _purchaseView = [[PurchasesView alloc] initWithFrame:CGRectMake(120.0, 0.0, 1024, 748.0) sapDelegate:_sapDelegate];
-    _purchaseView.hidden = YES;
     [self.view addSubview:_purchaseView];
-    
-    [_sidebarview setSiblingView:self];
     
     _dashboardView = [[DashboardView alloc] initWithFrame:CGRectMake(0.0, 0.0, 1004.0, 768.0) sapDelegate:_sapDelegate];
     [self.view addSubview:_dashboardView];
-    _dashboardView.hidden = NO;
+    
+    
+    [self showSplashScreen];
+    [_sidebarview setSiblingView:self];
 }
-
 
 - (void) resetDataInViews{
     
@@ -109,6 +107,16 @@
     [_workOrderView hideKeyBoard];    
 }
 
+- (void) showSplashScreen {
+    
+    _sidebarview.hidden     = YES;
+    _hrView.hidden          = YES;
+    _financeView.hidden     = YES;
+    _workOrderView.hidden   = YES;
+    _purchaseView.hidden    = YES;
+    [_dashboardView setAlpha:1.0];
+    _dashboardView.hidden   = NO;
+}
 
 - (void)didReceiveMemoryWarning
 {
