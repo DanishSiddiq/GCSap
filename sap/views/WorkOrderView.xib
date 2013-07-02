@@ -146,7 +146,6 @@
 						<reference key="NSNextKeyView" ref="848145336"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="218688246"/>
-						<int key="IBUIContentMode">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIView" id="690331904">
@@ -1229,7 +1228,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="907522297"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<reference key="IBUIBackgroundColor" ref="936824752"/>
+				<reference key="IBUIBackgroundColor" ref="854210078"/>
 				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -2019,20 +2018,20 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Base.png">{1985, 1314}</string>
-			<string key="TabBgNew.png">{1301, 1057}</string>
-			<string key="bg.png">{2048, 1536}</string>
-			<string key="cancelBtn.png">{228, 67}</string>
-			<string key="checkGreenHover.png">{30, 30}</string>
-			<string key="checkYellowHover.png">{30, 30}</string>
-			<string key="rsz_businesspartners.png">{240, 70}</string>
-			<string key="rsz_components.png">{240, 70}</string>
-			<string key="rsz_gridviewbg.png">{1248, 444}</string>
-			<string key="rsz_matetialconf.png">{320, 70}</string>
-			<string key="rsz_operations.png">{240, 70}</string>
-			<string key="rsz_overviewhover.png">{240, 70}</string>
-			<string key="sliderBtn.png">{83, 95}</string>
-			<string key="submitBtn.png">{261, 67}</string>
+			<string key="Base.png">{993, 657}</string>
+			<string key="TabBgNew.png">{651, 529}</string>
+			<string key="bg.png">{1024, 768}</string>
+			<string key="cancelBtn.png">{114, 34}</string>
+			<string key="checkGreenHover.png">{15, 15}</string>
+			<string key="checkYellowHover.png">{15, 15}</string>
+			<string key="rsz_businesspartners.png">{120, 35}</string>
+			<string key="rsz_components.png">{120, 35}</string>
+			<string key="rsz_gridviewbg.png">{624, 222}</string>
+			<string key="rsz_matetialconf.png">{160, 35}</string>
+			<string key="rsz_operations.png">{120, 35}</string>
+			<string key="rsz_overviewhover.png">{120, 35}</string>
+			<string key="sliderBtn.png">{42, 48}</string>
+			<string key="submitBtn.png">{131, 34}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

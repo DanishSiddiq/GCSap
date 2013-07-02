@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63b</string>
+		<string key="IBDocument.SystemVersion">11G56</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
@@ -38,7 +38,7 @@
 					<object class="IBUIButton" id="725231178">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 50}, {100, 108}}</string>
+						<string key="NSFrame">{{11, 50}, {94, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="416869740"/>
@@ -76,7 +76,7 @@
 					<object class="IBUIButton" id="271770735">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 313}, {100, 108}}</string>
+						<string key="NSFrame">{{11, 313}, {94, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="47817650"/>
@@ -101,7 +101,7 @@
 					<object class="IBUIButton" id="416869740">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 176}, {100, 108}}</string>
+						<string key="NSFrame">{{11, 176}, {94, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="271770735"/>
@@ -126,7 +126,7 @@
 					<object class="IBUIButton" id="47817650">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 451}, {100, 108}}</string>
+						<string key="NSFrame">{{11, 451}, {94, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="945602761"/>
@@ -443,11 +443,11 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Finance.png">{188, 200}</string>
-			<string key="Human.png">{188, 200}</string>
-			<string key="WorkOrder.png">{188, 200}</string>
-			<string key="purchasingHover.png">{188, 200}</string>
-			<string key="reload.png">{120, 121}</string>
+			<string key="Finance.png">{94, 100}</string>
+			<string key="Human.png">{94, 100}</string>
+			<string key="WorkOrder.png">{94, 100}</string>
+			<string key="purchasingHover.png">{94, 100}</string>
+			<string key="reload.png">{60, 61}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

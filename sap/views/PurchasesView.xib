@@ -145,7 +145,6 @@
 						<reference key="NSNextKeyView" ref="146670505"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="1042883232"/>
-						<int key="IBUIContentMode">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIView" id="680518146">
@@ -1715,7 +1714,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="507371206"/>
-				<reference key="IBUIBackgroundColor" ref="663396021"/>
+				<reference key="IBUIBackgroundColor" ref="37828726"/>
 				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
@@ -2882,22 +2881,22 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Base.png">{1985, 1314}</string>
-			<string key="TopDataWhiteBg.png">{1308, 323}</string>
-			<string key="approveBtn.png">{260, 65}</string>
-			<string key="avatar-1.png">{121, 121}</string>
-			<string key="bg.png">{2048, 1536}</string>
-			<string key="blueBar.png">{1329, 75}</string>
-			<string key="checkGreenHover.png">{30, 30}</string>
-			<string key="checkRedHover.png">{30, 30}</string>
-			<string key="checkYellowHover.png">{30, 30}</string>
-			<string key="icon1.png">{96, 67}</string>
-			<string key="icon2.png">{96, 67}</string>
-			<string key="icon3.png">{16, 16}</string>
-			<string key="icon4.png">{96, 67}</string>
-			<string key="rejectBtn.png">{228, 65}</string>
-			<string key="sliderBtn.png">{83, 95}</string>
-			<string key="topDataBc.png">{1328, 389}</string>
+			<string key="Base.png">{993, 657}</string>
+			<string key="TopDataWhiteBg.png">{654, 162}</string>
+			<string key="approveBtn.png">{130, 33}</string>
+			<string key="avatar-1.png">{61, 61}</string>
+			<string key="bg.png">{1024, 768}</string>
+			<string key="blueBar.png">{665, 38}</string>
+			<string key="checkGreenHover.png">{15, 15}</string>
+			<string key="checkRedHover.png">{15, 15}</string>
+			<string key="checkYellowHover.png">{15, 15}</string>
+			<string key="icon1.png">{48, 34}</string>
+			<string key="icon2.png">{48, 34}</string>
+			<string key="icon3.png">{48, 34}</string>
+			<string key="icon4.png">{48, 34}</string>
+			<string key="rejectBtn.png">{114, 33}</string>
+			<string key="sliderBtn.png">{42, 48}</string>
+			<string key="topDataBc.png">{664, 195}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

@@ -67,8 +67,7 @@
         
         [[NSBundle mainBundle] loadNibNamed:@"PurchasesView" owner:self options:nil];
         
-        UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"topBar.png"]];
-        self.titleView.backgroundColor = background;
+        self.titleView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"topBar.png"]];
         
         self.purchaseView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:self.purchaseView];
